@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class Robot{
+    - string surface;
+    - bool canOrderRoom
+    - bool canPolish
+    - float costPerHour
+    - int orderQuantity
+    - bool isAvailable
+}
+
+abstract class Service{
+    - int orderingQuantity
+    - int cleaningQuantity
+    - float orderValue
+    - float maxDebt
+}
+
+class Customer{
+    - Service service
+}
+
+class Order{
+    - string cleaning
+    - bool sorting
+}
+
+class PaymentModule{
+    + getDebt(Customer)
+}
+
+'Child classes'
+
+class K311Y-fl extends Robot{}
+class K311Y-fu extends Robot{}
+class P011H extends Robot{}
+class K311Y-a extends Robot{}
+class S031RTY extends Robot{}
+
+
+
+
+@enduml
