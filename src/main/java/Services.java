@@ -4,6 +4,6 @@ public abstract class Services {
     }
     
     private int servicesQuantity;
-    private int cleaningsQuantity;
     private float maxDebt;
+    private int cleaningsQuantity;
 }

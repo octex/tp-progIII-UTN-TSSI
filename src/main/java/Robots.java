@@ -5,8 +5,8 @@ public abstract class Robots {
 
     private String surface;
     private boolean canOrder;
+    private float costPH; 
     private boolean canPolish;
-    private float costPH;
 
     public String getSurface(){
         return surface;
