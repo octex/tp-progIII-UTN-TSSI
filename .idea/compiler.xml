@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="tp-progIII-UTN-TSSI" />
+        <module name="Robots" />
       </profile>
     </annotationProcessing>
   </component>
