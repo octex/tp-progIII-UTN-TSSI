@@ -1,4 +1,7 @@
 package CompanyUtils;
 
-public class PaymentModule {
+public interface PaymentModule {
+
+    public float getDebt(Client client);
+
 }

@@ -3,8 +3,9 @@ import Service.*;
 
 public class Client {
     private int dni;
-    private Service service;
     private float debt;
+    private Service service;
+    private RequestedOrder requestedOrder;
 
     public Client(){
     }
