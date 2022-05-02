@@ -1,4 +1,4 @@
-package Robots;
+package Robots.src.main.java.Robots;
 
 public class K311Y_fu extends Robot {
 

@@ -1,24 +1,13 @@
-package Client;
-import Service.*;
+package Robots.src.main.java.Client;
+
+import Robots.src.main.java.Order.CleanType;
+import Robots.src.main.java.Order.Order;
 
 public class Client {
     private int dni;
     private float debt;
-    private Service service;
-    private RequestedOrder requestedOrder;
+    private Services.Service service;
+    private Order requestedOrder;
 
-    public Client(){
-    }
 
-    public OrderPending requestOrder(Company company, CleanType cleanType, Location location) throws CouldNotCreateOrderException{
-        try{
-            OrderPending order = new OrderPending();
-            order = company.createOrderPending(CleanType cleanType, Location location);
-            return order;
-        }
-        catch (Exception CouldNotCreateOrderException){
-            throw new CouldNotCreateOrderException();
-        }
-
-    }
 }
