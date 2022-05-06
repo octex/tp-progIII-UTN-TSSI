@@ -1,0 +1,119 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Client {
+    - Service service;
+    - Location location;
+}
+
+class Location{
+    - int height;
+    - String street;
+    - String area;
+    - int floor;
+    - int department;
+    + Location();
+}
+abstract Robot{
+    - float costPerHourToCompany;
+}
+class S031RTY{
+costPerHourToCompany=2700;
+}
+class K311Yfu{
+costPerHourToCompany=500;
+}
+class P011H{
+costPerHourToCompany=1500;
+}
+class K311Ya{
+costPerHourToCompany=5000;
+}
+class K311Yfl{
+costPerHourToCompany=100;
+}
+
+interface OrderingRobot{
+    + void Order()
+}
+interface ShiningRobot{
+    + void Shine()
+}
+
+abstract Service{
+    - int OrderingQuantity;
+    - int CleaningQuantity;
+}
+class Platinum{
+OrderingQuantity=ilimitado;
+CleaningQuantity=ilimitado;
+}
+class Classic{
+OrderingQuantity=3;
+CleaningQuantity=ilimitado;
+}
+
+class Economic{
+OrderingQuantity=0;
+CleaningQuantity=3;
+}
+
+class Company{
+- List Clients;
+- List Robots
+- List Orders;
+- AllocatorSystem allocator;
+}
+class Order{
+    - CleanType cleanType;
+    - boolean wantsOrdering;
+    - String surfaceType;
+}
+enum CleanType{
+    SIMPLE,
+    COMPLEJA;
+}
+
+class AllocatorSystem{
+
++allocate(Order);
+}
+
+class PaymentModule{
+  +void validateOrder(Client);
+  *deuda getDebt(Client);
+  -bool compareDebtToService(deuda, Client.servicio);
+
+}
+
+Company*--PaymentModule
+PaymentModule<--Client
+Service <|-- Platinum
+Service <|-- Classic
+Service <|-- Economic
+
+Company *-- AllocatorSystem
+Company*-- Robot
+Company *-- Client
+Company <-- Order
+
+Robot <|--- K311Yfl
+Robot <|--- K311Yfu
+Robot <|--- P011H
+Robot <|--- K311Ya
+Robot <|--- S031RTY
+
+ShiningRobot <.. K311Yfu
+ShiningRobot <.. P011H
+ShiningRobot <.. K311Ya
+OrderingRobot <.. K311Yfu
+OrderingRobot <.. K311Ya
+OrderingRobot <.. S031RTY
+
+Client *-- Service
+Client *-- Location
+
+Order- CleanType
+
+AllocatorSystem <-- Order
+@enduml
