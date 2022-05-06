@@ -1,4 +1,4 @@
-package Robots;
+package Robots.src.main.java.Robots;
 public abstract class Robot {
     public Robot(){
 
