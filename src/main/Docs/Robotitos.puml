@@ -68,6 +68,7 @@ class Order{
     - CleanType cleanType;
     - boolean wantsOrdering;
     - String surfaceType;
+    - Location location;
 }
 enum CleanType{
     SIMPLE,
@@ -75,18 +76,22 @@ enum CleanType{
 }
 
 class AllocatorSystem{
+PaymentModule paymentModule;
 
-+allocate(Order);
++tryAllocate(Order, Cliente);
+-getRequiredRobot(Order)
+-getRequiredToPlatinumRobot(Order);
+
 }
 
 class PaymentModule{
-  +void validateOrder(Client);
-  *deuda getDebt(Client);
+  +void validateDebt(Client);
+  -deuda getDebt(Client);
   -bool compareDebtToService(deuda, Client.servicio);
 
 }
 
-Company*--PaymentModule
+AllocatorSystem*--PaymentModule
 PaymentModule<--Client
 Service <|-- Platinum
 Service <|-- Classic
