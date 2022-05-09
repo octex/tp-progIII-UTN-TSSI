@@ -22,5 +22,4 @@ public class K311Y_a extends Robot implements Polisher,RoomOrganizer {
     public String toString(){
         return "K311Y-a";
     }
-    
 }

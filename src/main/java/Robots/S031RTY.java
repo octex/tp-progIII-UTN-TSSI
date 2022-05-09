@@ -1,5 +1,6 @@
 package Robots;
 
+
 public class S031RTY extends Robot implements RoomOrganizer{
 
     public S031RTY(){
