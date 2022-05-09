@@ -1,4 +1,4 @@
-package Robots.src.main.java.Robots;
+package Robots;
 
 public class S031RTY extends Robot {
 

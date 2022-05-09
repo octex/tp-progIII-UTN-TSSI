@@ -1,13 +1,15 @@
-package Robots.src.main.java.Robots;
-public abstract class Robot {
-    public Robot(){
+package Robots;
 
-    }
+public abstract class Robot {
 
     protected String surface;
     protected boolean canOrderRoom;
     protected boolean canPolish;
     protected float costPH;
+
+    public Robot(){
+
+    }
 
     public String getSurface(){
         return surface;

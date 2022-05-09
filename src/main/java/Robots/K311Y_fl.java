@@ -1,6 +1,6 @@
-package Robots.src.main.java.Robots;
+package Robots;
 
-public class K311Y_fl extends Robots.Robot {
+public class K311Y_fl extends Robot {
 
     public K311Y_fl(){
         this.surface = "Pisos";

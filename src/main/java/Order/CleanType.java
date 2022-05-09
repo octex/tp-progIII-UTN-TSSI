@@ -1,4 +1,4 @@
-package Robots.src.main.java.Order;
+package Order;
 
 public enum CleanType {
     SIMPLE, COMPLEJA

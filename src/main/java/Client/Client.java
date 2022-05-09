@@ -1,13 +1,10 @@
-package Robots.src.main.java.Client;
+package Client;
 
-import Robots.src.main.java.Order.CleanType;
-import Robots.src.main.java.Order.Order;
+import Order.Order;
 
 public class Client {
     private int dni;
     private float debt;
     private Services.Service service;
     private Order requestedOrder;
-
-
 }

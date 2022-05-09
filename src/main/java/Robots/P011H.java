@@ -1,4 +1,4 @@
-package Robots.src.main.java.Robots;
+package Robots;
 
 public class P011H extends Robot {
 

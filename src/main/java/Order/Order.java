@@ -1,6 +1,7 @@
-package Robots.src.main.java.Order;
+package Order;
 
 import Client.Location;
+import Order.CleanType;
 
 public class Order {
     
@@ -13,5 +14,4 @@ public class Order {
         this.location = location;
         this.wantsOrder = wantsOrder;
     }
-
 }

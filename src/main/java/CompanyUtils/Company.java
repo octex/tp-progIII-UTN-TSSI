@@ -2,8 +2,6 @@ package CompanyUtils;
 
 import Client.Client;
 import Robots.Robot;
-import Robots.src.main.java.Client.Client;
-import Robots.src.main.java.Robots.Robot;
 
 import java.util.*;
 
