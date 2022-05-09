@@ -1,7 +1,6 @@
 package Order;
 
 import Client.Location;
-import Order.CleanType;
 
 public class Order {
     
