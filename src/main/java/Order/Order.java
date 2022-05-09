@@ -1,6 +1,7 @@
 package Robots.src.main.java.Order;
 
-import Client.Location;
+
+import Robots.src.main.java.Location;
 
 public class Order {
     
