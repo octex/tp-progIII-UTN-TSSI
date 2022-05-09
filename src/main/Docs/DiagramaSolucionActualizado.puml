@@ -76,7 +76,7 @@ enum CleanType{
 }
 
 class AllocatorSystem{
-PaymentModule paymentModule;
+-PaymentModule paymentModule;
 
 +tryAllocate(Order, Cliente);
 -getRequiredRobot(Order)
