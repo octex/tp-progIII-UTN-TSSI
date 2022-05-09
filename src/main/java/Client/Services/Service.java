@@ -1,4 +1,4 @@
-package Robots.src.main.java.Client.Services;
+package Client.Services;
 
 public abstract class Service {
 

@@ -1,6 +1,4 @@
-package Robots.src.main.java.Client.Services;
-
-import Robots.src.main.java.Client.Services.Service;
+package Client.Services;
 
 public class Economic extends Service {
 
