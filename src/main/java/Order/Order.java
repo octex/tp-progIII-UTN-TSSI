@@ -13,5 +13,4 @@ public class Order {
         this.location = location;
         this.wantsOrder = wantsOrder;
     }
-
 }

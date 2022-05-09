@@ -9,11 +9,11 @@ import java.util.*;
 public class Company {
     private ArrayList<Robot> robots;
     private ArrayList<Client> clients;
-    private PaymentModule payementModule;
-    private ServiceManagement serviceManagement;
-
-    public void createOrderPending(){
+    private AllocatorSystem allocatorSystem;
 
 
-    };
+    public void createOrderPending(){ //TODO: DEFINIR LA FIRMA DE ESTE METODO
+
+
+    }
 }
