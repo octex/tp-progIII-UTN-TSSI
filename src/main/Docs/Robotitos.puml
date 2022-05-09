@@ -4,7 +4,8 @@
 class Client {
     - Service service;
     - Location location;
-    +requestOrder(Cliente, Order)
+
+    + Order requestOrder(CleanType clean,boolean wantsOrder, String surface);
 }
 
 class Location{
@@ -16,6 +17,10 @@ class Location{
     + Location();
 }
 
+class RobotRegister{
+    - Robot robot;
+    - LinkedArrayList<Order> orders;
+}
 
 abstract Robot{
     - float costPerHourToCompany;
@@ -62,16 +67,22 @@ CleaningQuantity=3;
 }
 
 class Company{
-- List Clients;
-- List Robots
-- List Orders;
-- AllocatorSystem allocator;
+    - List Clients;
+    - List Robots;
+    - List Orders;
+    - AllocatorSystem allocator;
+    - LinkedArrayList<RobotRegister> ordersPerRobot;
+    + Company(List<Client> );
 }
+
 class Order{
     - CleanType cleanType;
     - boolean wantsOrdering;
     - String surfaceType;
     - Location location;
+    - Client client;
+
+    + Order(Client client, CleanType cleanType, boolean wantsOrder, String surface, Location loc);
 }
 enum CleanType{
     SIMPLE,
@@ -91,7 +102,6 @@ class PaymentModule{
   +void validateDebt(Client);
   -deuda getDebt(Client);
   -bool compareDebtToService(deuda, Client.servicio);
-
 }
 
 AllocatorSystem*--PaymentModule

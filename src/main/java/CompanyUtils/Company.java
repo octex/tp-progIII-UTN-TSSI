@@ -1,6 +1,7 @@
 package CompanyUtils;
 
 import Client.Client;
+import Order.Order;
 import Robots.Robot;
 
 import java.util.*;
@@ -14,6 +15,4 @@ public class Company {
     private AllocatorSystem allocatorSystem;
 
 
-    public void createOrderPending(){ //TODO: DEFINIR LA FIRMA DE ESTE METODO
-    }
 }
