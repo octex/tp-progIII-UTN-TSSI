@@ -4,6 +4,7 @@
 class Client {
     - Service service;
     - Location location;
+    - int dni;
 
     + Order requestOrder(CleanType clean,boolean wantsOrder, String surface);
 }
@@ -19,26 +20,26 @@ class Location{
 
 class RobotRegister{
     - Robot robot;
-    - LinkedArrayList<Order> orders;
+    - LinkedList<Order> orders;
 }
 
 abstract Robot{
     - float costPerHourToCompany;
 }
 class S031RTY{
-costPerHourToCompany=2700;
+    - float costPerHourToCompany=2700;
 }
 class K311Yfu{
-costPerHourToCompany=500;
+    - float costPerHourToCompany=500;
 }
 class P011H{
-costPerHourToCompany=1500;
+    - float costPerHourToCompany=1500;
 }
 class K311Ya{
-costPerHourToCompany=5000;
+    - float costPerHourToCompany=5000;
 }
 class K311Yfl{
-costPerHourToCompany=100;
+    - float costPerHourToCompany=100;
 }
 
 interface OrderingRobot{
@@ -53,26 +54,27 @@ abstract Service{
     - int CleaningQuantity;
 }
 class Platinum{
-OrderingQuantity=ilimitado;
-CleaningQuantity=ilimitado;
+    - OrderingQuantity=ilimitado;
+    - CleaningQuantity=ilimitado;
 }
 class Classic{
-OrderingQuantity=3;
-CleaningQuantity=ilimitado;
+    - OrderingQuantity=3;
+    - CleaningQuantity=ilimitado;
 }
 
 class Economic{
-OrderingQuantity=0;
-CleaningQuantity=3;
+    - OrderingQuantity=0;
+    - CleaningQuantity=3;
 }
 
 class Company{
-    - List Clients;
-    - List Robots;
-    - List Orders;
+    - ArrayList Clients;
+    - ArrayList Robots;
+    - ArrayList Orders;
+    - ArrayList<RobotRegister> ordersPerRobot;
     - AllocatorSystem allocator;
-    - LinkedArrayList<RobotRegister> ordersPerRobot;
     + Company(List<Client> );
+    + void tryToAssing(Order);
 }
 
 class Order{
@@ -90,18 +92,17 @@ enum CleanType{
 }
 
 class AllocatorSystem{
-
-PaymentModule paymentModule;
-+tryAllocate(Order, Cliente);
--getRequiredRobot(Order)
--getRequiredToPlatinumRobot(Order);
+    - PaymentModule paymentModule;
+    + void tryAllocate(Order);
+    - void getRequiredRobot(Order)
+    - void getRequiredToPlatinumRobot(Order);
 
 }
 
 class PaymentModule{
-  +void validateDebt(Client);
-  -deuda getDebt(Client);
-  -bool compareDebtToService(deuda, Client.servicio);
+    + void validateDebt(Client);
+    - float getDebt(Client);
+    - bool compareDebtToService(float debt, Service service);
 }
 
 
@@ -115,6 +116,7 @@ Company *-- AllocatorSystem
 Company*-- Robot
 Company *-- Client
 Company *-- Order
+Company *-- RobotRegister
 
 Robot <|--- K311Yfl
 Robot <|--- K311Yfu
