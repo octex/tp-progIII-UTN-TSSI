@@ -7,8 +7,7 @@ import Services.Service;
 public class Client {
     private int dni;
     private Service service;
-    private float debt;
-    private Order requestedOrder;
+
 
     Client(int dni, Service service){
         this.dni=dni;
