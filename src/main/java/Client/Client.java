@@ -1,24 +1,30 @@
 package Client;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import CompanyUtils.Company;
 import Order.*;
 import Services.Service;
 
+
 public class Client {
     private int dni;
     private Service service;
+    private Collection locations = new ArrayList<Location>();
 
 
-    Client(int dni, Service service){
+    Client(int dni, Service service, Collection locations){
         this.dni=dni;
         this.service=service;
+        this.locations = locations;
     };
 
-    public Order requestOrder(Company company, CleanType cleanType, Location location, boolean wantsOrder) throws CouldNotCreateOrderException
+    public void requestOrder(Company company, Order order) throws CouldNotCreateOrderException
     {
         try
         {
-            return null;
+            company.tryToAssing(order);
         }
         catch (Exception CouldNotCreateOrderException)
         {
