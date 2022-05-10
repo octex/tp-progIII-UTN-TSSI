@@ -1,11 +1,16 @@
 package Order;
 
+import Client.Client;
 import Client.Location;
 
 public class Order {
     
     private CleanType cleanType;
     private Location location;
+    private boolean wantsPolish;
+    private boolean wantsOrder;
+    private String surface;
+    private Client client;
 
     public boolean doesWantPolish() {
         return wantsPolish;
@@ -15,10 +20,8 @@ public class Order {
         this.wantsPolish = wantsPolish;
     }
 
-    private boolean wantsPolish;
-    private boolean wantsOrder;
-    private String surface;
-    public Order(CleanType cleanType, Location location, boolean wantsOrder, String surface){
+    public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, String surface){
+        this.client = client;
         this.cleanType = cleanType;
         this.location = location;
         this.wantsOrder = wantsOrder;
@@ -55,5 +58,9 @@ public class Order {
 
     public void setSurface(String surface) {
         this.surface = surface;
+    }
+
+    public Client getClient() {
+        return client;
     }
 }

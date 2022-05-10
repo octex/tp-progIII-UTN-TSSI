@@ -16,9 +16,17 @@ public class AllocatorSystem
         this.paymentModule = paymentModule;
     }
 
-    public void TryAllocate(Order order, Client client)
+    public void TryAllocate(Order order) throws ServiceNotIncludedExeption, HasNoCreditsExeption
     {
-
+        try
+        {
+            validateClientCredits(order, order.getClient());
+            validateService(order, order.getClient());
+        }
+        catch (ServiceNotIncludedExeption | HasNoCreditsExeption e)
+        {
+            System.out.println(e.toString());
+        }
     }
 
     private boolean validateService(Order order, Client client) throws ServiceNotIncludedExeption {
