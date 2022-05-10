@@ -1,5 +1,5 @@
 package CompanyUtils;
-
+import static org.mockito.Mockito.mock;
 import Client.Client;
 
 public class PaymentModule {
