@@ -1,10 +1,10 @@
 package Client.Services;
 
 public class Economic extends Service {
-
+    int cleaningRoomPerMonth=3;
     public Economic()
       {
-            super(-1,-1,0f,0f);
+            super(5000,10000);
         }
 
 

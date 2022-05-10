@@ -1,4 +1,4 @@
-package RobotsExeptions;
+package Robots.RobotsExeptions;
 
 public class CouldNotOrderExeption extends Exception{
     CouldNotOrderExeption(){
