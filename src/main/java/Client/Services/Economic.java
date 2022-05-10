@@ -1,7 +1,11 @@
 package Client.Services;
 
 public class Economic extends Service {
-    int cleaningRoomPerMonth=3;
+    @Override
+    public void setCleaningPerMonth(int cleaningPerMonth) {
+        super.setCleaningPerMonth(cleaningPerMonth);
+    }
+
     public Economic()
       {
             super(5000,10000);

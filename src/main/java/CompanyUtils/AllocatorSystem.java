@@ -28,9 +28,24 @@ public class AllocatorSystem
             return true;
     }
     private boolean validateClientCredits(Order order, Client client) throws HasNoCreditsExeption {
-        if(client.getService().getClass().getName().equals("Economic")){
-            throw new HasNoCreditsExeption("El cliente economico no puede pedir orden Exeption");}
-        else
+        switch (client.getService().getClass().getName()) {
+            case "Platinum":
+                return true;
+            case "Classic":
+                if (order.doesWantOrder() && client.getService().getOrderingQuantity() <= 0) {
+                    throw new HasNoCreditsExeption("El cliente clasico no tiene creditos");
+                } else {
+                    return true;
+                }
+            case "Economic":
+                if (client.getService().getCleaningQuantity() <= 0) {
+                    throw new HasNoCreditsExeption("El cliente Economico no tiene creditos para limpieza");
+                }else{
+                    return true;
+                }
+        }
+
+
             return true;
     }
 
