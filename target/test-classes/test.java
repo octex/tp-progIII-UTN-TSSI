@@ -1,12 +1,11 @@
-import java.beans.Transient;
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.Assertions.*;
-
+import Client.Client;
 import Services.Economic;
+import org.testng.annotations.Test;
+
+import static org.testng.Assert.*;
 
 
-public class test {
+public class economicOrdenamiento {
 
     @Test
     void economicLimpiezaOrdenamiento(){
