@@ -1,7 +1,9 @@
 import java.beans.Transient;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.Assertions.*; 
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 import Services.Economic;
 
