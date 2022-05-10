@@ -1,10 +1,11 @@
 package CompanyUtils;
-import org.mockito.Mockito.*;
 
 import Client.Client;
 
-public interface PaymentModule {
-
-    public float getDebt(Client client);
+public class PaymentModule {
+    public float getDebt(Client client){
+        float debt=500f;
+        return debt;
+            };
 
 }

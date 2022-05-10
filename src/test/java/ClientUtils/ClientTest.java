@@ -1,20 +1,13 @@
-package ClientUtils;
 
-import java.beans.Transient;
-
+import Client.Services.Economic;
 import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
 import Client.Client;
 import CompanyUtils.Company;
-import Order.CleanType;
 import Order.Order;
-import Order.CleanType;
-
-
 import org.junit.jupiter.api.Test;
-
+import static Order.CleanType.SIMPLE;
 import static org.junit.jupiter.api.Assertions.*;
 
-import Services.Economic;
 
 public class ClientTest {
 

@@ -17,7 +17,9 @@ public class Company {
     private ArrayList<Order> orders;
     private AllocatorSystem allocatorSystem;
     private ArrayList<RobotRegister> orderPerRobot;
+    public Company() {
 
+    }
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
         this.robots.addAll(robots);
         this.clients.addAll(clients);
@@ -25,6 +27,8 @@ public class Company {
         this.allocatorSystem = new AllocatorSystem();
         this.orderPerRobot = new ArrayList();
     }
+
+
 
     public void tryToAssing(Order order){
         try{
