@@ -24,7 +24,7 @@ public class AllocatorSystem
         }
         catch (ServiceNotIncludedExeption | HasNoCreditsExeption e)
         {
-            System.out.println(e.toString());
+            throw e;
         }
     }
 
