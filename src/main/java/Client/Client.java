@@ -6,7 +6,7 @@ import java.util.Collection;
 import Client.Services.Economic;
 import CompanyUtils.Company;
 import Order.*;
-import Services.Service;
+import Client.Services.Service;
 
 
 public class Client {
