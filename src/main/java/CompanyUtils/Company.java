@@ -1,6 +1,8 @@
 package CompanyUtils;
 
 import Client.Client;
+import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
+import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
 import Order.Order;
 import Robots.Robot;
 import Robots.RobotRegister;
@@ -25,6 +27,11 @@ public class Company {
     }
 
     public void tryToAssing(Order order){
-        this.allocatorSystem.TryAllocate(order);
+        try{
+            this.allocatorSystem.TryAllocate(order);
+        }
+        catch (ServiceNotIncludedExeption | HasNoCreditsExeption e){
+            System.out.println(e.toString());
+        }
     }
 }
