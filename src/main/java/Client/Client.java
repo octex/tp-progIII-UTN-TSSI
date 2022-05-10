@@ -3,10 +3,10 @@ package Client;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import Client.Services.Economic;
+import Services.Economic;
 import CompanyUtils.Company;
 import Order.*;
-import Client.Services.Service;
+import Services.Service;
 
 
 public class Client {
