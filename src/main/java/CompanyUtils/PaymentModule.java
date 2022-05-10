@@ -1,18 +1,10 @@
-package Robots.src.main.java.CompanyUtils;
+package CompanyUtils;
 
-import Robots.src.main.java.Client.Client;
 
-public interface PaymentModule {
-
-    public float getDebt(Client client);
-
-<<<<<<< HEAD
-=======
 import Client.Client;
 
 public interface PaymentModule {
 
     public float getDebt(Client client);
 
->>>>>>> develop
 }

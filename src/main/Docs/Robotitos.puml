@@ -90,8 +90,8 @@ enum CleanType{
 }
 
 class AllocatorSystem{
-PaymentModule paymentModule;
 
+PaymentModule paymentModule;
 +tryAllocate(Order, Cliente);
 -getRequiredRobot(Order)
 -getRequiredToPlatinumRobot(Order);
@@ -103,6 +103,7 @@ class PaymentModule{
   -deuda getDebt(Client);
   -bool compareDebtToService(deuda, Client.servicio);
 }
+
 
 AllocatorSystem*--PaymentModule
 PaymentModule<--Client

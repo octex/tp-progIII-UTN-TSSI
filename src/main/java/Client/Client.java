@@ -7,8 +7,7 @@ import Services.Service;
 public class Client {
     private int dni;
     private Service service;
-    private float debt;
-    private Order requestedOrder;
+
 
     Client(int dni, Service service){
         this.dni=dni;
@@ -26,5 +25,21 @@ public class Client {
             throw new CouldNotCreateOrderException("No se pudo crear la orden");
         }
 
+    }
+
+    public int getDni() {
+        return dni;
+    }
+
+    public void setDni(int dni) {
+        this.dni = dni;
+    }
+
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
     }
 }
