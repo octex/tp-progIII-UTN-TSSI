@@ -11,9 +11,8 @@ public class AllocatorSystem
 {
     private PaymentModule paymentModule;
 
-    public AllocatorSystem(PaymentModule paymentModule)
-    {
-        this.paymentModule = paymentModule;
+    public AllocatorSystem(){
+        this.paymentModule = null;
     }
 
     public void TryAllocate(Order order, Client client)
