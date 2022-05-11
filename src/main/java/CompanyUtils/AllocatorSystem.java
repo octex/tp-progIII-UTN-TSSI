@@ -7,16 +7,9 @@ import Order.Order;
 import Client.Client;
 
 
-public class AllocatorSystem
-{
-    private PaymentModule paymentModule;
+public class AllocatorSystem implements PaymentModule{
 
-    public AllocatorSystem(){
-        this.paymentModule = null;
-    }
-
-    public void TryAllocate(Order order)
-    {
+    public void TryAllocate(Order order){
         try
         {
             validateClientCredits(order);
@@ -63,5 +56,11 @@ public class AllocatorSystem
     private Robot GetRequiredToPlatinumRobot(Order order)
     {
         return null;
+    }
+
+
+    @Override
+    public float getDebt(Client client) {
+        return 0;
     }
 }
