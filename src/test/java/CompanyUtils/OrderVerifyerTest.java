@@ -39,7 +39,7 @@ class OrderVerifyerTest {
     void validateServiceEconomicSimpleWithoutCreditsFail() throws HasNoCreditsExeption {
         assertFalse(orderVerifyer.validateClientCredits(order));
     }
-    
+
 
     @Test
     void getDebt() {

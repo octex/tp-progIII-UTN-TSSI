@@ -15,7 +15,7 @@ public class Client {
     private Collection locations = new ArrayList<Location>();
 
 
-    public Client(int dni, Platinum service, Collection locations){
+    public Client(int dni, Service service, Collection locations){
         this.dni=dni;
         this.service=service;
         this.locations = locations;
