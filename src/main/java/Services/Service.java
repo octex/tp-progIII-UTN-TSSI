@@ -25,6 +25,6 @@ public abstract class Service {
 
     public String GetServiceName()
     {
-        return this.getClass().toString();
+        return this.getClass().getName().replace("Services.", "");
     }
 }
