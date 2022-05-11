@@ -22,14 +22,15 @@ public class OrderVerifyer implements PaymentModule{
     }
 
     protected boolean validateService(Order order) throws ServiceNotIncludedExeption {
-        if(order.doesWantOrder() && order.getClient().getService().getClass().getName().equals("Economic")){
+        if(order.doesWantOrder() && order.getClient().getService().getServiceName().equals("Economic")){
             throw new ServiceNotIncludedExeption("El cliente economico no puede pedir orden Exeption");}
         else
             return true;
     }
     protected boolean validateClientCredits(Order order) throws HasNoCreditsExeption {
-        switch (order.getClient().getService().getClass().getName()) {
+        switch (order.getClient().getService().getServiceName()) {
             case "Platinum":
+
                 return true;
             case "Classic":
                 if (order.doesWantOrder() && order.getClient().getService().getOrderingQuantity() <= 0) {
@@ -41,10 +42,11 @@ public class OrderVerifyer implements PaymentModule{
                 if (order.getClient().getService().getCleaningQuantity() <= 0) {
                     throw new HasNoCreditsExeption("El cliente Economico no tiene creditos para limpieza");
                 }else{
+
                     return true;
                 }
         }
-        return true;
+        return false;
     }
 
 

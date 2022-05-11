@@ -33,17 +33,11 @@ public class Order {
         return cleanType;
     }
 
-    public void setCleanType(CleanType cleanType) {
-        this.cleanType = cleanType;
-    }
 
     public Location getLocation() {
         return location;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
-    }
 
     public boolean doesWantOrder() {
         return wantsOrder;
@@ -63,5 +57,24 @@ public class Order {
 
     public Client getClient() {
         return client;
+    }
+
+    public void setCleanType(CleanType cleanType) {
+        this.cleanType = cleanType;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+
+
+    public void setWantsPolish(boolean wantsPolish) {
+        this.wantsPolish = wantsPolish;
+    }
+
+
+    public void setClient(Client client) {
+        this.client = client;
     }
 }

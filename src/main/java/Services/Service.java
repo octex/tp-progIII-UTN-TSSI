@@ -23,8 +23,24 @@ public abstract class Service {
         return this.orderValue;
     }
 
-    public String GetServiceName()
+    public String getServiceName()
     {
         return this.getClass().getName().replace("Services.", "");
+    }
+
+    public void setCleaningQuantity(int cleaningQuantity) {
+        this.cleaningQuantity = cleaningQuantity;
+    }
+
+    public void setOrderingQuantity(int orderingQuantity) {
+        this.orderingQuantity = orderingQuantity;
+    }
+
+    public void setOrderValue(float orderValue) {
+        this.orderValue = orderValue;
+    }
+
+    public void setMaxDebt(float maxDebt) {
+        this.maxDebt = maxDebt;
     }
 }
