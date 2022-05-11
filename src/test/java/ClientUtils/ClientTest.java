@@ -1,12 +1,15 @@
+package ClientUtils;
 
-import Services.Economic;
-import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
+import static Order.CleanType.SIMPLE;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
 import Client.Client;
 import CompanyUtils.Company;
+import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
 import Order.Order;
-import org.junit.jupiter.api.Test;
-import static Order.CleanType.SIMPLE;
-import static org.junit.jupiter.api.Assertions.*;
+import Services.Economic;
 
 
 public class ClientTest {
