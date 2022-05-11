@@ -31,11 +31,6 @@ public class Company {
 
 
     public void tryToAssing(Order order){
-        try{
-            this.allocatorSystem.TryAllocate(order);
-        }
-        catch (ServiceNotIncludedExeption | HasNoCreditsExeption e){
-            System.out.println(e.toString());
-        }
+        this.allocatorSystem.TryAllocate(order);
     }
 }

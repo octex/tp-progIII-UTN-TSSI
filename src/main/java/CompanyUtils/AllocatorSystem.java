@@ -15,7 +15,7 @@ public class AllocatorSystem
         this.paymentModule = null;
     }
 
-    public void TryAllocate(Order order) throws ServiceNotIncludedExeption, HasNoCreditsExeption
+    public void TryAllocate(Order order)
     {
         try
         {
@@ -24,7 +24,7 @@ public class AllocatorSystem
         }
         catch (ServiceNotIncludedExeption | HasNoCreditsExeption e)
         {
-            throw e;
+            System.out.println(e.toString());
         }
     }
 

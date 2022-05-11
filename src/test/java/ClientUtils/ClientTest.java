@@ -1,5 +1,5 @@
 
-import Client.Services.Economic;
+import Services.Economic;
 import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
 import Client.Client;
 import CompanyUtils.Company;
