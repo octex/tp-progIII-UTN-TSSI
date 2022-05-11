@@ -3,9 +3,9 @@ package Client;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import Services.Economic;
 import CompanyUtils.Company;
 import Order.*;
+import Services.Platinum;
 import Services.Service;
 
 
@@ -15,7 +15,7 @@ public class Client {
     private Collection locations = new ArrayList<Location>();
 
 
-    public Client(int dni, Economic service, Collection locations){
+    public Client(int dni, Platinum service, Collection locations){
         this.dni=dni;
         this.service=service;
         this.locations = locations;

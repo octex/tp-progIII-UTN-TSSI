@@ -21,13 +21,13 @@ public class OrderVerifyer implements PaymentModule{
         }
     }
 
-    private boolean validateService(Order order) throws ServiceNotIncludedExeption {
+    protected boolean validateService(Order order) throws ServiceNotIncludedExeption {
         if(order.doesWantOrder() && order.getClient().getService().getClass().getName().equals("Economic")){
             throw new ServiceNotIncludedExeption("El cliente economico no puede pedir orden Exeption");}
         else
             return true;
     }
-    private boolean validateClientCredits(Order order) throws HasNoCreditsExeption {
+    protected boolean validateClientCredits(Order order) throws HasNoCreditsExeption {
         switch (order.getClient().getService().getClass().getName()) {
             case "Platinum":
                 return true;

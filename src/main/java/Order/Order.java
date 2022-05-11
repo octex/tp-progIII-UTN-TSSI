@@ -20,6 +20,7 @@ public class Order {
         this.wantsPolish = wantsPolish;
     }
 
+
     public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, String surface){
         this.client = client;
         this.cleanType = cleanType;
