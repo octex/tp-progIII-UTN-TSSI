@@ -7,9 +7,9 @@ import Order.Order;
 import Client.Client;
 
 
-public class AllocatorSystem implements PaymentModule{
+public class OrderVerifyer implements PaymentModule{
 
-    public void TryAllocate(Order order){
+    public void verifyOrder(Order order){
         try
         {
             validateClientCredits(order);
@@ -44,7 +44,7 @@ public class AllocatorSystem implements PaymentModule{
                     return true;
                 }
         }
-            return true;
+        return true;
     }
 
 
