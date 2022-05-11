@@ -19,8 +19,8 @@ public class AllocatorSystem
     {
         try
         {
-            validateClientCredits(order, order.getClient());
-            validateService(order, order.getClient());
+            validateClientCredits(order);
+            validateService(order);
         }
         catch (ServiceNotIncludedExeption | HasNoCreditsExeption e)
         {
@@ -28,24 +28,24 @@ public class AllocatorSystem
         }
     }
 
-    private boolean validateService(Order order, Client client) throws ServiceNotIncludedExeption {
-        if(order.doesWantOrder() && client.getService().getClass().getName().equals("Economic")){
+    private boolean validateService(Order order) throws ServiceNotIncludedExeption {
+        if(order.doesWantOrder() && order.getClient().getService().getClass().getName().equals("Economic")){
             throw new ServiceNotIncludedExeption("El cliente economico no puede pedir orden Exeption");}
         else
             return true;
     }
-    private boolean validateClientCredits(Order order, Client client) throws HasNoCreditsExeption {
-        switch (client.getService().getClass().getName()) {
+    private boolean validateClientCredits(Order order) throws HasNoCreditsExeption {
+        switch (order.getClient().getService().getClass().getName()) {
             case "Platinum":
                 return true;
             case "Classic":
-                if (order.doesWantOrder() && client.getService().getOrderingQuantity() <= 0) {
+                if (order.doesWantOrder() && order.getClient().getService().getOrderingQuantity() <= 0) {
                     throw new HasNoCreditsExeption("El cliente clasico no tiene creditos");
                 } else {
                     return true;
                 }
             case "Economic":
-                if (client.getService().getCleaningQuantity() <= 0) {
+                if (order.getClient().getService().getCleaningQuantity() <= 0) {
                     throw new HasNoCreditsExeption("El cliente Economico no tiene creditos para limpieza");
                 }else{
                     return true;

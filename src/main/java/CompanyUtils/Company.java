@@ -28,8 +28,6 @@ public class Company {
         this.orderPerRobot = new ArrayList();
     }
 
-
-
     public void tryToAssing(Order order){
         this.allocatorSystem.TryAllocate(order);
     }
