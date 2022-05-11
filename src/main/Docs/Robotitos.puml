@@ -92,11 +92,14 @@ enum CleanType{
 }
 
 class AllocatorSystem{
-    - PaymentModule paymentModule;
     + void tryAllocate(Order);
     - void getRequiredRobot(Order)
     - void getRequiredToPlatinumRobot(Order);
+}
 
+class OrderVerifyer{
+    - boolean validateCreditClient(Order order);
+    - boolean validateService(Order order);
 }
 
 class PaymentModule{
@@ -117,6 +120,7 @@ Company*-- Robot
 Company *-- Client
 Company *-- Order
 Company *-- RobotRegister
+Company <-left- OrderVerifyer
 
 Robot <|--- K311Yfl
 Robot <|--- K311Yfu

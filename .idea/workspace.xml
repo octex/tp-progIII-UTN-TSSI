@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="81f0da50-e4e9-43b4-a053-8bba11bc9497" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/CompanyUtils/OrderVerifyer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Docs/Robotitos.puml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Docs/Robotitos.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,22 +58,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="ClientTest.economicLimpiezaOrdenamiento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="tp-progIII-UTN-TSSI" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="ClientUtils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="ClientUtils" />
-      <option name="MAIN_CLASS_NAME" value="ClientUtils.ClientTest" />
-      <option name="METHOD_NAME" value="economicLimpiezaOrdenamiento" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -86,11 +69,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.ClientTest.economicLimpiezaOrdenamiento" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
