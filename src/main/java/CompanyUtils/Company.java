@@ -14,9 +14,11 @@ public class Company {
     private ArrayList<Order> orders;
     private RobotAssigner robotAssigner;
     private ArrayList<RobotRegister> orderPerRobot;
+
     public Company() {
 
     }
+
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
         this.robots.addAll(robots);
         this.clients.addAll(clients);
@@ -25,7 +27,22 @@ public class Company {
         this.orderPerRobot = new ArrayList();
     }
 
-    public void tryToAssing(Order order){
-        this.robotAssigner.AssignRobot(order);
+    public void tryToAssign(Order order){
+        try{
+            OrderVerifyer orderVerifyer = new OrderVerifyer();
+            RobotAssigner robotAssigner = new RobotAssigner();
+
+            orderVerifyer.verifyOrder(order);
+            robotAssigner.AssignRobot(order);
+        }
+        catch (CouldNotVerifyOrderException e){
+            System.out.println("No se pudo verificar la orden.");
+        }
+        catch (CouldNotAssignRobotException e){
+            System.out.println("No se pudo asignar el robot a la orden.");
+        }
+        catch (Exception e){
+            System.out.println("Hubo un error.");
+        }
     }
 }
