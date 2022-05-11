@@ -59,6 +59,22 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration name="ClientTest.economicLimpiezaOrdenamiento" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="tp-progIII-UTN-TSSI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ClientUtils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="ClientUtils" />
+      <option name="MAIN_CLASS_NAME" value="ClientUtils.ClientTest" />
+      <option name="METHOD_NAME" value="economicLimpiezaOrdenamiento" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
         <option name="Make" enabled="true" />
@@ -70,6 +86,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ClientTest.economicLimpiezaOrdenamiento" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">

@@ -1,3 +1,4 @@
+package ClientUtils;
 
 import Services.Economic;
 import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ClientTest {
 
         @Test
-        void economicLimpiezaOrdenamiento(){
+        void EconomicClientRequestsCleaningAndOrder(){
             var client = new Client(111, new Economic(), null);
 
             assertThrows(ServiceNotIncludedExeption.class, ()->{
