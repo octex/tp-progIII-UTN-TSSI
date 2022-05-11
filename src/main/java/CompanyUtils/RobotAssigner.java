@@ -16,7 +16,7 @@ public class RobotAssigner
     public void AssignRobot(Order order)
     {
         Robot robotToAssing;
-        if(order.getClient().getService().getClass().getName().equals("Platinum"))
+        if(order.getClient().getService().GetServiceName().equals("Platinum"))
         {
             robotToAssing = GetRequiredRobotToPlatinumRobot(order);
         }

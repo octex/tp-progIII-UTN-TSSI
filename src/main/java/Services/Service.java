@@ -22,5 +22,9 @@ public abstract class Service {
     public float getOrderValue(){
         return this.orderValue;
     }
-    
+
+    public String GetServiceName()
+    {
+        return this.getClass().toString();
+    }
 }
