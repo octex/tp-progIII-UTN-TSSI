@@ -15,6 +15,12 @@ public class Company {
     private RobotAssigner robotAssigner;
     private ArrayList<RobotRegister> orderPerRobot;
 
+    public void tryToAssing(Order order) {
+    }
+
+    public void tryToAssign(Order order) {
+    }
+
     public Company() {
 
     }
@@ -45,4 +51,6 @@ public class Company {
             System.out.println("Hubo un error.");
         }
     }
+
+
 }
