@@ -29,10 +29,6 @@ class OrderVerifyerTest {
 
     }
 
-    @AfterEach
-    void tearDown() {
-    }
-
     @Test
     void validateServiceEconomicSimpleWithCreditsOk() throws ServiceNotIncludedExeption {
         assertTrue(orderVerifyer.validateService(order));
@@ -54,7 +50,5 @@ class OrderVerifyerTest {
         assertTrue(orderVerifyer.validateClientCredits(order));
     }
 
-    @Test
-    void getDebt() {
-    }
+
 }
