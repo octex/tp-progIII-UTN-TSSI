@@ -25,7 +25,7 @@ public class RobotAssigner
 
         if(order.getClient().getService().getServiceName().equals("Platinum"))
         {
-            robotToAssing = GetRequiredRobotToPlatinumRobot(robotsOrders);
+            robotToAssing = GetRequiredRobotToPlatinumRobot(suitableRobots, robotsOrders);
         }
         else
         {
@@ -39,16 +39,15 @@ public class RobotAssigner
     {
         ArrayList<Robot> matchRobots = new ArrayList<Robot>();
 
-        for(Robot robot: robots)
+        for(Robot robot : robots)
         {
-            boolean condition = order.getSurface().equals(robot.getSurface()) &&
+            boolean matches = order.getSurface().equals(robot.getSurface()) &&
                     order.doesWantOrder() && robot instanceof RoomOrganizer &&
                     order.doesWantPolish() && robot instanceof Polisher;
-            if(condition)
+            if(matches)
             {
                 matchRobots.add(robot);
             }
-
         }
         return matchRobots;
     }
@@ -60,9 +59,14 @@ public class RobotAssigner
                 .get();
     }
 
-    private Robot GetRequiredRobotToPlatinumRobot(ArrayList<RobotRegister> robotsOrders)
+    private Robot GetRequiredRobotToPlatinumRobot(ArrayList<Robot> suitableRobots, ArrayList<RobotRegister> robotsOrders)
     {
-        return robotsOrders.stream()
+        ArrayList<RobotRegister> suitableRobotsWithOrders = new ArrayList<RobotRegister>();
+        for(Robot robot : suitableRobots)
+        {
+            suitableRobotsWithOrders.add(robotsOrders.get(robotsOrders.indexOf(robot)));
+        }
+        return suitableRobotsWithOrders.stream()
                 .min(Comparator.comparingInt(RobotRegister::GetAmountOfOrders))
                 .get().GetRobot();
     }
