@@ -1,5 +1,6 @@
 package CompanyUtils;
 
+import CompanyUtils.RobotAssignerExceptions.CouldNotAssignRobotException;
 import Robots.Polisher;
 import Robots.Robot;
 import Order.Order;
@@ -18,11 +19,14 @@ public class RobotAssigner
 
     }
 
-    public void AssignRobot(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders)
+    public void AssignRobot(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders) throws CouldNotAssignRobotException
     {
         Robot robotToAssing;
         ArrayList<Robot> suitableRobots = GetSuitableRobots(order, robots);
-
+        if (suitableRobots.size() == 0)
+        {
+            throw new CouldNotAssignRobotException("No hay robots disponibles para el pedido solicitado");
+        }
         if(order.getClient().getService().getServiceName().equals("Platinum"))
         {
             robotToAssing = GetRequiredRobotToPlatinumRobot(suitableRobots, robotsOrders);
