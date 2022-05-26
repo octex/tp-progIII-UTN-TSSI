@@ -4,15 +4,12 @@ package Robots;
 public class S031RTY extends Robot implements RoomOrganizer{
 
     public S031RTY(){
-        this.surface = "N/A";
-        this.canOrderRoom = true;
-        this.canPolish = false;
-        this.costPH = 2700;
+        super("N/A",2700);
     }
 
     @Override
     public void order(Integer surface) {
-
+        System.out.println("Soy S031RTY y estoy ordenando");
     }
 
     public String toString(){
