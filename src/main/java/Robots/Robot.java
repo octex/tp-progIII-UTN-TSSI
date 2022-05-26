@@ -3,7 +3,6 @@ package Robots;
 public abstract class Robot {
 
     protected String surface;
-
     protected float costPH;
 
     public Robot(String surface,float costPH){

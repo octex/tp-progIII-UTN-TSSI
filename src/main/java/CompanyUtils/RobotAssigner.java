@@ -1,8 +1,10 @@
 package CompanyUtils;
 
+import Robots.Polisher;
 import Robots.Robot;
 import Order.Order;
 import Robots.RobotRegister;
+import Robots.RoomOrganizer;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -19,17 +21,37 @@ public class RobotAssigner
     public void AssignRobot(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders)
     {
         Robot robotToAssing;
+        ArrayList<Robot> suitableRobots = GetSuitableRobots(order, robots);
+
         if(order.getClient().getService().getServiceName().equals("Platinum"))
         {
             robotToAssing = GetRequiredRobotToPlatinumRobot(robotsOrders);
         }
         else
         {
-            robotToAssing = GetCheapestRobot(robots);
+            robotToAssing = GetCheapestRobot(suitableRobots);
         }
         robotsOrders.get(robotsOrders.indexOf(robotToAssing)).AddOrder(order);
     }
 
+
+    private ArrayList<Robot> GetSuitableRobots(Order order, ArrayList<Robot> robots)
+    {
+        ArrayList<Robot> matchRobots = new ArrayList<Robot>();
+
+        for(Robot robot: robots)
+        {
+            boolean condition = order.getSurface().equals(robot.getSurface()) &&
+                    order.doesWantOrder() && robot instanceof RoomOrganizer &&
+                    order.doesWantPolish() && robot instanceof Polisher;
+            if(condition)
+            {
+                matchRobots.add(robot);
+            }
+
+        }
+        return matchRobots;
+    }
 
     private Robot GetCheapestRobot(ArrayList<Robot> robots)
     {
