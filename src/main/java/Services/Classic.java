@@ -20,4 +20,9 @@ public class Classic extends Service  {
         }
     }
 
+    @Override
+    public void validateService() {
+
+    }
+
 }

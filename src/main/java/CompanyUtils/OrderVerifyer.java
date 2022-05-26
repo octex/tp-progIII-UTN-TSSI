@@ -9,7 +9,7 @@ import Client.Client;
 
 public class OrderVerifyer implements PaymentModule{
 
-    public void verifyOrder(Order order){
+    public void verifyOrder(Order order) throws Exception{
         try
         {
             validateClientCredits(order);
@@ -18,6 +18,7 @@ public class OrderVerifyer implements PaymentModule{
         catch (ServiceNotIncludedExeption | HasNoCreditsExeption e)
         {
             System.out.println(e.toString());
+            throw e;
         }
     }
 

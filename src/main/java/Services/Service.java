@@ -54,5 +54,6 @@ public abstract class Service{
         this.orderValue = orderValue;
     }
 
+    public abstract void validateService();
 
 }
