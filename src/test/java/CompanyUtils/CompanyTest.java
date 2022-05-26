@@ -49,5 +49,18 @@ class CompanyTest {
         });
     }
 
+    @Test
+    void tryToAssignRobotToEconomicDontThrowCouldNotVerifyOrderException() {
+        CleanType cleanType =  CleanType.SIMPLE;
+        Location location = new Location("Buenos Aires", "Olivos", "Maipu");
+        Service service = new Economic();
+        Client client = new Client(111111111, service, (Collection) location);
+        Order order = new Order(client, cleanType, location, true, "madera");
+
+        assertThrows(CouldNotCreateOrderException.class , () -> {
+            company.tryToAssign(order);
+        });
+    }
+
 
 }
