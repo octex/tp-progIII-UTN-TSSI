@@ -1,4 +1,4 @@
 package CompanyUtils;
 
-public class CouldNotVerifyOrderException {
+public class CouldNotVerifyOrderException extends Exception{
 }
