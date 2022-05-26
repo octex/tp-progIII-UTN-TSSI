@@ -23,7 +23,7 @@ public abstract class Robot {
     }
 
     public void sendMessage(){
-        this.communicationModule.readyMessage(true);
+        this.communicationModule.readyMessage(this);
     }
 
 

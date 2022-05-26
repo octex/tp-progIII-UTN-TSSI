@@ -6,8 +6,8 @@ public class CommunicationModuleEmisor {
 
     private Company company;
 
-    public void readyMessage(boolean isReady){
-        company.reciveMessage(isReady);
+    public void readyMessage(Robot robot){
+        company.getCommunicationModuleReciver().reciveMessage(robot);
     }
     
 }

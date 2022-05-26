@@ -16,6 +16,7 @@ public class Company {
     private ArrayList<Order> orders;
     private RobotAssigner robotAssigner;
     private ArrayList<RobotRegister> orderPerRobot;
+    private CommunicationModuleReciver communicationModuleReciver;
 
 
     public Company() {
@@ -28,6 +29,10 @@ public class Company {
         this.orders.addAll(orders);
         this.robotAssigner = new RobotAssigner();
         this.orderPerRobot = new ArrayList();
+    }
+
+    public CommunicationModuleReciver getCommunicationModuleReciver(){
+        return this.communicationModuleReciver;
     }
 
     public void tryToAssign(Order order){
