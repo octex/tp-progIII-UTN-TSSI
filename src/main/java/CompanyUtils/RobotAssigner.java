@@ -3,6 +3,10 @@ package CompanyUtils;
 import Robots.Robot;
 import Order.Order;
 import Client.Client;
+import Robots.RobotRegister;
+
+import java.util.ArrayList;
+import java.util.Comparator;
 
 
 public class RobotAssigner
@@ -13,26 +17,28 @@ public class RobotAssigner
 
     }
 
-    public void AssignRobot(Order order)
+    public void AssignRobot(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders)
     {
         Robot robotToAssing;
         if(order.getClient().getService().getServiceName().equals("Platinum"))
         {
-            robotToAssing = GetRequiredRobotToPlatinumRobot(order);
+            robotToAssing = GetRequiredRobotToPlatinumRobot(robots, robotsOrders);
         }
         else
         {
-            robotToAssing = GetRequiredRobot(order);
+            robotToAssing = GetCheapestRobot(robots);
         }
     }
 
 
-    private Robot GetRequiredRobot(Order order)
+    private Robot GetCheapestRobot(ArrayList<Robot> robots)
     {
-        return null;
+        return robots.stream()
+                .min(Comparator.comparingDouble(Robot::getCostPH))
+                .get();
     }
 
-    private Robot GetRequiredRobotToPlatinumRobot(Order order)
+    private Robot GetRequiredRobotToPlatinumRobot(ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders)
     {
         return null;
     }

@@ -36,7 +36,7 @@ public class Company {
             RobotAssigner robotAssigner = new RobotAssigner();
 
             orderVerifyer.verifyOrder(order);
-            robotAssigner.AssignRobot(order);
+            robotAssigner.AssignRobot(order, robots, orderPerRobot);
         }
         catch (CouldNotVerifyOrderException e){
             System.out.println("No se pudo verificar la orden.");
@@ -48,6 +48,4 @@ public class Company {
             System.out.println("Hubo un error.");
         }
     }
-
-
 }
