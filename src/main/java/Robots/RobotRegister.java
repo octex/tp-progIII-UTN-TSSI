@@ -22,4 +22,9 @@ public class RobotRegister {
     {
         return robot;
     }
+
+    public void AddOrder(Order order)
+    {
+        orders.add(order);
+    }
 }
