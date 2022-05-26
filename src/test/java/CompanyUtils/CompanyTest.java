@@ -8,7 +8,7 @@ import Order.*;
 import Client.*;
 import Services.*;
 import CompanyUtils.Company;
-import org.mockito.internal.matchers.Or;
+//import org.mockito.internal.matchers.Or;
 
 import java.util.Collection;
 
@@ -28,6 +28,19 @@ class CompanyTest {
         CleanType cleanType =  CleanType.SIMPLE;
         Location location = new Location("Buenos Aires", "Olivos", "Maipu");
         Service service = new Classic();
+        Client client = new Client(111111111, service, (Collection) location);
+        Order order = new Order(client, cleanType, location, true, "madera");
+
+        assertThrows(CouldNotCreateOrderException.class , () -> {
+            company.tryToAssign(order);
+        });
+    }
+
+    @Test
+    void tryToAssignRobotToEconomicThrowCouldNotVerifyOrderException() {
+        CleanType cleanType =  CleanType.SIMPLE;
+        Location location = new Location("Buenos Aires", "Olivos", "Maipu");
+        Service service = new Economic();
         Client client = new Client(111111111, service, (Collection) location);
         Order order = new Order(client, cleanType, location, true, "madera");
 
