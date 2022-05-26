@@ -1,6 +1,7 @@
 package CompanyUtils;
 
 import Client.Client;
+import CompanyUtils.OrderVerifyerExceptions.*;
 import CompanyUtils.RobotAssignerExceptions.*;
 import Order.Order;
 import Robots.Robot;
