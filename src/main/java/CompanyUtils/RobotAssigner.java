@@ -2,7 +2,6 @@ package CompanyUtils;
 
 import Robots.Robot;
 import Order.Order;
-import Client.Client;
 import Robots.RobotRegister;
 
 import java.util.ArrayList;
@@ -22,12 +21,13 @@ public class RobotAssigner
         Robot robotToAssing;
         if(order.getClient().getService().getServiceName().equals("Platinum"))
         {
-            robotToAssing = GetRequiredRobotToPlatinumRobot(robots, robotsOrders);
+            robotToAssing = GetRequiredRobotToPlatinumRobot(robotsOrders);
         }
         else
         {
             robotToAssing = GetCheapestRobot(robots);
         }
+        robotsOrders.get(robotsOrders.indexOf(robotToAssing)).AddOrder(order);
     }
 
 
@@ -38,8 +38,10 @@ public class RobotAssigner
                 .get();
     }
 
-    private Robot GetRequiredRobotToPlatinumRobot(ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders)
+    private Robot GetRequiredRobotToPlatinumRobot(ArrayList<RobotRegister> robotsOrders)
     {
-        return null;
+        return robotsOrders.stream()
+                .min(Comparator.comparingInt(RobotRegister::GetAmountOfOrders))
+                .get().GetRobot();
     }
 }
