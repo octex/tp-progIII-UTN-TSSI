@@ -12,4 +12,14 @@ public class RobotRegister {
         this.robot = robot;
         this.orders.addAll(orders);
     }
+
+    public int GetAmountOfOrders()
+    {
+        return orders.size();
+    }
+
+    public Robot GetRobot()
+    {
+        return robot;
+    }
 }

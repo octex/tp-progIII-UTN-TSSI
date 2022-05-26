@@ -40,6 +40,8 @@ public class RobotAssigner
 
     private Robot GetRequiredRobotToPlatinumRobot(ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders)
     {
-        return null;
+        return robotsOrders.stream()
+                .min(Comparator.comparingInt(RobotRegister::GetAmountOfOrders))
+                .get().GetRobot();
     }
 }
