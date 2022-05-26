@@ -4,6 +4,8 @@ public abstract class Robot {
 
     protected String surface;
 
+    private CommunicationModuleEmisor communicationModule;
+
     protected float costPH;
 
     public Robot(String surface,float costPH){
@@ -18,6 +20,10 @@ public abstract class Robot {
     }
     public float getCostPH(){
         return costPH;
+    }
+
+    public void sendMessage(){
+        this.communicationModule.readyMessage(true);
     }
 
 
