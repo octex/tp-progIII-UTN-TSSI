@@ -1,12 +1,15 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+skinparam linetype ortho
+
 class Client {
     - Service service;
-    - Location location;
+    - LinkedList<Location> locations;
     - int dni;
 
-    + Order requestOrder(CleanType clean,boolean wantsOrder, String surface);
+    + Client();
+    + Order requestOrder(Company company, Order order);
 }
 
 class Location{
@@ -68,33 +71,45 @@ class Economic{
 }
 
 class Company{
-    - ArrayList Clients;
-    - ArrayList Robots;
-    - ArrayList Orders;
-    - ArrayList<RobotRegister> ordersPerRobot;
-    - AllocatorSystem allocator;
-    + Company(List<Client> );
+    - ArrayList<Client> clients;
+    - ArrayList<Robot> robots;
+    - ArrayList<Order> orders;
+    - RobotAssigner robotAssigner;
+    - ArrayList<RobotRegister> orderPerRobot;
+    - CommunicationModuleReciver communicationModule;
+
+    + Company();
+    + CommunicationModuleReciver getCommunicationModuleReciver();
     + void tryToAssing(Order);
+}
+
+class OrderVerifyer{
+    + void verifyOrder(Order order);
+    - Robot GetRequiredRobot(Order order);
+    - Robot GetRequiredToPlatinumRobot(Order order);
+}
+
+class RobotAssigner{
+   + RobotAssigner();
+   + void AssignRobot(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
+   - ArrayList<Robot> GetSuitableRobots(Order order, ArrayList<Robot> robots);
+   - Robot GetCheapestRobot(ArrayList<Robot> robots);
+   - Robot GetRequiredRobotToPlatinumRobot(ArrayList<Robot> suitableRobots, ArrayList<RobotRegister> robotsOrders)
 }
 
 class Order{
     - CleanType cleanType;
-    - boolean wantsOrdering;
-    - String surfaceType;
     - Location location;
+    - boolean wantsOrder;
+    - boolean wantsPolish;
+    - String surface;
     - Client client;
 
-    + Order(Client client, CleanType cleanType, boolean wantsOrder, String surface, Location loc);
+    + Order();
 }
 enum CleanType{
     SIMPLE,
     COMPLEJA;
-}
-
-class AllocatorSystem{
-    + void tryAllocate(Order);
-    - void getRequiredRobot(Order)
-    - void getRequiredToPlatinumRobot(Order);
 }
 
 class OrderVerifyer{
@@ -102,25 +117,22 @@ class OrderVerifyer{
     - boolean validateService(Order order);
 }
 
-class PaymentModule{
-    + void validateDebt(Client);
-    - float getDebt(Client);
-    - bool compareDebtToService(float debt, Service service);
+Interface PaymentModule{
 }
 
+OrderVerifyer <.left. PaymentModule
+OrderVerifyer <-- Order
 
-AllocatorSystem*--PaymentModule
-PaymentModule<--Client
 Service <|-- Platinum
 Service <|-- Classic
 Service <|-- Economic
 
-Company *-- AllocatorSystem
 Company*-- Robot
 Company *-- Client
 Company *-- Order
 Company *-- RobotRegister
 Company <-left- OrderVerifyer
+Company <-up- RobotAssigner
 
 Robot <|--- K311Yfl
 Robot <|--- K311Yfu
@@ -139,6 +151,5 @@ Client *-- Service
 Client *-- Location
 
 Order- CleanType
-Client<--Order
-AllocatorSystem <-- Order
+Client*--Order
 @enduml
