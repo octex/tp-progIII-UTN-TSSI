@@ -1,5 +1,8 @@
 package Services;
 
+import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
+import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
+import Order.Order;
 import Services.Exeptions.EconomicOverpassesDebtExeption;
 
 public class Classic extends Service  {
@@ -21,8 +24,16 @@ public class Classic extends Service  {
     }
 
     @Override
-    public void validateService() {
-
+    public boolean validateService(Order order) throws ServiceNotIncludedExeption {
+            return true;
     }
+    public boolean validateClientCredits(Order order) throws HasNoCreditsExeption{
+        if (order.doesWantOrder() && order.getClient().getService().getOrderingQuantity() <= 0) {
+            throw new HasNoCreditsExeption("El cliente clasico no tiene creditos");
+        } else {
+            return true;
+        }
+    };
+
 
 }
