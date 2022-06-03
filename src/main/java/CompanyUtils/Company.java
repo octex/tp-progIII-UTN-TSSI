@@ -1,10 +1,6 @@
 package CompanyUtils;
 
 import Client.Client;
-import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
-import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
-import CompanyUtils.OrderVerifyerExceptions.*;
-import CompanyUtils.RobotAssignerExceptions.*;
 import Order.Order;
 import Robots.Robot;
 import Robots.RobotRegister;
@@ -18,8 +14,12 @@ public class Company {
     private ArrayList<Order> orders;
     private RobotAssigner robotAssigner;
     private ArrayList<RobotRegister> orderPerRobot;
-    private CommunicationModuleReciver communicationModuleReciver;
 
+    public void tryToAssing(Order order) {
+    }
+
+    public void tryToAssign(Order order) {
+    }
 
     public Company() {
 
@@ -33,26 +33,24 @@ public class Company {
         this.orderPerRobot = new ArrayList();
     }
 
-    public CommunicationModuleReciver getCommunicationModuleReciver(){
-        return this.communicationModuleReciver;
-    }
-
     public void tryToAssign(Order order){
         try{
             OrderVerifyer orderVerifyer = new OrderVerifyer();
             RobotAssigner robotAssigner = new RobotAssigner();
 
             orderVerifyer.verifyOrder(order);
-            robotAssigner.AssignRobot(order, robots, orderPerRobot);
+            robotAssigner.AssignRobot(order);
         }
-        catch (ServiceNotIncludedExeption e){
+        catch (CouldNotVerifyOrderException e){
             System.out.println("No se pudo verificar la orden.");
         }
-        catch (HasNoCreditsExeption e){
+        catch (CouldNotAssignRobotException e){
             System.out.println("No se pudo asignar el robot a la orden.");
         }
         catch (Exception e){
             System.out.println("Hubo un error.");
         }
     }
+
+
 }

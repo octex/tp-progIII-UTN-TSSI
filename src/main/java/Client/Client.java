@@ -25,7 +25,7 @@ public class Client {
     {
         try
         {
-            company.tryToAssign(order);
+            company.tryToAssing(order);
         }
         catch (Exception CouldNotCreateOrderException)
         {

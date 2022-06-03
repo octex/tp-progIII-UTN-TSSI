@@ -1,9 +1,6 @@
 package Services;
 
-import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
-import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
-import Order.Order;
-
+import Services.Exeptions.OverpassesDebtExeption;
 import Services.Exeptions.PlatinumOverpassesDebtExeption;
 
 public class Platinum extends Service {
@@ -25,16 +22,6 @@ public class Platinum extends Service {
             throw new PlatinumOverpassesDebtExeption("Platino tiene deuda");
         }
         return true;
-
-    }
-    public boolean validateService(Order order) throws ServiceNotIncludedExeption {
-        return true;
-}
-
-    @Override
-    public boolean validateClientCredits(Order order) throws HasNoCreditsExeption {
-
-            return true;
 
     }
 }

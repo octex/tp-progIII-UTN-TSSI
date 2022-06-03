@@ -9,19 +9,45 @@ import Client.Client;
 
 public class OrderVerifyer implements PaymentModule{
 
-    public void verifyOrder(Order order) throws Exception{
+    public void verifyOrder(Order order){
         try
         {
-            order.getClient().getService().validateClientCredits(order);
-            order.getClient().getService().validateService(order);
+            validateClientCredits(order);
+            validateService(order);
         }
         catch (ServiceNotIncludedExeption | HasNoCreditsExeption e)
         {
             System.out.println(e.toString());
-            throw e;
         }
     }
 
+    protected boolean validateService(Order order) throws ServiceNotIncludedExeption {
+        if(order.doesWantOrder() && order.getClient().getService().getServiceName().equals("Economic")){
+            throw new ServiceNotIncludedExeption("El cliente economico no puede pedir orden Exeption");}
+        else
+            return true;
+    }
+    protected boolean validateClientCredits(Order order) throws HasNoCreditsExeption {
+        switch (order.getClient().getService().getServiceName()) {
+            case "Platinum":
+
+                return true;
+            case "Classic":
+                if (order.doesWantOrder() && order.getClient().getService().getOrderingQuantity() <= 0) {
+                    throw new HasNoCreditsExeption("El cliente clasico no tiene creditos");
+                } else {
+                    return true;
+                }
+            case "Economic":
+                if (order.getClient().getService().getCleaningQuantity() <= 0) {
+                    throw new HasNoCreditsExeption("El cliente Economico no tiene creditos para limpieza");
+                }else{
+
+                    return true;
+                }
+        }
+        return false;
+    }
 
 
     private Robot GetRequiredRobot(Order order)

@@ -29,28 +29,32 @@ class OrderVerifyerTest {
 
     }
 
+    @AfterEach
+    void tearDown() {
+    }
+
     @Test
     void validateServiceEconomicSimpleWithCreditsOk() throws ServiceNotIncludedExeption {
-        assertTrue( order.getClient().getService().validateService(order));
+        assertTrue(orderVerifyer.validateService(order));
     }
 
     @Test
     void validateServiceEconomicSimpleWithoutCreditsFail() throws HasNoCreditsExeption {
         client.getService().setCleaningQuantity(0);
-        assertFalse(order.getClient().getService().validateClientCredits(order));
+        assertFalse(orderVerifyer.validateClientCredits(order));
     }
-
-
     @Test
-    void validateServicePlatinumOK() throws HasNoCreditsExeption { //nunca va a tirar exepción.
+    void validateServicePlatinumOK() throws HasNoCreditsExeption {
         client.setService(new Platinum());
 
         order.setWantsOrder(true);
         order.setWantsPolish(true);
         client.getService().setCleaningQuantity(-1);
         client.getService().setOrderingQuantity(-1);
-        assertTrue(order.getClient().getService().validateClientCredits(order));
+        assertTrue(orderVerifyer.validateClientCredits(order));
     }
 
-
+    @Test
+    void getDebt() {
+    }
 }
