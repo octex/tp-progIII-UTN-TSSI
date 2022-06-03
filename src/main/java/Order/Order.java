@@ -2,6 +2,7 @@ package Order;
 
 import Client.Client;
 import Client.Location;
+import Order.FactoryCleanType.CleanType;
 
 public class Order {
     

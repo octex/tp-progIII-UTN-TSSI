@@ -1,7 +1,7 @@
 package Order.FactoryCleanType;
 
-public class SimpleClean implements CleanType{
-    public SimpleClean() {
+public class ComplexCleanType implements CleanType {
+    public ComplexCleanType() {
 
     }
 
@@ -9,4 +9,5 @@ public class SimpleClean implements CleanType{
     public void beCleantype() {
 
     }
+
 }

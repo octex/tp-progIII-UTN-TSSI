@@ -1,5 +1,5 @@
 package Order.FactoryCleanType;
 
-public interface Clean {
+public interface CleanType {
     void beCleantype();
 }

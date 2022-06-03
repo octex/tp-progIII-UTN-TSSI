@@ -5,7 +5,7 @@ public class ComplexCleanCreator extends CleanCreator{
     }
 
     @Override
-    public Clean createClean() {
+    public CleanType createClean() {
         return new ComplexClean();
     }
 }

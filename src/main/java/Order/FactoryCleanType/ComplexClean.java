@@ -1,13 +1,8 @@
 package Order.FactoryCleanType;
 
-public class ComplexClean implements Clean{
-    public ComplexClean() {
-
-    }
-
+public class ComplexClean implements CleanType {
     @Override
     public void beCleantype() {
 
     }
-
 }
