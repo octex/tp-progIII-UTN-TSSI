@@ -2,6 +2,6 @@ package Order.FactoryCleanType;
 
 public abstract class CleanCreator {
 
-   public abstract CleanType createClean();
+   public abstract CleanInterface createClean();
 
 }

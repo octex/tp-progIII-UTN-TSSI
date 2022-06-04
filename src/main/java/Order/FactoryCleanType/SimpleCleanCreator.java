@@ -3,7 +3,7 @@ package Order.FactoryCleanType;
 public class SimpleCleanCreator extends CleanCreator{
 
     @Override
-    public CleanType createClean() {
+    public CleanInterface createClean() {
         return new SimpleClean();
     }
 }

@@ -1,6 +1,7 @@
 package CompanyUtils;
 
 import Client.Location;
+import Order.FactoryCleanType.CleanType;
 import Services.Classic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,6 @@ import CompanyUtils.Company;
 
 import java.util.Collection;
 
-import static Order.CleanType.SIMPLE;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyTest {

@@ -1,6 +1,6 @@
 package Order.FactoryCleanType;
 
-public class SimpleClean implements CleanType{
+public class SimpleClean implements CleanInterface {
     public SimpleClean() {
 
     }

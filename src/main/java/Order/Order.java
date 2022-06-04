@@ -2,6 +2,7 @@ package Order;
 
 import Client.Client;
 import Client.Location;
+import Order.FactoryCleanType.CleanInterface;
 import Order.FactoryCleanType.CleanType;
 
 public class Order {
@@ -60,9 +61,6 @@ public class Order {
         return client;
     }
 
-    public void setCleanType(CleanType cleanType) {
-        this.cleanType = cleanType;
-    }
 
     public void setLocation(Location location) {
         this.location = location;

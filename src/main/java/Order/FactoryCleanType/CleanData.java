@@ -1,5 +1,6 @@
 package Order.FactoryCleanType;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 
@@ -7,4 +8,34 @@ public class CleanData {
     Date lastCleanDate;
     HashSet<String> residuos;
     int cantMascotas;
+
+    public CleanData(Date lastCleanDate, HashSet<String> residuos, int cantMascotas) {
+        this.lastCleanDate = lastCleanDate;
+        this.residuos = residuos;
+        this.cantMascotas = cantMascotas;
+    }
+
+    public Date getLastCleanDate() {
+        return lastCleanDate;
+    }
+
+    public void setLastCleanDate(Date lastCleanDate) {
+        this.lastCleanDate = lastCleanDate;
+    }
+
+    public HashSet<String> getResiduos() {
+        return residuos;
+    }
+
+    public void setResiduos(HashSet<String> residuos) {
+        this.residuos = residuos;
+    }
+
+    public int getCantMascotas() {
+        return cantMascotas;
+    }
+
+    public void setCantMascotas(int cantMascotas) {
+        this.cantMascotas = cantMascotas;
+    }
 }

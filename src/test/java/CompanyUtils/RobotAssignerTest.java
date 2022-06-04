@@ -1,6 +1,7 @@
 package CompanyUtils;
 
 import Client.Client;
+import Order.FactoryCleanType.CleanType;
 import Services.Economic;
 import Services.Service;
 import Order.*;
