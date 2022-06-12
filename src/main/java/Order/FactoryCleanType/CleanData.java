@@ -5,21 +5,21 @@ import java.util.Date;
 import java.util.HashSet;
 
 public class CleanData {
-    Date lastCleanDate;
+    String lastCleanDate;
     HashSet<String> residuos;
     int cantMascotas;
 
-    public CleanData(Date lastCleanDate, HashSet<String> residuos, int cantMascotas) {
+    public CleanData(String lastCleanDate, HashSet<String> residuos, int cantMascotas) {
         this.lastCleanDate = lastCleanDate;
         this.residuos = residuos;
         this.cantMascotas = cantMascotas;
     }
 
-    public Date getLastCleanDate() {
+    public String getLastCleanDate() {
         return lastCleanDate;
     }
 
-    public void setLastCleanDate(Date lastCleanDate) {
+    public void setLastCleanDate(String lastCleanDate) {
         this.lastCleanDate = lastCleanDate;
     }
 

@@ -3,12 +3,10 @@ package Order.FactoryCleanType;
 
 
 
-import Order.FactoryCleanType.CleanTypeExeptions.NoEncajaEnNingunaLimpiezaExeption;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,9 +21,10 @@ class CleanTypeSelectorTest {
 
     @BeforeEach
     void setUp() throws ParseException {
+        CleanTypeSelector cleanTypeSelector =CleanTypeSelector.getInstance();
+
         CleanTypeSelector.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-        Date date =sdf.parse("12/24/1994");
+        String date ="2022-06-10";
 
         HashSet <String>residuos=new HashSet();
         residuos.add("Polvo");
@@ -51,9 +50,27 @@ class CleanTypeSelectorTest {
     }
 
     @Test
-    void hasJustDustFail(){
+    void doesNotContainMudFalse(){
         cleanData.getResiduos().add("Barro");
-        assertFalse(CleanTypeSelector.hasJustPolvoOrEmpty(cleanData.residuos));
+        assertFalse(CleanTypeSelector.doesNotContainMud(cleanData.residuos));
+    }
+    @Test
+    void doesNotContainMudOk(){
+        cleanData.getResiduos().remove("Barro");
+        assertTrue(CleanTypeSelector.doesNotContainMud(cleanData.residuos));
+    }
+    @Test
+    void recentlyCleanedOk(){
+        cleanData.setLastCleanDate("2022-06-10");
+        String currentDate = "2022-06-12";
+        assertTrue(CleanTypeSelector.recentlyCleaned(currentDate,cleanData.lastCleanDate));
+    }
+
+    @Test
+    void recentlyCleanedFalse(){
+        cleanData.setLastCleanDate("2022-04-10");
+        String currentDate = "2022-06-12";
+        assertFalse(CleanTypeSelector.recentlyCleaned(currentDate,cleanData.lastCleanDate));
     }
 
     @Test
@@ -66,37 +83,35 @@ class CleanTypeSelectorTest {
     void returnsSimpleOk(){
 
 
-        assertEquals(CleanType.SIMPLE,CleanTypeSelector.selectCleanType(cleanData));
+        assertEquals(CleanType.SIMPLE,CleanTypeSelector.createCleanType(cleanData));
 
     }
     @Test
     void returnsSimpleWithMultipleDogsBecauseOfJustDustOk(){
         cleanData.setCantMascotas(5);
-
-        assertEquals(CleanType.SIMPLE,CleanTypeSelector.selectCleanType(cleanData));
-
+        assertEquals(CleanType.SIMPLE,CleanTypeSelector.createCleanType(cleanData));
     }
     @Test
-    void returnsComplexWithMultipleDogsAndBarroOk(){
+    void returnsSimpleWith2MaterialsBecauseOfDate(){
         cleanData.getResiduos().add("Barro");
         cleanData.setCantMascotas(5);
-        assertNotEquals(CleanType.COMPLEJA,CleanTypeSelector.selectCleanType(cleanData));
-
+        assertEquals(CleanType.SIMPLE,CleanTypeSelector.createCleanType(cleanData));
     }
 
 
     @Test
-    void returnsComplexWithJustBarroOK(){
-        cleanData.getResiduos().remove("Polvo");
+    void returnsComplexBecauseNotSimpleWithBarro(){
+        cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Barro");
         cleanData.setCantMascotas(5);
-        assertEquals(CleanType.COMPLEJA,CleanTypeSelector.selectCleanType(cleanData));
+        assertEquals(CleanType.COMPLEJA,CleanTypeSelector.createCleanType(cleanData));
     }
     @Test
-    void returnsComplexWithTwoOrMoreResiduosOK(){
+    void returnsComplexBecauseNotSimpleWith2Residuos(){
+        cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Pelos");
         cleanData.setCantMascotas(5);
-        assertEquals(CleanType.COMPLEJA,CleanTypeSelector.selectCleanType(cleanData));
+        assertEquals(CleanType.COMPLEJA,CleanTypeSelector.createCleanType(cleanData));
     }
 /*
     @Test
