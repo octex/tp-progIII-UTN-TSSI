@@ -1,12 +1,10 @@
 package Order.FactoryCleanType;
 
-public class SimpleClean implements CleanInterface {
-    public SimpleClean() {
+import Order.Order;
 
-    }
-
+public class SimpleClean implements CleanType{
     @Override
-    public void beCleantype() {
-
+    public Float calculatePrice(Order order) {
+        return null;
     }
 }

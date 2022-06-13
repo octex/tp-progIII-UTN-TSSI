@@ -1,7 +1,10 @@
 package Order.FactoryCleanType;
 
 
-    public enum CleanType {
-        SIMPLE, COMPLEJA
+import Order.Order;
+
+public interface CleanType {
+        Float calculatePrice(Order order);
+
     }
 

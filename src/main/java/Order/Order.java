@@ -2,7 +2,7 @@ package Order;
 
 import Client.Client;
 import Client.Location;
-import Order.FactoryCleanType.CleanInterface;
+import Order.FactoryCleanType.CleanData;
 import Order.FactoryCleanType.CleanType;
 
 public class Order {
@@ -13,6 +13,17 @@ public class Order {
     private boolean wantsOrder;
     private String surface;
     private Client client;
+
+
+
+    CleanData cleanData;
+
+    public void setCleanData(CleanData cleanData) {
+        this.cleanData = cleanData;
+    }
+    public CleanData getCleanData() {
+        return cleanData;
+    }
 
     public boolean doesWantPolish() {
         return wantsPolish;

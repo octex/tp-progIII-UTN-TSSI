@@ -1,5 +1,5 @@
 package Order.FactoryCleanType;
 
 public interface CleanInterface {
-    void beCleantype();
+    float calculateCleanTypePrice();
 }
