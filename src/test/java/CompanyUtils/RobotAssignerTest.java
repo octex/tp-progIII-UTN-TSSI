@@ -2,6 +2,7 @@ package CompanyUtils;
 
 import Client.Client;
 import Order.FactoryCleanType.CleanType;
+import Order.FactoryCleanType.SimpleClean;
 import Services.Economic;
 import Services.Service;
 import Order.*;
@@ -26,7 +27,7 @@ class RobotAssignerTest {
     {
         Service economicService = new Economic();
         Client economicClient = new Client(43085477, economicService, null);
-        Order economicOrder = new Order(economicClient, CleanType.SIMPLE,
+        Order economicOrder = new Order(economicClient, new SimpleClean(),
                 null, true, "Pisos");
 
     }
