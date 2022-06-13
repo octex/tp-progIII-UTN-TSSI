@@ -4,7 +4,6 @@ package Order.FactoryCleanType;
 
 
 import CompanyUtils.Company;
-import Order.FactoryCleanType.CleanTypeExeptions.ComplexClean;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -99,14 +98,14 @@ class CleanTypeSelectorTest {
         cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Barro");
         cleanData.setCantMascotas(5);
-        assertEquals(new ComplexClean(), CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
+        assertEquals(new CleanType.ComplexClean(), CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
     }
     @Test
     void returnsComplexBecauseNotSimpleWith2Residuos(){
         cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Pelos");
         cleanData.setCantMascotas(5);
-        assertEquals(new ComplexClean(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
+        assertEquals(new CleanType.ComplexClean(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
     }
 /*
     @Test
