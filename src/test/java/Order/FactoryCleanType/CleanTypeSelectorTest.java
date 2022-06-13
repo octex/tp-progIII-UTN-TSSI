@@ -3,27 +3,26 @@ package Order.FactoryCleanType;
 
 
 
+import CompanyUtils.Company;
+import Order.FactoryCleanType.CleanTypeExeptions.ComplexClean;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 
 class CleanTypeSelectorTest {
     public CleanData cleanData;
-
+    public Company company;
 
 
 
     @BeforeEach
     void setUp() throws ParseException {
-        CleanTypeSelector cleanTypeSelector =CleanTypeSelector.getInstance();
+        CleanTypeSelector cleanTypeSelector =CleanTypeSelector.getInstance(company);
 
-        CleanTypeSelector.getInstance();
+        CleanTypeSelector.getInstance(company);
         String date ="2022-06-10";
 
         HashSet <String>residuos=new HashSet();
@@ -81,37 +80,33 @@ class CleanTypeSelectorTest {
     }
     @Test
     void returnsSimpleOk(){
-
-
-        assertEquals(CleanType.SIMPLE,CleanTypeSelector.createCleanType(cleanData));
-
+        assertEquals(new SimpleClean(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
     }
     @Test
     void returnsSimpleWithMultipleDogsBecauseOfJustDustOk(){
         cleanData.setCantMascotas(5);
-        assertEquals(CleanType.SIMPLE,CleanTypeSelector.createCleanType(cleanData));
+        assertEquals(new SimpleClean(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
     }
     @Test
     void returnsSimpleWith2MaterialsBecauseOfDate(){
         cleanData.getResiduos().add("Barro");
         cleanData.setCantMascotas(5);
-        assertEquals(CleanType.SIMPLE,CleanTypeSelector.createCleanType(cleanData));
-    }
+        assertEquals(new SimpleClean(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));    }
 
 
     @Test
-    void returnsComplexBecauseNotSimpleWithBarro(){
+    void returnsComplexBecauseNotSimpleWithBarro() {
         cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Barro");
         cleanData.setCantMascotas(5);
-        assertEquals(CleanType.COMPLEJA,CleanTypeSelector.createCleanType(cleanData));
+        assertEquals(new ComplexClean(), CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
     }
     @Test
     void returnsComplexBecauseNotSimpleWith2Residuos(){
         cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Pelos");
         cleanData.setCantMascotas(5);
-        assertEquals(CleanType.COMPLEJA,CleanTypeSelector.createCleanType(cleanData));
+        assertEquals(new ComplexClean(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
     }
 /*
     @Test

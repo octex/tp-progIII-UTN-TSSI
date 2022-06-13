@@ -1,27 +1,26 @@
 package Order.FactoryCleanType;
 
-import java.time.ZoneId;
+import CompanyUtils.Company;
+import Order.FactoryCleanType.CleanTypeExeptions.ComplexClean;
+
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.util.Date;
 import java.util.HashSet;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.temporal.ChronoUnit;
 
 
 public class CleanTypeSelector {
 
     private static CleanTypeSelector single_instance = null;
-
-    private CleanTypeSelector()
+    private  Company company;
+    private CleanTypeSelector(Company company)
     {
-
+        this.company =company;
     }
-    public static CleanTypeSelector getInstance()
+
+    public static CleanTypeSelector getInstance(Company company)
     {
         if (single_instance == null)
-            single_instance = new CleanTypeSelector();
+            single_instance = new CleanTypeSelector(company);
 
         return single_instance;
     }
@@ -50,15 +49,20 @@ public class CleanTypeSelector {
     }
 
 
-    public static CleanType createCleanType(CleanData cleanData) {
+    public  CleanType setCleanStrategy(CleanData cleanData) {
         String currentDate="2022-06-12";
         if((hasJustPolvoOrEmpty(cleanData.residuos)||
                 (doesNotContainMud(cleanData.residuos)) && numberOfPetsSimple(cleanData.cantMascotas))||
                 (recentlyCleaned(currentDate,cleanData.lastCleanDate))){
-            return CleanType.SIMPLE;
+            getInstance(company).company.getPriceCalculator().setContext(new SimpleClean());
+            return new SimpleClean();
         }
-        return CleanType.COMPLEJA;
+        this.company.getPriceCalculator().setContext(new SimpleClean());
+        return new ComplexClean();
     }
 
 
+    public Company getCompany() {
+        return company;
+    }
 }

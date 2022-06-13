@@ -74,6 +74,7 @@ class Company{
     - ArrayList<Client> clients;
     - ArrayList<Robot> robots;
     - ArrayList<Order> orders;
+    - CleantypeSelector cleanTypeSelector;
     - RobotAssigner robotAssigner;
     - ArrayList<RobotRegister> orderPerRobot;
     - CommunicationModuleReciver communicationModule;
@@ -98,7 +99,7 @@ class RobotAssigner{
 }
 
 class Order{
-    - CleantypeSelector cleanTypeSelector;
+
     - CleanType cleanType;
     - Location location;
     - boolean wantsOrder;
@@ -164,7 +165,7 @@ OrderingRobot <.. S031RTY
 Client *-- Service
 Client *-- Location
 
-Order *-->CleantypeSelector
+Company *-CleantypeSelector
 Order- CleanType
 Client*--Order
 @enduml
