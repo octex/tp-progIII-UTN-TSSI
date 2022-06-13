@@ -53,11 +53,11 @@ public class CleanTypeSelector {
         if((hasJustPolvoOrEmpty(cleanData.residuos)||
                 (doesNotContainMud(cleanData.residuos)) && numberOfPetsSimple(cleanData.cantMascotas))||
                 (recentlyCleaned(currentDate,cleanData.lastCleanDate))){
-           // getInstance(company).company.getPriceCalculator().setContext(new SimpleClean());
+            getInstance(company).company.getPriceCalculator().setStrategy(new SimpleClean());
             return new SimpleClean();
         }
-        //this.company.getPriceCalculator().setContext(new SimpleClean());
-        return new CleanType.ComplexClean();
+        this.company.getPriceCalculator().setStrategy(new SimpleClean());
+        return new ComplexClean();
     }
 
 
