@@ -5,7 +5,7 @@ import Order.Order;
 public class SimpleClean implements CleanType{
     @Override
 
-    public Float calculatePrice(Order order){
+    public float calculatePrice(Order order){
 
         float sumatory = 0;
 
@@ -17,3 +17,4 @@ public class SimpleClean implements CleanType{
 
         return sumatory;
     }
+}
