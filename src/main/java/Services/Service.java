@@ -1,5 +1,8 @@
 package Services;
 
+import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
+import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
+import Order.Order;
 import Services.Exeptions.OverpassesDebtExeption;
 
 public abstract class Service{
@@ -53,6 +56,6 @@ public abstract class Service{
     public void setOrderValue(float orderValue) {
         this.orderValue = orderValue;
     }
-
-
+    public abstract boolean validateService(Order order) throws ServiceNotIncludedExeption;
+    public abstract boolean validateClientCredits(Order order) throws HasNoCreditsExeption;
 }
