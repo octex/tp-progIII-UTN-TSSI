@@ -5,6 +5,7 @@ import Client.Location;
 import CompanyUtils.Employees.Specialist;
 import Order.FactoryCleanType.CleanData;
 import Order.FactoryCleanType.CleanType;
+import Order.Repairs.Repair;
 import Robots.Robot;
 
 import java.util.ArrayList;
