@@ -2,6 +2,7 @@ package Order;
 
 import Client.Client;
 import Client.Location;
+import CompanyUtils.Employees.Specialist;
 import Order.FactoryCleanType.CleanData;
 import Order.FactoryCleanType.CleanType;
 import Order.Repairs.Repair;
@@ -18,7 +19,16 @@ public class Order {
     private String surface;
     private Client client;
     private ArrayList<Robot> robots;
-    private Empleado empleado;
+
+    public Specialist getSpecialist() {
+        return specialist;
+    }
+
+    public void setSpecialist(Specialist specialist) {
+        this.specialist = specialist;
+    }
+
+    private Specialist specialist;
     private Repair repair;
     private CleanData cleanData;
 
@@ -85,15 +95,9 @@ public class Order {
         this.client = client;
     }
 
-    public void addRobot(Robot robot) { robots.add(robot); }
-
-    public void setEmpleado(Empleado empleado) { this.empleado = empleado; }
-
-    public void setReparacion(Repair repair) { this.repair = repair; }
 
     public ArrayList<Robot> getRobots() { return robots; }
 
-    public Empleado getEmpleado() { return empleado; }
 
     public Repair getReparacion() { return repair; }
 }

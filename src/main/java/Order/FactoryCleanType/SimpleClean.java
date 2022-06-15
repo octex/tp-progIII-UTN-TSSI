@@ -7,11 +7,11 @@ public class SimpleClean implements CleanType{
 
     public float calculatePrice(Order order){
 
-        float sumatory = 0;
 
+        float sumatory;
         order.getRobots().stream().forEach(y -> sumatory += y.getCostPH());
 
-        sumatory += (order.getEmpleado().getSalary() / 160) * order.getReparacion().getComplexity();
+        sumatory += (order.getSpecialist().getSalary() / 160) * order.getReparacion().getComplexity();
 
         sumatory += order.getReparacion().getCost();
 
