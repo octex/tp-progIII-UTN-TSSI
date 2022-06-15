@@ -6,7 +6,6 @@ import Order.FactoryCleanType.CleanData;
 import Order.FactoryCleanType.CleanType;
 import Robots.Robot;
 
-import java.lang.annotation.Repeatable;
 import java.util.ArrayList;
 
 public class Order {
@@ -19,7 +18,7 @@ public class Order {
     private Client client;
     private ArrayList<Robot> robots;
     private Empleado empleado;
-    private Reparacion reparacion;
+    private Repair repair;
     private CleanData cleanData;
 
     public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, String surface){
@@ -89,11 +88,11 @@ public class Order {
 
     public void setEmpleado(Empleado empleado) { this.empleado = empleado; }
 
-    public void setReparacion(Reparacion reparacion) { this.reparacion = reparacion; }
+    public void setReparacion(Repair repair) { this.repair = repair; }
 
     public ArrayList<Robot> getRobots() { return robots; }
 
     public Empleado getEmpleado() { return empleado; }
 
-    public Reparacion getReparacion() { return reparacion; }
+    public Repair getReparacion() { return repair; }
 }
