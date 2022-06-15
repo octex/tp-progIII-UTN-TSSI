@@ -11,14 +11,14 @@ public class ComplexClean implements CleanType{
     private float robotPlusValue;
 
     public float calculatePrice(Order order){
-
-        float sumatory = 0;
+        
 
         int horas = 3; //random
 
+        float sumatory=0f;
         order.getRobots().stream().forEach(y -> sumatory += (y.getCostPH() * horas * robotPlusValue));
 
-        sumatory += (order.getEmpleado().getSalary() / 160) * order.getReparacion().getComplexity();
+        sumatory += (order.getSpecialist().getSalary() / 160) * order.getReparacion().getComplexity();
 
         sumatory += order.getReparacion().getCost();
 
