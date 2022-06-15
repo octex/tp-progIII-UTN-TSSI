@@ -61,4 +61,8 @@ public class Company {
             System.out.println("Hubo un error.");
         }
     }
+
+    public void setPriceCalculator(PriceCalculator priceCalculator) {
+        this.priceCalculator = priceCalculator;
+    }
 }

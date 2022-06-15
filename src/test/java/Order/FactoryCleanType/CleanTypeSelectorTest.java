@@ -4,6 +4,7 @@ package Order.FactoryCleanType;
 
 
 import CompanyUtils.Company;
+import CompanyUtils.PriceUtils.PriceCalculator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,13 +15,15 @@ import java.util.HashSet;
 class CleanTypeSelectorTest {
     public CleanData cleanData;
     public Company company;
+    PriceCalculator priceCalculator;
 
 
 
     @BeforeEach
     void setUp() throws ParseException {
         CleanTypeSelector cleanTypeSelector =CleanTypeSelector.getInstance(company);
-
+        priceCalculator = new PriceCalculator();
+        company.setPriceCalculator(priceCalculator);
         CleanTypeSelector.getInstance(company);
         String date ="2022-06-10";
 
