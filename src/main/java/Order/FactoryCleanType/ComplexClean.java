@@ -18,9 +18,9 @@ public class ComplexClean implements CleanType{
 
         order.getRobots().stream().forEach(y -> sumatory += (y.getCostPH() * horas * robotPlusValue));
 
-        sumatory += (order.getEmpleado().getSalary() / 160) * order.getReparacion().complexity();
+        sumatory += (order.getEmpleado().getSalary() / 160) * order.getReparacion().getComplexity();
 
-        sumatory += order.getReparacion().cost();
+        sumatory += order.getReparacion().getCost();
 
         return sumatory;
     }
