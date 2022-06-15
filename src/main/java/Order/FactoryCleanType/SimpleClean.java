@@ -13,7 +13,7 @@ public class SimpleClean implements CleanType{
 
         sumatory += (order.getEmpleado().getSalary / 160) * order.getReparation().complexity;
 
-        sumatory += order.getReparation().cost;
+        sumatory += order.getReparation().cost();
 
         return sumatory;
     }
