@@ -1,7 +1,5 @@
 package Order.Repairs;
 
-import java.util.HashMap;
-
 public class ElectricalRepair extends Repair
 {
     public ElectricalRepair(int complexity)
