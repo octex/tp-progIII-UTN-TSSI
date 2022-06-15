@@ -20,7 +20,7 @@ public class ComplexClean implements CleanType{
 
         sumatory += (order.getEmpleado().getSalary() / 160) * order.getReparacion().complexity();
 
-        sumatory += order.getReparacion().cost;
+        sumatory += order.getReparacion().cost();
 
         return sumatory;
     }
