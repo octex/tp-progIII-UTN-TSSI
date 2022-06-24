@@ -9,15 +9,12 @@ import org.junit.jupiter.api.function.Executable;
 
 public final class ServiceManagement {
     private static ServiceManagement serviceInstance;
-
     public int getCostumerDebt() {
         return costumerDebt;
     }
-
     public void setCostumerDebt(int costumerDebt) {
         this.costumerDebt = costumerDebt;
     }
-
     int costumerDebt;
     private ServiceManagement(){
 

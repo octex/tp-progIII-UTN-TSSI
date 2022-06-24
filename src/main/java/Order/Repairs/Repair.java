@@ -9,6 +9,8 @@ public abstract class Repair
     protected float cost;
     protected RepairPriceType priceType;
     protected Map<RepairPriceType, Float> priceChart;
+    abstract public String getType();
+
 
     public Repair(int complexity)
     {
