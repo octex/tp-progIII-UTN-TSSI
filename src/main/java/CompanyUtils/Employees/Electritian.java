@@ -3,6 +3,8 @@ package CompanyUtils.Employees;
 import Order.Order;
 import Order.Repairs.Repair;
 
+import java.util.Objects;
+
 public class Electritian implements Specialist {
 
     float salary;
@@ -23,7 +25,7 @@ public class Electritian implements Specialist {
     }
     @Override
     public boolean canHandle(Repair repair) {
-        return false;
+        return Objects.equals(repair.getType(), "Electrical");
     }
 
     public void setSalary(float salary) {

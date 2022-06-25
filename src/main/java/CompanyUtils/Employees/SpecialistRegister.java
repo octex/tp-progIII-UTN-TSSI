@@ -18,28 +18,22 @@ public class SpecialistRegister {
     public static SpecialistRegister getInstance() {
         if (single_instance == null)
             single_instance = new SpecialistRegister();
-            loadSpecialists();
+
         return single_instance;
 
     }
 
-    public static void loadSpecialists(){
-
-        Specialist empleado1Gas = new Gasist(1000,"Octavio Gurnik");
-        Specialist empleado2Gas = new Gasist(1000,"Maximo Magaldi");
-        Specialist empleado3Gas = new Gasist(1000,"Bruno Mirocznyk");
-        Specialist empleado1Electricidad = new Electritian(1000,"Octavio Gurnik");
-        Specialist empleado2Electricidad = new Electritian(1000,"Maximo Magaldi");
-        Specialist empleado3Electricidad = new Electritian(1000,"Bruno Mirocznyk");
-
-        specialists.add(empleado1Electricidad);
-        specialists.add(empleado2Electricidad);
-        specialists.add(empleado3Electricidad);
-        specialists.add(empleado1Gas);
-        specialists.add(empleado2Gas);
-        specialists.add(empleado3Gas);
+    public static void addSpecialist(Specialist specialist){
+        specialists.add(specialist);
     }
 
 
+    public static void setSpecialists(ArrayList<Specialist> specialists) {
+        SpecialistRegister.specialists = specialists;
+    }
+
+    public static SpecialistRegister getSingle_instance() {
+        return single_instance;
+    }
 }
 

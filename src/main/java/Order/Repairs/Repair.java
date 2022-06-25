@@ -9,6 +9,8 @@ public abstract class Repair
     protected float cost;
     protected RepairPriceType priceType;
     protected Map<RepairPriceType, Float> priceChart;
+
+
     abstract public String getType();
 
 
@@ -16,10 +18,13 @@ public abstract class Repair
     {
         this.complexity = complexity;
         priceChart = new HashMap<>();
+        /*
         verifyComplexityRange();
         calculateRepairPrice();
-    }
 
+         */
+    }
+/*
     public int getComplexity() { return complexity; }
 
     public float getCost() { return cost; }
@@ -48,4 +53,6 @@ public abstract class Repair
         }
         cost = priceChart.get(priceType);
     }
+
+*/
 }

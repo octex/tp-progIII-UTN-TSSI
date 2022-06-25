@@ -19,11 +19,25 @@ public class Order {
     private String surface;
     private Client client;
     private ArrayList<Robot> robots;
-    private ArrayList<Specialist> specialistsAssigned;
-    private ArrayList<Repair> repairsNeeded;
+    private ArrayList<Specialist> specialistsAssigned =new ArrayList<Specialist>();
+    public Order() {
+
+    }
+    public void setSpecialist(Specialist specialist) {
+        this.specialist = specialist;
+    }
+
+    private Specialist specialist;
+    private ArrayList<Repair> repairNeeded;
     private CleanData cleanData;
 
-
+    public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, String surface){
+        this.client = client;
+        this.cleanType = cleanType;
+        this.location = location;
+        this.wantsOrder = wantsOrder;
+        this.surface=surface;
+    }
     public void setCleanData(CleanData cleanData) {
         this.cleanData = cleanData;
     }
@@ -84,11 +98,6 @@ public class Order {
     public ArrayList<Robot> getRobots() { return robots; }
 
 
-
-    public void setRobots(ArrayList<Robot> robots) {
-        this.robots = robots;
-    }
-
     public ArrayList<Specialist> getSpecialistsAssigned() {
         return specialistsAssigned;
     }
@@ -98,9 +107,13 @@ public class Order {
     }
 
     public ArrayList<Repair> getRepairsNeeded() {
-        return repairsNeeded;
+        return repairNeeded;
     }
-    public void setRepairsNeeded(ArrayList<Repair> repairsNeeded) {
-        this.repairsNeeded = repairsNeeded;
+
+    public void assignSpecialist(Specialist specialist){
+        this.specialistsAssigned.add(specialist);
+    }
+    public void setRepairsNeeded(ArrayList<Repair> repairNeeded) {
+        this.repairNeeded = repairNeeded;
     }
 }

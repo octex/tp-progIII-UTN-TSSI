@@ -5,21 +5,23 @@ import Order.Repairs.Repair;
 
 public class SpecialistAssigner {
 
-   void iterateOrder(Order order){
+   public void iterateOrder(Order order){
            order.getRepairsNeeded().forEach(repair ->
                    {
                        try {
-                           order.getSpecialistsAssigned().add(getSpecialist(repair));
-                       } catch (noHayEspecialistaExepcion e) {
+                           order.assignSpecialist(getRequiredSpecialist(repair));
+                       } catch (NoHayEspecialistaExepcion e) {
                            e.printStackTrace();
+
                        }
                    }
            );
        }
-   Specialist getSpecialist(Repair repair) throws noHayEspecialistaExepcion{
-       Specialist specialistToAssign= SpecialistRegister.getSpecialists().stream().findFirst().filter(specialist -> specialist.canHandle(repair)).orElse(null);
+       public Specialist getRequiredSpecialist(Repair repair) throws NoHayEspecialistaExepcion {
+
+       Specialist specialistToAssign= SpecialistRegister.getSpecialists().stream().filter(specialist -> specialist.canHandle(repair)).findFirst().orElse(null);
        if(specialistToAssign ==null) {
-           throw new noHayEspecialistaExepcion("No hay especialistas del tipo" + repair.getType());
+           throw new NoHayEspecialistaExepcion("No hay especialistas del tipo" + repair.getType());
        }else{
            return  specialistToAssign;
        }

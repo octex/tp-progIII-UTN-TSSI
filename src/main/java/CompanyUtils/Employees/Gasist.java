@@ -16,15 +16,18 @@ public class Gasist implements Specialist {
     }
 
 
-    @Override
-    public void repair() {
-    }
+
     public boolean canHandle(Repair repair) {
         return Objects.equals(repair.getType(), "Gas");
     }
 
     public float getSalary() {
         return salary;
+    }
+
+    @Override
+    public void repair() {
+
     }
 
     public void setSalary(float salary) {
