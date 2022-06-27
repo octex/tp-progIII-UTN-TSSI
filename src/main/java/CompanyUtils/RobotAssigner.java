@@ -42,7 +42,7 @@ public class RobotAssigner
     private ArrayList<Robot> GetSuitableRobots(Order order, ArrayList<Robot> robots)
     {
         ArrayList<Robot> matchRobots = new ArrayList<Robot>();
-
+        // stream filter?
         for(Robot robot : robots)
         {
             boolean matches = order.getSurface().equals(robot.getSurface()) &&
