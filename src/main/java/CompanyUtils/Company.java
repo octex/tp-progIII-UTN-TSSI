@@ -4,6 +4,7 @@ import Client.Client;
 import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
 import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
 import CompanyUtils.OrderVerifyerExceptions.*;
+import CompanyUtils.PriceUtils.PriceCalculator;
 import CompanyUtils.RobotAssignerExceptions.*;
 import Order.Order;
 import Robots.Robot;
@@ -19,6 +20,7 @@ public class Company {
     private RobotAssigner robotAssigner;
     private ArrayList<RobotRegister> orderPerRobot;
     private CommunicationModuleReciver communicationModuleReciver;
+    private PriceCalculator priceCalculator;
 
 
     public Company() {
@@ -35,6 +37,10 @@ public class Company {
 
     public CommunicationModuleReciver getCommunicationModuleReciver(){
         return this.communicationModuleReciver;
+    }
+
+    public PriceCalculator getPriceCalculator(){
+        return this.priceCalculator;
     }
 
     public void tryToAssign(Order order){
@@ -54,5 +60,9 @@ public class Company {
         catch (Exception e){
             System.out.println("Hubo un error.");
         }
+    }
+
+    public void setPriceCalculator(PriceCalculator priceCalculator) {
+        this.priceCalculator = priceCalculator;
     }
 }

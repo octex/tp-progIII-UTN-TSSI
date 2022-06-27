@@ -5,6 +5,8 @@ import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
 import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
 import Order.*;
 import Client.*;
+import Order.FactoryCleanType.CleanType;
+import Order.FactoryCleanType.SimpleClean;
 import Services.Classic;
 import Services.Economic;
 import Services.Platinum;
@@ -13,7 +15,6 @@ import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.Test;
 
-import static Order.CleanType.SIMPLE;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderVerifyerTest {
@@ -22,7 +23,7 @@ class OrderVerifyerTest {
     public Location location = new Location("Buenos aires","Olivos","Maipu 3500");;
     public Client client = new Client(111, new Economic(), null);
 
-    public Order order =new Order(client,SIMPLE,location,false,"Piso");
+    public Order order =new Order(client, new SimpleClean(),location,false,"Piso");
 
     @BeforeEach
     void setUp() {

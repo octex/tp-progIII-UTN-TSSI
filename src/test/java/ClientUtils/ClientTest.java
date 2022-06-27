@@ -1,8 +1,11 @@
 package ClientUtils;
 
-import static Order.CleanType.SIMPLE;
+
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import Order.FactoryCleanType.CleanType;
+import Order.FactoryCleanType.SimpleClean;
 import org.junit.jupiter.api.Test;
 
 import Client.Client;
@@ -19,7 +22,7 @@ public class ClientTest {
             var client = new Client(111, new Economic(), null);
 
             assertThrows(ServiceNotIncludedExeption.class, ()->{
-                         client.requestOrder(new Company(), new Order(client, SIMPLE, null, true, "a"));
+                         client.requestOrder(new Company(), new Order(client, new SimpleClean(), null, true, "a"));
             });
         }
 

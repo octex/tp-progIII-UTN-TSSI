@@ -74,6 +74,7 @@ class Company{
     - ArrayList<Client> clients;
     - ArrayList<Robot> robots;
     - ArrayList<Order> orders;
+    - CleantypeSelector cleanTypeSelector;
     - RobotAssigner robotAssigner;
     - ArrayList<RobotRegister> orderPerRobot;
     - CommunicationModuleReciver communicationModule;
@@ -98,15 +99,29 @@ class RobotAssigner{
 }
 
 class Order{
+
     - CleanType cleanType;
     - Location location;
     - boolean wantsOrder;
     - boolean wantsPolish;
     - String surface;
     - Client client;
-
+    - CleanData cleanData;
+    + CleanType createOrderCleanType();
     + Order();
 }
+
+class CleantypeSelector {
+
++CleantypeSelector();
++CleanType createOrderCleanType(CleanData cleanData);
+-boolean hasJustPolvoOrEmpty(HashSet<String> residuos)
+-boolean numberOfPetsSimple(Integer cantMascotas)
+-int daysFromLastClean(Date lastCleanDate){
+-boolean recentlyCleaned(Date lastCleanDate)
+}
+
+
 enum CleanType{
     SIMPLE,
     COMPLEJA;
@@ -150,6 +165,7 @@ OrderingRobot <.. S031RTY
 Client *-- Service
 Client *-- Location
 
+Company *-CleantypeSelector
 Order- CleanType
 Client*--Order
 @enduml

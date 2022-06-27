@@ -1,6 +1,8 @@
 package CompanyUtils;
 
 import Client.Location;
+import Order.FactoryCleanType.CleanType;
+import Order.FactoryCleanType.SimpleClean;
 import Services.Classic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,6 @@ import CompanyUtils.Company;
 
 import java.util.Collection;
 
-import static Order.CleanType.SIMPLE;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CompanyTest {
@@ -25,7 +26,7 @@ class CompanyTest {
 
     @Test
     void tryToAssignRobotToClassicThrowCouldNotVerifyOrderException() {
-        CleanType cleanType =  CleanType.SIMPLE;
+        CleanType cleanType =   new SimpleClean();
         Location location = new Location("Buenos Aires", "Olivos", "Maipu");
         Service service = new Classic();
         Client client = new Client(111111111, service, (Collection) location);
@@ -38,7 +39,7 @@ class CompanyTest {
 
     @Test
     void tryToAssignRobotToEconomicThrowCouldNotVerifyOrderException() {
-        CleanType cleanType =  CleanType.SIMPLE;
+        CleanType cleanType =   new SimpleClean();
         Location location = new Location("Buenos Aires", "Olivos", "Maipu");
         Service service = new Economic();
         Client client = new Client(111111111, service, (Collection) location);
@@ -51,7 +52,7 @@ class CompanyTest {
 
     @Test
     void tryToAssignRobotToEconomicDontThrowCouldNotVerifyOrderException() {
-        CleanType cleanType =  CleanType.SIMPLE;
+        CleanType cleanType =  new SimpleClean();
         Location location = new Location("Buenos Aires", "Olivos", "Maipu");
         Service service = new Economic();
         Client client = new Client(111111111, service, (Collection) location);
