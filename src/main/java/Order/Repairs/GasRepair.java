@@ -2,6 +2,11 @@ package Order.Repairs;
 
 public class GasRepair extends Repair
 {
+    @Override
+    public String getType() {
+        return "Gas";
+    }
+
     public GasRepair(int complexity)
     {
         super(complexity);

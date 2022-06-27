@@ -11,7 +11,7 @@ import Robots.Robot;
 import java.util.ArrayList;
 
 public class Order {
-    
+
     private CleanType cleanType;
     private Location location;
     private boolean wantsPolish;
@@ -19,17 +19,16 @@ public class Order {
     private String surface;
     private Client client;
     private ArrayList<Robot> robots;
+    private ArrayList<Specialist> specialistsAssigned =new ArrayList<Specialist>();
+    public Order() {
 
-    public Specialist getSpecialist() {
-        return specialist;
     }
-
     public void setSpecialist(Specialist specialist) {
         this.specialist = specialist;
     }
 
     private Specialist specialist;
-    private Repair repair;
+    private ArrayList<Repair> repairNeeded;
     private CleanData cleanData;
 
     public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, String surface){
@@ -99,5 +98,22 @@ public class Order {
     public ArrayList<Robot> getRobots() { return robots; }
 
 
-    public Repair getReparacion() { return repair; }
+    public ArrayList<Specialist> getSpecialistsAssigned() {
+        return specialistsAssigned;
+    }
+
+    public void setSpecialistsAssigned(ArrayList<Specialist> specialistsAssigned) {
+        this.specialistsAssigned = specialistsAssigned;
+    }
+
+    public ArrayList<Repair> getRepairsNeeded() {
+        return repairNeeded;
+    }
+
+    public void assignSpecialist(Specialist specialist){
+        this.specialistsAssigned.add(specialist);
+    }
+    public void setRepairsNeeded(ArrayList<Repair> repairNeeded) {
+        this.repairNeeded = repairNeeded;
+    }
 }
