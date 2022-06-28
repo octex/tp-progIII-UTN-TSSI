@@ -1,18 +1,20 @@
 package Robots;
 
+import java.util.ArrayList;
+
 public abstract class Robot {
 
-    protected String surface;
+    protected ArrayList<Surface> surfaces;
     private CommunicationModuleEmisor communicationModule;
     protected float costPH;
 
-    public Robot(String surface,float costPH){
-        this.surface=surface;
+    public Robot(float costPH){
+        surfaces = new ArrayList<>();
         this.costPH=costPH;
     }
 
-    public String getSurface(){
-        return surface;
+    public ArrayList<Surface> getSurface(){
+        return surfaces;
     }
     public float getCostPH(){
         return costPH;
@@ -22,5 +24,13 @@ public abstract class Robot {
         this.communicationModule.readyMessage(this);
     }
 
+    public boolean doesSupportThisSurface(Surface surface)
+    {
+        if (surfaces.contains(Surface.ANY))
+        {
+            return true;
+        }
+        return surfaces.contains(surface);
+    }
 
 }

@@ -3,8 +3,10 @@ package Robots;
 
 public class S031RTY extends Robot implements RoomOrganizer{
 
-    public S031RTY(){
-        super("N/A",2700);
+    public S031RTY()
+    {
+        super(2700);
+        surfaces.add(Surface.ANY);
     }
 
     @Override

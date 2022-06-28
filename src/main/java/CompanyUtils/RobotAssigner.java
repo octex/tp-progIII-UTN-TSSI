@@ -38,15 +38,15 @@ public class RobotAssigner
         {
             robotToAssing = GetCheapestRobot(suitableRobots);
         }
+
         try
         {
             robotsOrders.get(robotsOrders.indexOf(robotToAssing)).AddOrder(order);
         }
         catch (IndexOutOfBoundsException e)
         {
-            LinkedList<Order> newOrderList = new LinkedList<>();
-            newOrderList.add(order);
-            RobotRegister newRobotRegister = new RobotRegister(robotToAssing, newOrderList);
+            RobotRegister newRobotRegister = new RobotRegister(robotToAssing);
+            newRobotRegister.AddOrder(order);
             robotsOrders.add(newRobotRegister);
         }
     }
@@ -55,7 +55,7 @@ public class RobotAssigner
     private ArrayList<Robot> GetSuitableRobots(Order order, ArrayList<Robot> robots)
     {
         Stream<Robot> matchRobotsStream = robots.stream().filter(
-                x -> x.getSurface().equals(order.getSurface())
+                x -> x.doesSupportThisSurface(order.getSurface())
         );
         if (order.doesWantOrder())
         {

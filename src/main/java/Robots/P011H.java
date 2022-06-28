@@ -3,8 +3,10 @@ package Robots;
 
 public class P011H extends Robot implements Polisher{
 
-    public P011H(){
-        super("Pisos",1500);
+    public P011H()
+    {
+        super(1500);
+        surfaces.add(Surface.PISOS);
     }
 
     @Override

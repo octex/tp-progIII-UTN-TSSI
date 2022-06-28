@@ -2,8 +2,10 @@ package Robots;
 
 public class K311Y_fu extends Robot  implements Polisher{
 
-    public K311Y_fu(){
-        super("Muebles",500);
+    public K311Y_fu()
+    {
+        super(500);
+        surfaces.add(Surface.MUEBLES);
     }
 
     @Override

@@ -34,7 +34,7 @@ class RobotAssignerTest {
         testService = new Economic();
         LinkedList<Order> testOrders = new LinkedList<>();
         Order economicOrder = new Order(testClient, new SimpleClean(),
-                null, true, "Pisos");
+                null, true, Surface.PISOS);
         for (int i = 0; i < 3; i++)
         {
             testOrders.add(economicOrder);
@@ -50,11 +50,17 @@ class RobotAssignerTest {
         robots.add(po11h);
         robots.add(so31rty);
 
-        RobotRegister so31rtyOrders = new RobotRegister(so31rty, testOrders);
-        RobotRegister k311yfuOrders = new RobotRegister(k311Y_fu, testOrders);
+        RobotRegister so31rtyOrders = new RobotRegister(so31rty);
+        RobotRegister k311yfuOrders = new RobotRegister(k311Y_fu);
+
+        for (int i = 0; i < 3; i++)
+        {
+            so31rtyOrders.AddOrder(economicOrder);
+            k311yfuOrders.AddOrder(economicOrder);
+        }
+
         robotOrders.add(so31rtyOrders);
         robotOrders.add(k311yfuOrders);
-
     }
 
     @Test
@@ -63,7 +69,7 @@ class RobotAssignerTest {
         Service economicService = new Economic();
         Client economicClient = new Client(43085477, economicService, null);
         Order economicOrder = new Order(economicClient, new SimpleClean(),
-                null, false, "Pisos");
+                null, false, Surface.PISOS);
         economicOrder.setWantsPolish(false);
         assertDoesNotThrow(() -> robotAssigner.AssignRobot(economicOrder, robots, robotOrders));
     }
