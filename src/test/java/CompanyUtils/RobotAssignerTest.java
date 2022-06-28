@@ -4,6 +4,7 @@ import Client.Client;
 import CompanyUtils.RobotAssignerExceptions.CouldNotAssignRobotException;
 import Order.FactoryCleanType.SimpleClean;
 import Robots.*;
+import Services.Classic;
 import Services.Economic;
 import Services.Service;
 import Order.*;
@@ -85,7 +86,7 @@ class RobotAssignerTest {
     void AssignRobotForEconomicService()
     {
         Service economicService = new Economic();
-        Client economicClient = new Client(43085477, economicService, null);
+        Client economicClient = new Client(11, economicService, null);
         Order economicOrder = new Order(economicClient, new SimpleClean(),
                 null, false, Surface.PISOS);
         economicOrder.setWantsPolish(false);
@@ -96,7 +97,8 @@ class RobotAssignerTest {
     @Test
     void AssignRobotForClassicService()
     {
-
+        Service classicService = new Classic();
+        Client classicClient = new Client()
     }
 
     @Test
