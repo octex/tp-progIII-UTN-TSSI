@@ -102,6 +102,7 @@ class RobotAssignerTest {
     }
 
     @Test
+
     void AssignRobotForClassicService()
     {
         Service classicService = new Classic();

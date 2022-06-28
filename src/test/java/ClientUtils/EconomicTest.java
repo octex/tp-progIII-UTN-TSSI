@@ -1,40 +1,61 @@
+package ClientUtils;
+
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.AfterEach;
+
+import Client.Client;
+import CompanyUtils.Company;
+import CompanyUtils.OrderVerifyer;
+import CompanyUtils.OrderVerifyerExceptions.CouldNotVerifyOrderException;
+import Services.Economic;
+import Services.Service;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
+import Order.Order;
 
 class EconomicTest {
-
-
-
+    Client client;
+    Service economic =new Economic();
+    Order order =new Order();
+    Company company= new Company();
+    OrderVerifyer orderVerifyer =new OrderVerifyer();
     @BeforeEach
     void setUp() {
-        Cliente clienteEconomic;
-        Service economic;
-        RequestOrder requestOrder;
-        Company company;
+        client =new Client(5,economic,null);
+
+    }
+
+
+    @Test
+    void economicOrderPolishCleaning(){
+
+        order.setClient(client);
+        order.setWantsOrder(true);
+        assertThrows(CouldNotVerifyOrderException.ServiceNotIncludedExeption.class,() -> orderVerifyer.verifyOrder(order));
     }
 
     @Test
-    void economicOrderPolishCleaning throws NoCumpleExeption{
-        this.economic= new ServiceEconomic();
-        this.requestOrder = new RequestOrder(true,true);
-        this.clienteEconomic = new ClienteEconomic(21001,,false,economic ,requestOrder);
-        assertNotThrows(clienteEconomic.requireOrder(Company));
+    void economicOr(){
+
+        order.setClient(client);
+        order.setWantsOrder(true);
+        assertThrows(CouldNotVerifyOrderException.ServiceNotIncludedExeption.class,() -> orderVerifyer.verifyOrder(order));
     }
 
-    @Test
-    void economicOrderSimple{
-        this.economic= new ServiceEconomic();
-        this.requestOrder = new RequestOrder(false,false);
-        this.clienteEconomic = new ClienteEconomic(21001,false,economic ,requestOrder);
-        assertDoesNotThrow(clienteEconomic.requireOrder(Company));
-    }
 
     @Test
-    void economicOrderCleaning{
+    void economicOrderSimple(){
+        order.setClient(client);
+        order.setWantsOrder(false);
+
+        assertDoesNotThrow(()-> orderVerifyer.verifyOrder(order));
+    }
+
+
+/*
+    @Test
+    void economicOrderCleaning(){
         this.economic= new ServiceEconomic();
         this.requestOrder = new RequestOrder(true,false);
         this.clienteEconomic = new ClienteEconomic(21001,false,economic ,requestOrder);
@@ -51,4 +72,6 @@ class EconomicTest {
 
 
     }
+
+     */
 }

@@ -1,8 +1,6 @@
 package CompanyUtils;
 
 import Client.Client;
-import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
-import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
 import CompanyUtils.OrderVerifyerExceptions.*;
 import CompanyUtils.PriceUtils.PriceCalculator;
 import CompanyUtils.RobotAssignerExceptions.*;
@@ -21,6 +19,10 @@ public class Company {
     private ArrayList<RobotRegister> orderPerRobot;
     private CommunicationModuleReciver communicationModuleReciver;
     private PriceCalculator priceCalculator;
+    private int simpleOrdersContator;
+    private int complexOrdersContator;
+    private float robotAdjustmentFactor;
+
 
 
     public Company() {
@@ -33,6 +35,9 @@ public class Company {
         this.orders.addAll(orders);
         this.robotAssigner = new RobotAssigner();
         this.orderPerRobot = new ArrayList();
+        this.simpleOrdersContator = 0;
+        this.complexOrdersContator = 0;
+        this.robotAdjustmentFactor = 1;
     }
 
     public CommunicationModuleReciver getCommunicationModuleReciver(){
@@ -51,18 +56,41 @@ public class Company {
             orderVerifyer.verifyOrder(order);
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
         }
-        catch (ServiceNotIncludedExeption e){
+
+        catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption e){
             System.out.println("No se pudo verificar la orden.");
         }
-        catch (HasNoCreditsExeption e){
+        catch (CouldNotVerifyOrderException.HasNoCreditsExeption e){
             System.out.println("No se pudo asignar el robot a la orden.");
+        } catch (CouldNotAssignRobotException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e){
-            System.out.println("Hubo un error.");
-        }
+    }
+
+    public int getSimpleOrdersContator() {
+        return simpleOrdersContator;
+    }
+    public void increaseSimpleOrdersContator() {
+        simpleOrdersContator += 1;
+    }
+    
+    public int getComplexOrdersContator() {
+        return complexOrdersContator;
+    }
+    public void increaseComplexOrdersContator() {
+        complexOrdersContator += 1;
     }
 
     public void setPriceCalculator(PriceCalculator priceCalculator) {
         this.priceCalculator = priceCalculator;
+    }
+    
+    public float getRobotAdjustmentFactor() {
+        return this.robotAdjustmentFactor;
+    }
+    public void setRobotAdjustmentFactor(float robotAdjustmentFactor) {
+        this.robotAdjustmentFactor = robotAdjustmentFactor;
     }
 }
