@@ -2,7 +2,6 @@ package CompanyUtils;
 
 import Client.Client;
 import CompanyUtils.RobotAssignerExceptions.CouldNotAssignRobotException;
-import Order.FactoryCleanType.CleanType;
 import Order.FactoryCleanType.SimpleClean;
 import Robots.*;
 import Services.Economic;
@@ -64,9 +63,9 @@ class RobotAssignerTest {
         Service economicService = new Economic();
         Client economicClient = new Client(43085477, economicService, null);
         Order economicOrder = new Order(economicClient, new SimpleClean(),
-                null, true, "Pisos");
-        assertThrows(CouldNotAssignRobotException.class, () ->
-                robotAssigner.AssignRobot(economicOrder, robots, robotOrders));
+                null, false, "Pisos");
+        economicOrder.setWantsPolish(false);
+        assertDoesNotThrow(() -> robotAssigner.AssignRobot(economicOrder, robots, robotOrders));
     }
 
     @Test

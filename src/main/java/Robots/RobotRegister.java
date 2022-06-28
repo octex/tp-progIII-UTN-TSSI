@@ -8,7 +8,9 @@ public class RobotRegister {
     private Robot robot;
     private LinkedList<Order> orders;
 
-    public RobotRegister(Robot robot, LinkedList<Order> orders){
+    public RobotRegister(Robot robot, LinkedList<Order> orders)
+    {
+        this.orders = new LinkedList<Order>();
         this.robot = robot;
         this.orders.addAll(orders);
     }
