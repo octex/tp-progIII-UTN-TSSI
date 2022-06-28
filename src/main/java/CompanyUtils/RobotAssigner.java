@@ -9,6 +9,7 @@ import Robots.RoomOrganizer;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.stream.Stream;
 
 
 public class RobotAssigner
@@ -41,19 +42,24 @@ public class RobotAssigner
 
     private ArrayList<Robot> GetSuitableRobots(Order order, ArrayList<Robot> robots)
     {
-        ArrayList<Robot> matchRobots = new ArrayList<Robot>();
-        // stream filter?
-        for(Robot robot : robots)
+        Stream<Robot> matchRobotsStream = robots.stream().filter(
+                x -> x.getSurface().equals(order.getSurface())
+        );
+
+        if (order.doesWantOrder())
         {
-            boolean matches = order.getSurface().equals(robot.getSurface()) &&
-                    order.doesWantOrder() && robot instanceof RoomOrganizer &&
-                    order.doesWantPolish() && robot instanceof Polisher;
-            if(matches)
-            {
-                matchRobots.add(robot);
-            }
+            matchRobotsStream = matchRobotsStream.filter(
+                    x -> x instanceof RoomOrganizer
+            );
         }
-        return matchRobots;
+        if (order.doesWantPolish())
+        {
+            matchRobotsStream = matchRobotsStream.filter(
+                    x -> x instanceof Polisher
+            );
+        }
+
+        return new ArrayList<Robot>(matchRobotsStream.toList());
     }
 
     private Robot GetCheapestRobot(ArrayList<Robot> robots)
