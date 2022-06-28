@@ -23,6 +23,8 @@ public class Company {
     private PriceCalculator priceCalculator;
     private int simpleOrdersContator;
     private int complexOrdersContator;
+    private float robotAdjustmentFactor;
+
 
 
     public Company() {
@@ -37,6 +39,7 @@ public class Company {
         this.orderPerRobot = new ArrayList();
         this.simpleOrdersContator = 0;
         this.complexOrdersContator = 0;
+        this.robotAdjustmentFactor = 1;
     }
 
     public CommunicationModuleReciver getCommunicationModuleReciver(){
@@ -82,5 +85,12 @@ public class Company {
 
     public void setPriceCalculator(PriceCalculator priceCalculator) {
         this.priceCalculator = priceCalculator;
+    }
+    
+    public float getRobotAdjustmentFactor() {
+        return this.robotAdjustmentFactor;
+    }
+    public void setRobotAdjustmentFactor(float robotAdjustmentFactor) {
+        this.robotAdjustmentFactor = robotAdjustmentFactor;
     }
 }
