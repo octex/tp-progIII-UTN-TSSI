@@ -20,6 +20,11 @@ public class Order {
     private Client client;
     private ArrayList<Robot> robots;
     private ArrayList<Specialist> specialistsAssigned =new ArrayList<Specialist>();
+    private Specialist specialist;
+    private ArrayList<Repair> repairNeeded;
+    private CleanData cleanData;
+    private float orderPrice;
+
     public Order() {
 
     }
@@ -27,9 +32,6 @@ public class Order {
         this.specialist = specialist;
     }
 
-    private Specialist specialist;
-    private ArrayList<Repair> repairNeeded;
-    private CleanData cleanData;
 
     public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, String surface){
         this.client = client;
@@ -81,6 +83,17 @@ public class Order {
     public Client getClient() {
         return client;
     }
+
+    public float getOrderPrice() {
+        return orderPrice;
+    }
+    public void setOrderPrice(float price) {
+        this.orderPrice = price;
+    }
+    public void addOrderPrice(float price) {
+        this.orderPrice += price;
+    }
+    
 
     public void setLocation(Location location) {
         this.location = location;
