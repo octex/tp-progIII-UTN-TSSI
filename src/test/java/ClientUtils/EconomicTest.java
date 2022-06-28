@@ -3,6 +3,7 @@ package ClientUtils;
 import static org.junit.jupiter.api.Assertions.*;
 
 import Client.Client;
+import Client.CouldNotCreateOrderException;
 import CompanyUtils.Company;
 import Order.FactoryCleanType.CleanTypeSelector;
 import Order.FactoryCleanType.SimpleClean;
