@@ -21,6 +21,8 @@ public class Company {
     private ArrayList<RobotRegister> orderPerRobot;
     private CommunicationModuleReciver communicationModuleReciver;
     private PriceCalculator priceCalculator;
+    private int simpleOrdersContator;
+    private int complexOrdersContator;
 
 
     public Company() {
@@ -33,6 +35,8 @@ public class Company {
         this.orders.addAll(orders);
         this.robotAssigner = new RobotAssigner();
         this.orderPerRobot = new ArrayList();
+        this.simpleOrdersContator = 0;
+        this.complexOrdersContator = 0;
     }
 
     public CommunicationModuleReciver getCommunicationModuleReciver(){
@@ -60,6 +64,20 @@ public class Company {
         catch (Exception e){
             System.out.println("Hubo un error.");
         }
+    }
+
+    public int getSimpleOrdersContator() {
+        return simpleOrdersContator;
+    }
+    public void increaseSimpleOrdersContator() {
+        simpleOrdersContator += 1;
+    }
+    
+    public int getComplexOrdersContator() {
+        return complexOrdersContator;
+    }
+    public void increaseComplexOrdersContator() {
+        complexOrdersContator += 1;
     }
 
     public void setPriceCalculator(PriceCalculator priceCalculator) {
