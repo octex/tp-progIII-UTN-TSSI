@@ -1,8 +1,6 @@
 package CompanyUtils;
 
 import Client.Client;
-import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
-import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
 import CompanyUtils.OrderVerifyerExceptions.*;
 import CompanyUtils.PriceUtils.PriceCalculator;
 import CompanyUtils.RobotAssignerExceptions.*;
@@ -55,14 +53,16 @@ public class Company {
             orderVerifyer.verifyOrder(order);
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
         }
-        catch (ServiceNotIncludedExeption e){
+
+        catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption e){
             System.out.println("No se pudo verificar la orden.");
         }
-        catch (HasNoCreditsExeption e){
+        catch (CouldNotVerifyOrderException.HasNoCreditsExeption e){
             System.out.println("No se pudo asignar el robot a la orden.");
-        }
-        catch (Exception e){
-            System.out.println("Hubo un error.");
+        } catch (CouldNotAssignRobotException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,7 +1,6 @@
 package Services;
 
-import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
-import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
+import CompanyUtils.OrderVerifyerExceptions.CouldNotVerifyOrderException;
 import Order.Order;
 import Services.Exeptions.EconomicOverpassesDebtExeption;
 
@@ -11,7 +10,6 @@ public class Economic extends Service  {
             this.cleaningQuantity = 3;
             this.orderingQuantity = 3;
             this.orderValue = 0;
-
 
     }
 
@@ -25,18 +23,18 @@ public class Economic extends Service  {
         }
     }
 
-    public boolean validateService(Order order) throws ServiceNotIncludedExeption {
+    public boolean validateService(Order order) throws CouldNotVerifyOrderException.ServiceNotIncludedExeption {
         if(order.doesWantOrder() && order.getClient().getService().getServiceName().equals("Economic")){
-            throw new ServiceNotIncludedExeption("El cliente economico no puede pedir orden Exeption");}
+            throw new CouldNotVerifyOrderException.ServiceNotIncludedExeption("El cliente economico no puede pedir orden Exeption");}
         else
             return true;
     }
 
-    public boolean validateClientCredits(Order order) throws HasNoCreditsExeption{
+    public boolean validateClientCredits(Order order) throws CouldNotVerifyOrderException.HasNoCreditsExeption {
      if (order.getClient().getService().getCleaningQuantity() <= 0) {
-        throw new HasNoCreditsExeption("El cliente Economico no tiene creditos para limpieza");
+        throw new CouldNotVerifyOrderException.HasNoCreditsExeption("El cliente Economico no tiene creditos para limpieza");
     }else{
-
+         order.getClient().getService().setCleaningQuantity(order.getClient().getService().getCleaningQuantity()-1);
         return true;
     }
     }

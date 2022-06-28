@@ -93,12 +93,13 @@ class RobotAssignerTest {
         assertDoesNotThrow(() -> robotAssigner.AssignRobot(economicOrder, robots, robotOrders));
         assertNotNull(GetRobotRegistry(po11h));
     }
-
+    /*
     @Test
+
     void AssignRobotForClassicService()
     {
         Service classicService = new Classic();
-        Client classicClient = new Client()
+        Client classicClient = new Client();
     }
 
     @Test
@@ -106,4 +107,6 @@ class RobotAssignerTest {
     {
 
     }
+
+     */
 }

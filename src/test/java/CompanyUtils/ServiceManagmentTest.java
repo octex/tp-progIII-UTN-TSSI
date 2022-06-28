@@ -4,15 +4,14 @@
 package CompanyUtils;
 
 import Client.Client;
-import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
-import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
+import CompanyUtils.OrderVerifyerExceptions.CouldNotVerifyOrderException;
+import Order.FactoryCleanType.SimpleClean;
 import Order.Order;
+import Robots.Surface;
 import Services.Classic;
 import Services.Economic;
-import Services.Exeptions.EconomicOverpassesDebtExeption;
 import Services.Exeptions.OverpassesDebtExeption;
 import Services.Platinum;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,8 +23,11 @@ public class ServiceManagmentTest {
 
 
 
+    protected OrderVerifyer orderVerifyer=new OrderVerifyer();
 
-    public Client client;
+    public Client client = new Client(111, new Economic(), null);
+    public Order order =new Order(client, new SimpleClean(),null,false, Surface.PISOS);
+
 
     ServiceManagement serviceManagment = ServiceManagement.getInstance();
 
@@ -37,6 +39,8 @@ public class ServiceManagmentTest {
     }
 
 
+
+
     @Test
     void EconomicHasDebtFail()  {
         serviceManagment.setCostumerDebt((5));
@@ -45,7 +49,6 @@ public class ServiceManagmentTest {
         });
     }
 
-
     @Test
     void EconomicNoDebtOk()  {
         serviceManagment.setCostumerDebt((0));
@@ -53,9 +56,6 @@ public class ServiceManagmentTest {
             serviceManagment.debtSucceded(client.getService(), serviceManagment.getCostumerDebt());
         });
     }
-
-
-
 
 
     @Test
@@ -98,6 +98,8 @@ public class ServiceManagmentTest {
             serviceManagment.debtSucceded(client.getService(), serviceManagment.getCostumerDebt());
         });
     }
+
+
     @Test
     void getDebt() {
     }

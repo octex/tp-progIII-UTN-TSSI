@@ -1,7 +1,6 @@
 package Services;
 
-import CompanyUtils.AllocatorSystemExeptions.HasNoCreditsExeption;
-import CompanyUtils.AllocatorSystemExeptions.ServiceNotIncludedExeption;
+import CompanyUtils.OrderVerifyerExceptions.CouldNotVerifyOrderException;
 import Order.Order;
 
 import Services.Exeptions.PlatinumOverpassesDebtExeption;
@@ -27,12 +26,12 @@ public class Platinum extends Service {
         return true;
 
     }
-    public boolean validateService(Order order) throws ServiceNotIncludedExeption {
+    public boolean validateService(Order order) throws CouldNotVerifyOrderException.ServiceNotIncludedExeption {
         return true;
 }
 
     @Override
-    public boolean validateClientCredits(Order order) throws HasNoCreditsExeption {
+    public boolean validateClientCredits(Order order) throws CouldNotVerifyOrderException.HasNoCreditsExeption {
 
             return true;
 

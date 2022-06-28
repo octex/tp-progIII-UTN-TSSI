@@ -3,10 +3,9 @@ package ClientUtils;
 import static org.junit.jupiter.api.Assertions.*;
 
 import Client.Client;
-import Client.CouldNotCreateOrderException;
 import CompanyUtils.Company;
-import Order.FactoryCleanType.CleanTypeSelector;
-import Order.FactoryCleanType.SimpleClean;
+import CompanyUtils.OrderVerifyer;
+import CompanyUtils.OrderVerifyerExceptions.CouldNotVerifyOrderException;
 import Services.Economic;
 import Services.Service;
 
@@ -20,7 +19,7 @@ class EconomicTest {
     Service economic =new Economic();
     Order order =new Order();
     Company company= new Company();
-
+    OrderVerifyer orderVerifyer =new OrderVerifyer();
     @BeforeEach
     void setUp() {
         client =new Client(5,economic,null);
@@ -28,24 +27,35 @@ class EconomicTest {
     }
 
 
+    @Test
+    void economicOrderPolishCleaning(){
+
+        order.setClient(client);
+        order.setWantsOrder(true);
+        assertThrows(CouldNotVerifyOrderException.ServiceNotIncludedExeption.class,() -> orderVerifyer.verifyOrder(order));
+    }
 
     @Test
-    void economicOrderPolishCleaning() throws CouldNotCreateOrderException, {
+    void economicOr(){
 
-        client.requestOrder(company,order);
-        assertNotThrows(economic.req(Company));
+        order.setClient(client);
+        order.setWantsOrder(true);
+        assertThrows(CouldNotVerifyOrderException.ServiceNotIncludedExeption.class,() -> orderVerifyer.verifyOrder(order));
     }
+
 
     @Test
     void economicOrderSimple(){
-        this.economic= new ServiceEconomic();
-        this.requestOrder = new RequestOrder(false,false);
-        this.clienteEconomic = new ClienteEconomic(21001,false,economic ,requestOrder);
-        assertDoesNotThrow(clienteEconomic.requireOrder(Company));
+        order.setClient(client);
+        order.setWantsOrder(false);
+
+        assertDoesNotThrow(()-> orderVerifyer.verifyOrder(order));
     }
 
+
+/*
     @Test
-    void economicOrderCleaning{
+    void economicOrderCleaning(){
         this.economic= new ServiceEconomic();
         this.requestOrder = new RequestOrder(true,false);
         this.clienteEconomic = new ClienteEconomic(21001,false,economic ,requestOrder);
@@ -62,4 +72,6 @@ class EconomicTest {
 
 
     }
+
+     */
 }

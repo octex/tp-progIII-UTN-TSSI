@@ -21,7 +21,7 @@ public class Client {
         this.locations = locations;
     };
 
-    public void requestOrder(Company company, Order order) throws CouldNotCreateOrderException
+    public void requestOrder(Company company, Order order) throws Exception
     {
         try
         {
