@@ -45,6 +45,7 @@ public class ServiceManagmentTest {
         });
     }
 
+
     @Test
     void EconomicNoDebtOk()  {
         serviceManagment.setCostumerDebt((0));
@@ -52,6 +53,8 @@ public class ServiceManagmentTest {
             serviceManagment.debtSucceded(client.getService(), serviceManagment.getCostumerDebt());
         });
     }
+
+
 
 
 
