@@ -7,6 +7,7 @@ import Order.FactoryCleanType.CleanData;
 import Order.FactoryCleanType.CleanType;
 import Order.Repairs.Repair;
 import Robots.Robot;
+import Robots.Surface;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class Order {
     private Location location;
     private boolean wantsPolish;
     private boolean wantsOrder;
-    private String surface;
+    private Surface surface;
     private Client client;
     private ArrayList<Robot> robots;
     private ArrayList<Specialist> specialistsAssigned =new ArrayList<Specialist>();
@@ -33,7 +34,7 @@ public class Order {
     }
 
 
-    public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, String surface){
+    public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, Surface surface){
         this.client = client;
         this.cleanType = cleanType;
         this.location = location;
@@ -72,11 +73,11 @@ public class Order {
         this.wantsOrder = wantsOrder;
     }
 
-    public String getSurface() {
+    public Surface getSurface() {
         return surface;
     }
 
-    public void setSurface(String surface) {
+    public void setSurface(Surface surface) {
         this.surface = surface;
     }
 

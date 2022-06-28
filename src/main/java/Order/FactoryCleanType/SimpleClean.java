@@ -10,11 +10,11 @@ public class SimpleClean implements CleanType{
 
         float sumatory=0;
 
-        order.getRobots().stream().forEach(y -> sumatory += y.getCostPH());
+        /*order.getRobots().stream().forEach(y -> sumatory += y.getCostPH());
 
         sumatory += (order.getSpecialist().getSalary() / 160) * order.getReparacion().getComplexity();
 
-        sumatory += order.getReparacion().getCost();
+        sumatory += order.getReparacion().getCost();*/
 
         return sumatory;
     }

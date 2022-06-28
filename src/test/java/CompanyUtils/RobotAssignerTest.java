@@ -2,9 +2,9 @@ package CompanyUtils;
 
 import Client.Client;
 import CompanyUtils.RobotAssignerExceptions.CouldNotAssignRobotException;
-import Order.FactoryCleanType.CleanType;
 import Order.FactoryCleanType.SimpleClean;
 import Robots.*;
+import Services.Classic;
 import Services.Economic;
 import Services.Service;
 import Order.*;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 class RobotAssignerTest {
 
@@ -24,6 +25,11 @@ class RobotAssignerTest {
     public ArrayList<RobotRegister> robotOrders;
     public Client testClient;
     public Service testService;
+
+    public Robot k311Y_fu;
+    public Robot k311Ya;
+    public Robot po11h;
+    public Robot so31rty;
 
     @BeforeEach
     void setUp()
@@ -35,44 +41,64 @@ class RobotAssignerTest {
         testService = new Economic();
         LinkedList<Order> testOrders = new LinkedList<>();
         Order economicOrder = new Order(testClient, new SimpleClean(),
-                null, true, "Pisos");
+                null, true, Surface.PISOS);
         for (int i = 0; i < 3; i++)
         {
             testOrders.add(economicOrder);
         }
 
-        Robot k311Y_fu = new K311Y_fu();
-        Robot k311Ya = new K311Ya();
-        Robot po11h = new P011H();
-        Robot so31rty = new S031RTY();
+        k311Y_fu = new K311Y_fu();
+        k311Ya = new K311Ya();
+        po11h = new P011H();
+        so31rty = new S031RTY();
 
         robots.add(k311Y_fu);
         robots.add(k311Ya);
         robots.add(po11h);
         robots.add(so31rty);
 
-        RobotRegister so31rtyOrders = new RobotRegister(so31rty, testOrders);
-        RobotRegister k311yfuOrders = new RobotRegister(k311Y_fu, testOrders);
+        RobotRegister so31rtyOrders = new RobotRegister(so31rty);
+        RobotRegister k311yfuOrders = new RobotRegister(k311Y_fu);
+
+        for (int i = 0; i < 3; i++)
+        {
+            so31rtyOrders.AddOrder(economicOrder);
+            k311yfuOrders.AddOrder(economicOrder);
+        }
+
         robotOrders.add(so31rtyOrders);
         robotOrders.add(k311yfuOrders);
+    }
 
+    private RobotRegister GetRobotRegistry(Robot robot)
+    {
+        for (RobotRegister robotOrder : robotOrders)
+        {
+            if (robotOrder.GetRobot().equals(robot))
+            {
+                return robotOrder;
+            }
+        }
+        return null;
     }
 
     @Test
     void AssignRobotForEconomicService()
     {
         Service economicService = new Economic();
-        Client economicClient = new Client(43085477, economicService, null);
+        Client economicClient = new Client(11, economicService, null);
         Order economicOrder = new Order(economicClient, new SimpleClean(),
-                null, true, "Pisos");
-        assertThrows(CouldNotAssignRobotException.class, () ->
-                robotAssigner.AssignRobot(economicOrder, robots, robotOrders));
+                null, false, Surface.PISOS);
+        economicOrder.setWantsPolish(false);
+        assertDoesNotThrow(() -> robotAssigner.AssignRobot(economicOrder, robots, robotOrders));
+        assertNotNull(GetRobotRegistry(po11h));
     }
 
     @Test
     void AssignRobotForClassicService()
     {
-
+        Service classicService = new Classic();
+        Client classicClient = new Client()
     }
 
     @Test

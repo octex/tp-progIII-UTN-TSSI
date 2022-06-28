@@ -6,9 +6,11 @@ import Robots.Robot;
 import Order.Order;
 import Robots.RobotRegister;
 import Robots.RoomOrganizer;
+import org.mockito.internal.matchers.Or;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.stream.Stream;
 
 
@@ -36,16 +38,25 @@ public class RobotAssigner
         {
             robotToAssing = GetCheapestRobot(suitableRobots);
         }
-        robotsOrders.get(robotsOrders.indexOf(robotToAssing)).AddOrder(order);
+
+        try
+        {
+            robotsOrders.get(robotsOrders.indexOf(robotToAssing)).AddOrder(order);
+        }
+        catch (IndexOutOfBoundsException e)
+        {
+            RobotRegister newRobotRegister = new RobotRegister(robotToAssing);
+            newRobotRegister.AddOrder(order);
+            robotsOrders.add(newRobotRegister);
+        }
     }
 
 
     private ArrayList<Robot> GetSuitableRobots(Order order, ArrayList<Robot> robots)
     {
         Stream<Robot> matchRobotsStream = robots.stream().filter(
-                x -> x.getSurface().equals(order.getSurface())
+                x -> x.doesSupportThisSurface(order.getSurface())
         );
-
         if (order.doesWantOrder())
         {
             matchRobotsStream = matchRobotsStream.filter(

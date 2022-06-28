@@ -2,9 +2,11 @@ package Robots;
 
 public class K311Ya extends Robot implements Polisher,RoomOrganizer {
 
-    public K311Ya(){
-        super("Pisos/Muebles",5000);
-
+    public K311Ya()
+    {
+        super(5000);
+        surfaces.add(Surface.PISOS);
+        surfaces.add(Surface.MUEBLES);
     }
 
     @Override
