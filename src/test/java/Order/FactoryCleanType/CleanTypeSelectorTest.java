@@ -14,7 +14,7 @@ import java.util.HashSet;
 
 class CleanTypeSelectorTest {
     public CleanData cleanData;
-    public Company company;
+    public Company company =new Company();
     PriceCalculator priceCalculator;
 
 
@@ -82,7 +82,7 @@ class CleanTypeSelectorTest {
     }
     @Test
     void returnsSimpleOk(){
-        assertEquals(new SimpleClean(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
+        assertEquals(new SimpleClean().getClass(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData).getClass());
     }
     @Test
     void returnsSimpleWithMultipleDogsBecauseOfJustDustOk(){
