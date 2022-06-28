@@ -1,6 +1,7 @@
 package CompanyUtils;
 
 import Client.Client;
+import Client.CouldNotCreateOrderException;
 import Order.Order;
 import Services.Economic;
 import Services.Exeptions.OverpassesDebtExeption;
