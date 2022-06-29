@@ -6,6 +6,7 @@ import Robots.Robot;
 import Order.Order;
 import Robots.RobotRegister;
 import Robots.RoomOrganizer;
+import org.mockito.internal.matchers.Or;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -22,71 +23,118 @@ public class RobotAssigner
 
     public void AssignRobot(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders) throws CouldNotAssignRobotException
     {
-        Robot robotToAssing;
-        ArrayList<Robot> suitableRobots = GetSuitableRobots(order, robots);
+        ArrayList<Robot> suitableRobots;
+
+        if(order.getClient().getService().getServiceName().equals("Platinum"))
+        {
+            suitableRobots = GetSuitableRobotsForPlatinum(order, robots, robotsOrders);
+        }
+        else
+        {
+            suitableRobots = GetSuitableRobots(order, robots);
+        }
+
         if (suitableRobots.size() == 0)
         {
             throw new CouldNotAssignRobotException("No hay robots disponibles para el pedido solicitado");
         }
-        if(order.getClient().getService().getServiceName().equals("Platinum"))
-        {
-            robotToAssing = GetRequiredRobotToPlatinumRobot(suitableRobots, robotsOrders);
-        }
-        else
-        {
-            robotToAssing = GetCheapestRobot(suitableRobots);
-        }
 
-        try
+        for(Robot robot : suitableRobots)
         {
-            robotsOrders.get(robotsOrders.indexOf(robotToAssing)).AddOrder(order);
-        }
-        catch (IndexOutOfBoundsException e)
-        {
-            RobotRegister newRobotRegister = new RobotRegister(robotToAssing);
-            newRobotRegister.AddOrder(order);
-            robotsOrders.add(newRobotRegister);
+            try
+            {
+                robotsOrders.get(GetRobotRegistry(robot, robotsOrders)).AddOrder(order);
+            }
+            catch (IndexOutOfBoundsException e)
+            {
+                RobotRegister newRobotRegister = new RobotRegister(robot);
+                newRobotRegister.AddOrder(order);
+                robotsOrders.add(newRobotRegister);
+            }
         }
     }
 
-
-    private ArrayList<Robot> GetSuitableRobots(Order order, ArrayList<Robot> robots)
+    private int GetRobotRegistry(Robot robot, ArrayList<RobotRegister> robotOrders)
     {
-        Stream<Robot> matchRobotsStream = robots.stream().filter(
+        for (RobotRegister robotOrder : robotOrders)
+        {
+            if (robotOrder.GetRobot().equals(robot))
+            {
+                return robotOrders.indexOf(robotOrder);
+            }
+        }
+        return -1;
+    }
+
+    private ArrayList<Robot> GetSuitableRobotsForPlatinum(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders)
+    {
+        ArrayList<Robot> suitableRobots = new ArrayList<>(robots.stream().filter(
                 x -> x.doesSupportThisSurface(order.getSurface())
-        );
+        ).toList());
+        ArrayList<RobotRegister> suitableRobotsWithOrders = new ArrayList<>();
+
         if (order.doesWantOrder())
         {
-            matchRobotsStream = matchRobotsStream.filter(
-                    x -> x instanceof RoomOrganizer
+            suitableRobots = new ArrayList<>(
+                    suitableRobots.stream().filter(
+                            x -> x instanceof RoomOrganizer
+                    ).toList()
             );
         }
         if (order.doesWantPolish())
         {
-            matchRobotsStream = matchRobotsStream.filter(
-                    x -> x instanceof Polisher
+            suitableRobots = new ArrayList<>(
+                    suitableRobots.stream().filter(
+                            x -> x instanceof Polisher
+                    ).toList()
             );
         }
 
-        return new ArrayList<Robot>(matchRobotsStream.toList());
-    }
-
-    private Robot GetCheapestRobot(ArrayList<Robot> robots)
-    {
-        return robots.stream()
-                .min(Comparator.comparingDouble(Robot::getCostPH))
-                .get();
-    }
-
-    private Robot GetRequiredRobotToPlatinumRobot(ArrayList<Robot> suitableRobots, ArrayList<RobotRegister> robotsOrders)
-    {
-        ArrayList<RobotRegister> suitableRobotsWithOrders = new ArrayList<RobotRegister>();
-        for(Robot robot : suitableRobots)
+        for (Robot robot: suitableRobots)
         {
-            suitableRobotsWithOrders.add(robotsOrders.get(robotsOrders.indexOf(robot)));
+            int index = GetRobotRegistry(robot, robotsOrders);
+            if (index == -1)
+            {
+                suitableRobots.clear();
+                suitableRobots.add(robot);
+                return suitableRobots;
+            }
+            else
+            {
+                suitableRobotsWithOrders.add(robotsOrders.get(index));
+            }
         }
-        return suitableRobotsWithOrders.stream()
-                .min(Comparator.comparingInt(RobotRegister::GetAmountOfOrders))
-                .get().GetRobot();
+        return suitableRobots;
+    }
+
+    private ArrayList<Robot> GetSuitableRobots(Order order, ArrayList<Robot> robots)
+    {
+        ArrayList<Robot> matchRobots = new ArrayList<>();
+
+        Robot matchRobotForSurface = robots.stream().filter(
+                x -> x.doesSupportThisSurface(order.getSurface())
+        ).min(Comparator.comparingDouble(Robot::getCostPH)).get();
+
+        matchRobots.add(matchRobotForSurface);
+
+        Robot matchRobotForOrder;
+        Robot matchRobotForPolish;
+
+        if (order.doesWantOrder() && !(matchRobotForSurface instanceof RoomOrganizer))
+        {
+            matchRobotForOrder = robots.stream().filter(
+                    x -> x instanceof RoomOrganizer
+            ).min(Comparator.comparingDouble(Robot::getCostPH)).get();
+            matchRobots.add(matchRobotForOrder);
+        }
+        if (order.doesWantPolish() && !(matchRobotForSurface instanceof Polisher))
+        {
+            matchRobotForPolish = robots.stream().filter(
+                    x -> x instanceof Polisher
+            ).min(Comparator.comparingDouble(Robot::getCostPH)).get();
+            matchRobots.add(matchRobotForPolish);
+        }
+
+        return matchRobots;
     }
 }
