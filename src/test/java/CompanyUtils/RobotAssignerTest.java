@@ -90,6 +90,17 @@ class RobotAssignerTest {
     }
 
     @Test
+    void AssignRobotForClassicWithOrder()
+    {
+        Service classicService = new Classic();
+        Client classicClient = new Client(222222222, classicService, null);
+        Order economicOrder = new Order(classicClient, new ComplexClean(),
+                null, true, Surface.PISOS);
+        economicOrder.setWantsPolish(false);
+
+    }
+
+    @Test
     void AssignRobotForEconomicService()
     {
         Service economicService = new Economic();
@@ -102,7 +113,6 @@ class RobotAssignerTest {
     }
 
     @Test
-
     void AssignRobotForClassicService()
     {
         Service classicService = new Classic();
