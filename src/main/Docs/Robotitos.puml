@@ -21,6 +21,7 @@ class Location{
     + Location();
 }
 
+
 class RobotRegister{
     - Robot robot;
     - LinkedList<Order> orders;
@@ -71,6 +72,7 @@ class Economic{
 }
 
 class Company{
+    -SpecialistsAssigner specialistAssigner
     - ArrayList<Client> clients;
     - ArrayList<Robot> robots;
     - ArrayList<Order> orders;
@@ -81,7 +83,7 @@ class Company{
 
     + Company();
     + CommunicationModuleReciver getCommunicationModuleReciver();
-    + void tryToAssing(Order);
+    + void assign(Order);
 }
 
 class OrderVerifyer{
@@ -106,10 +108,15 @@ class Order{
     - boolean wantsPolish;
     - String surface;
     - Client client;
+    - Arraylist<Repair> repairsRequested;
     - CleanData cleanData;
     + CleanType createOrderCleanType();
     + Order();
+    - ArrayList<Robot> robotsAsigned;
+    - ArrayList<Specialists> specialistsAssigned;
 }
+
+
 
 class CleantypeSelector {
 
@@ -135,12 +142,61 @@ class OrderVerifyer{
 Interface PaymentModule{
 }
 
+
+
+interface Specialist{
+    + float getSalary();
+    + void repair();
+    + boolean canHandle(Repair repair);
+}
+
+class Gasist implements Specialist{
+String name;
+Float wage;
+}
+
+class Electritian implements Specialist{
+String name;
+Float wage;
+}
+
+abstract class Repair{
+   -Complexity complexity;
+   +verifyComplexityRange();
+   +calculateRepairPrice();
+}
+class GasRepair extends Repair{
+
+}
+class ElectricalRepair extends Repair{
+
+}
+
+class SpecialistsAssigner {
++iterateOrder(order);
+-getRequiredSpecialist(repair);
+-assignSpecialistToOrder(Specialist);
+
+}
+
+SpecialistsAssigner->Order
+
+SpecialistsAssigner->Repair
+
+SpecialistsAssigner-left>Specialist
+
+Specialists-left->Repair
 OrderVerifyer <.left. PaymentModule
 OrderVerifyer <-- Order
 
 Service <|-- Platinum
 Service <|-- Classic
 Service <|-- Economic
+
+
+CleantypeSelector<--CleantypeSelector
+
+Company *-- SpecialistsAssigner
 
 Company*-- Robot
 Company *-- Client
@@ -164,8 +220,10 @@ OrderingRobot <.. S031RTY
 
 Client *-- Service
 Client *-- Location
-
+Company *--Specialist
 Company *-CleantypeSelector
+Order*-->Specialists
+Order*-->Repair
 Order- CleanType
 Client*--Order
 @enduml
