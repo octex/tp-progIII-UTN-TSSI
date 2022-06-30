@@ -21,7 +21,7 @@ public class CostCalculator{
             );
 
 
-        return sumatory;
+        return sumatory ;
     }
     
 }
