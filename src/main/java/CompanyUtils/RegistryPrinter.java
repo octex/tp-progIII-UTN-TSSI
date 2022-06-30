@@ -1,4 +1,4 @@
-package CompanyUtils.RobotAssignerExceptions;
+package CompanyUtils;
 
 import CompanyUtils.CompanyRegistry;
 
