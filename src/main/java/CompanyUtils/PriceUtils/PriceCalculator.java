@@ -10,6 +10,7 @@ public class PriceCalculator {
     private CostCalculator costCalculator;
 
     public PriceCalculator() {
+        this.costCalculator = new CostCalculator();
     }
 
     public void setStrategy(CleanType cleanTypeStrategy){
