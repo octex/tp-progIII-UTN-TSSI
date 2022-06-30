@@ -31,6 +31,7 @@ public class Order {
     {
         this.robots = new ArrayList<>();
         this.specialistsAssigned =new ArrayList<>();
+        this.repairNeeded = new ArrayList<>();
     }
 
     public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, Surface surface){
