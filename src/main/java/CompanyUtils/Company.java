@@ -25,15 +25,6 @@ public class Company {
     private CommunicationModuleReciver communicationModuleReciver;
     private PriceCalculator priceCalculator;
     private float robotAdjustmentFactor;
-
-    public CompanyRegistry getCompanyRegistry() {
-        return companyRegistry;
-    }
-
-    public void setCompanyRegistry(CompanyRegistry companyRegistry) {
-        this.companyRegistry = companyRegistry;
-    }
-
     private CompanyRegistry companyRegistry;
 
     public Company() {
@@ -45,17 +36,6 @@ public class Company {
         this.orders = new ArrayList<>();
         this.companyRegistry= new CompanyRegistry();
     }
-
-
-    public void increaseComplexRegistry(){
-        companyRegistry.increaseNumberOfComplex();
-    }
-
-
-    public void increaseSimpleRegistry(){
-        companyRegistry.increasNumberOfSimplex();
-    }
-
 
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
         this.robotAssigner = new RobotAssigner();
@@ -98,12 +78,6 @@ public class Company {
         }
     }
 
-<<<<<<< Updated upstream
-=======
-    public int getSimpleOrdersContator() {
-        return simpleOrdersContator;
-    }
-
     public void createOrUpdateClient(Order order){
         ClientOrders clientRegister =findClient(order);
 
@@ -122,13 +96,7 @@ public class Company {
                 (clientOrders -> order.getClient().getDni() == clientOrders.client.getDni()));
         return a.findFirst().orElse(null);
     }
-    
-    public int getComplexOrdersContator() {
-        return complexOrdersContator;
-    }
 
-
->>>>>>> Stashed changes
     public void setPriceCalculator(PriceCalculator priceCalculator) {
         this.priceCalculator = priceCalculator;
     }
@@ -140,6 +108,19 @@ public class Company {
     public CompanyRegistry getCompanyRegistry() {
         return this.companyRegistry;
     }
+
+    public void setCompanyRegistry(CompanyRegistry companyRegistry) {
+        this.companyRegistry = companyRegistry;
+    }
+
+    public void increaseComplexRegistry(){
+        companyRegistry.increaseNumberOfComplex();
+    }
+
+    public void increaseSimpleRegistry(){
+        companyRegistry.increasNumberOfSimplex();
+    }
+
     public void setRobotAdjustmentFactor(float robotAdjustmentFactor) {
         this.robotAdjustmentFactor = robotAdjustmentFactor;
     }
