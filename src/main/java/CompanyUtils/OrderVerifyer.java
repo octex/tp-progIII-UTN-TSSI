@@ -6,8 +6,8 @@ import Order.Order;
 import Client.Client;
 
 
-public class OrderVerifyer implements PaymentModule{
-
+public class OrderVerifyer
+{
     public void verifyOrder(Order order) throws Exception{
         try
         {
@@ -18,21 +18,5 @@ public class OrderVerifyer implements PaymentModule{
         {
             throw e;
         }
-    }
-
-    private Robot GetRequiredRobot(Order order)
-    {
-        return null;
-    }
-
-    private Robot GetRequiredToPlatinumRobot(Order order)
-    {
-        return null;
-    }
-
-
-    @Override
-    public float getDebt(Client client) {
-        return 0;
     }
 }

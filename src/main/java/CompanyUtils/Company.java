@@ -7,9 +7,12 @@ import CompanyUtils.RobotAssignerExceptions.*;
 import Order.Order;
 import Robots.Robot;
 import Robots.RobotRegister;
+import Services.Exeptions.OverpassesDebtExeption;
 
 import java.util.*;
 import java.util.stream.Stream;
+
+import static org.mockito.Mockito.mock;
 
 
 public class Company {
@@ -23,6 +26,7 @@ public class Company {
     private PriceCalculator priceCalculator;
     private float robotAdjustmentFactor;
     private CompanyRegistry companyRegistry;
+    private PaymentModule paymentModule;
 
     public Company() {
         this.robotAssigner = new RobotAssigner();
@@ -32,6 +36,7 @@ public class Company {
         this.clients = new ArrayList<>();
         this.orders = new ArrayList<>();
         this.companyRegistry= new CompanyRegistry();
+        this.paymentModule = mock(PaymentModule.class);
     }
 
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
@@ -45,7 +50,8 @@ public class Company {
         this.clients.addAll(clients);
         this.orders.addAll(orders);
         this.robotAdjustmentFactor = 1;
-        companyRegistry= new CompanyRegistry();
+        this.companyRegistry = new CompanyRegistry();
+        this.paymentModule = mock(PaymentModule.class);
     }
 
     public CommunicationModuleReciver getCommunicationModuleReciver(){
@@ -62,6 +68,12 @@ public class Company {
         {
             orderVerifyer.verifyOrder(order);
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
+            paymentModule.checkClientsDebt(order.getClient());
+        }
+        catch (OverpassesDebtExeption e)
+        {
+            System.out.println("Error de deuda.");
+            printExceptionReasonAndThrowBack(e);
         }
         catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption e)
         {
@@ -138,5 +150,9 @@ public class Company {
         System.out.println("Detalle: ");
         System.out.println(e.toString());
         throw e;
+    }
+
+    public PaymentModule getPaymentModule() {
+        return paymentModule;
     }
 }

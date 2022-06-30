@@ -6,6 +6,7 @@ import Order.FactoryCleanType.CleanType;
 import Order.FactoryCleanType.SimpleClean;
 import Robots.*;
 import Services.Classic;
+import Services.Exeptions.OverpassesDebtExeption;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import Order.*;
@@ -16,10 +17,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 class CompanyTest
 {
     Company company;
+    PaymentModule paymentModule;
 
     @BeforeEach
     void setUp()
@@ -44,6 +47,7 @@ class CompanyTest
         robots.add(k311yfl);
 
         company = new Company(robots, new ArrayList<>(), new ArrayList<>());
+        paymentModule = company.getPaymentModule();
     }
 
     @Test
