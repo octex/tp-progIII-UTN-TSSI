@@ -226,7 +226,9 @@ class OrderVerifyer{
     - boolean validateService(Order order);
 }
 
-Interface PaymentModule{
+Interface PaymentModule
+{
+    + void checkClientsDebt(Client client)
 }
 
 
