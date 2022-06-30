@@ -6,6 +6,7 @@ import Order.FactoryCleanType.SimpleClean;
 import Robots.*;
 import Services.Classic;
 import Services.Economic;
+import Services.Platinum;
 import Services.Service;
 import Order.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,77 +54,56 @@ class RobotAssignerTest {
         robots.add(so31rty);
         robots.add(k311yfl);
 
-        RobotRegister so31rtyOrders = new RobotRegister(so31rty);
-        RobotRegister k311YfuOrders = new RobotRegister(k311Yfu);
-        RobotRegister k311YaOrders = new RobotRegister(k311Ya);
-
-        for (int i = 0; i < 3; i++)
-        {
-            so31rtyOrders.AddOrder(testOrder);
-        }
-
-        for (int i = 0; i < 5; i++)
-        {
-            k311YaOrders.AddOrder(testOrder);
-        }
-
-        for(int i = 0; i < 10; i++)
-        {
-            k311YfuOrders.AddOrder(testOrder);
-        }
-
-        robotOrders.add(so31rtyOrders);
-        robotOrders.add(k311YfuOrders);
-        robotOrders.add(k311YaOrders);
+        RobotRegister k311yflOrders = new RobotRegister(k311yfl);
+        k311yflOrders.AddOrder(testOrder);
+        robotOrders.add(k311yflOrders);
     }
 
-    private RobotRegister GetRobotRegistry(Robot robot)
+    private boolean hasRobot(Order order, Robot expectedRobot)
     {
-        for (RobotRegister robotOrder : robotOrders)
+        for(Robot robot : order.getRobots())
         {
-            if (robotOrder.GetRobot().equals(robot))
+            if (robot.equals(expectedRobot))
             {
-                return robotOrder;
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     @Test
-    void AssignRobotForClassicWithOrder()
+    void AssignTwoRobotsForAClassicClient()
     {
-        Service classicService = new Classic();
-        Client classicClient = new Client(222222222, classicService, null);
-        Order economicOrder = new Order(classicClient, new ComplexClean(),
+        testClient = new Client(43085477, new Classic(), null);
+        Order testOrder = new Order(testClient, new SimpleClean(),
                 null, true, Surface.PISOS);
-        economicOrder.setWantsPolish(false);
+        testOrder.setWantsPolish(false);
 
+        assertDoesNotThrow(() ->robotAssigner.AssignRobot(testOrder, robots, robotOrders));
+        assertTrue(hasRobot(testOrder, k311yfl));
+        assertTrue(hasRobot(testOrder, so31rty));
     }
 
     @Test
-    void AssignRobotForEconomicService()
+    void AssignTwoRobotsForAClassicWithPolish()
     {
-        Service economicService = new Economic();
-        Client economicClient = new Client(11111111, economicService, null);
-        Order economicOrder = new Order(economicClient, new SimpleClean(),
+        testClient = new Client(43085477, new Classic(), null);
+        Order testOrder = new Order(testClient, new SimpleClean(),
                 null, false, Surface.PISOS);
-        economicOrder.setWantsPolish(false);
-        assertDoesNotThrow(() -> robotAssigner.AssignRobot(economicOrder, robots, robotOrders));
-        assertNotNull(GetRobotRegistry(k311yfl));
+        testOrder.setWantsPolish(true);
+        assertDoesNotThrow(() ->robotAssigner.AssignRobot(testOrder, robots, robotOrders));
+        assertTrue(hasRobot(testOrder, k311yfl));
+        assertTrue(hasRobot(testOrder, k311Yfu));
     }
 
     @Test
-    void AssignRobotForClassicService()
+    void AssignSingleRobotForPlatinum()
     {
-        Service classicService = new Classic();
-        Client classicClient = new Client(222222222, classicService, null);
-        Order economicOrder = new Order(classicClient, new ComplexClean(),
-                null, false, Surface.MUEBLES);
-    }
-
-    @Test
-    void AssignRobotForPlatinumClient()
-    {
-
+        testClient = new Client(43085477, new Platinum(), null);
+        Order testOrder = new Order(testClient, new SimpleClean(),
+                null, false, Surface.PISOS);
+        testOrder.setWantsPolish(false);
+        assertDoesNotThrow(() ->robotAssigner.AssignRobot(testOrder, robots, robotOrders));
+        assertTrue(hasRobot(testOrder, k311Ya));
     }
 }
