@@ -51,14 +51,6 @@ public class Company {
         this.registryPrinter = new RegistryPrinter(companyRegistry);
     }
 
-    public CommunicationModuleReciver getCommunicationModuleReciver(){
-        return this.communicationModuleReciver;
-    }
-
-    public PriceCalculator getPriceCalculator(){
-        return this.priceCalculator;
-    }
-
     public void recieveOrder(Order order) throws Exception
     {
         try
@@ -161,5 +153,13 @@ public class Company {
 
     public RegistryPrinter getRegistryPrinter() {
         return this.registryPrinter;
+    }
+
+    public CommunicationModuleReciver getCommunicationModuleReciver(){
+        return this.communicationModuleReciver;
+    }
+
+    public PriceCalculator getPriceCalculator(){
+        return this.priceCalculator;
     }
 }
