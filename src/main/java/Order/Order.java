@@ -4,6 +4,7 @@ import Client.Client;
 import Client.Location;
 import CompanyUtils.Employees.Specialist;
 import Order.FactoryCleanType.CleanData;
+import Order.FactoryCleanType.CleanType;
 import Order.Repairs.Repair;
 import Robots.Robot;
 import Robots.Surface;
@@ -23,13 +24,6 @@ public class Order
     private ArrayList<Repair> repairNeeded;
     private CleanData cleanData;
     private float orderPrice;
-
-    public Order()
-    {
-        this.robots = new ArrayList<>();
-        this.specialistsAssigned =new ArrayList<>();
-        this.repairNeeded = new ArrayList<>();
-    }
 
     public Order(Client client, CleanData cleanData, Location location,
                  boolean wantsOrder, boolean wantsPolish, Surface surface)
@@ -131,6 +125,7 @@ public class Order
     public void assignSpecialist(Specialist specialist){
         this.specialistsAssigned.add(specialist);
     }
+
     public void setRepairsNeeded(ArrayList<Repair> repairNeeded) {
         this.repairNeeded = repairNeeded;
     }
