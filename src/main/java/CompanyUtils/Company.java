@@ -65,16 +65,25 @@ public class Company {
             orderVerifyer.verifyOrder(order);
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
         }
-
-        catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption e){
-            System.out.println("No se pudo verificar la orden.");
+        catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption e)
+        {
+            System.out.println("Error verificando el servicio del cliente.");
+            printExceptionReason(e);
         }
-        catch (CouldNotVerifyOrderException.HasNoCreditsExeption e){
+        catch (CouldNotVerifyOrderException.HasNoCreditsExeption e)
+        {
+            System.out.println("Error de pago.");
+            printExceptionReason(e);
+        }
+        catch (CouldNotAssignRobotException e)
+        {
             System.out.println("No se pudo asignar el robot a la orden.");
-        } catch (CouldNotAssignRobotException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+            printExceptionReason(e);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error inesperado procesando el pedido.");
+            printExceptionReason(e);
         }
     }
 
@@ -123,5 +132,11 @@ public class Company {
 
     public void setRobotAdjustmentFactor(float robotAdjustmentFactor) {
         this.robotAdjustmentFactor = robotAdjustmentFactor;
+    }
+
+    private void printExceptionReason(Exception e)
+    {
+        System.out.println("Detalle: ");
+        e.printStackTrace();
     }
 }
