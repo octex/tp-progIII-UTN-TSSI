@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import Order.*;
 import Client.*;
 import Services.*;
-import CompanyUtils.Company;
 //import org.mockito.internal.matchers.Or;
 
 import java.util.Collection;
@@ -34,7 +33,7 @@ class CompanyTest {
         Order order = new Order(client, cleanType, location, true, Surface.PISOS);
 
         assertThrows(CouldNotCreateOrderException.class , () -> {
-            company.tryToAssign(order);
+            company.recieveOrder(order);
         });
     }
 
@@ -47,7 +46,7 @@ class CompanyTest {
         Order order = new Order(client, cleanType, location, true, Surface.PISOS);
 
         assertThrows(CouldNotCreateOrderException.class , () -> {
-            company.tryToAssign(order);
+            company.recieveOrder(order);
         });
     }
 
@@ -60,7 +59,7 @@ class CompanyTest {
         Order order = new Order(client, cleanType, location, true, Surface.PISOS);
 
         assertThrows(CouldNotCreateOrderException.class , () -> {
-            company.tryToAssign(order);
+            company.recieveOrder(order);
         });
     }
 

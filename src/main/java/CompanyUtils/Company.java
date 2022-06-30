@@ -35,7 +35,7 @@ public class Company {
         this.clients.addAll(clients);
         this.orders.addAll(orders);
         this.robotAssigner = new RobotAssigner();
-        orderVerifyer = new OrderVerifyer();
+        this.orderVerifyer = new OrderVerifyer();
         this.simpleOrdersContator = 0;
         this.complexOrdersContator = 0;
         this.robotAdjustmentFactor = 1;
