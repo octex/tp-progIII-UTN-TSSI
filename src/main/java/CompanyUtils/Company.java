@@ -44,7 +44,7 @@ public class Company {
         this.robotAdjustmentFactor = 1;
         this.companyRegistry = new CompanyRegistry();
         this.paymentModule = mock(PaymentModule.class);
-        this.registryPrinter=new RegistryPrinter(companyRegistry);
+        this.registryPrinter = new RegistryPrinter(companyRegistry);
     }
 
     public CommunicationModuleReciver getCommunicationModuleReciver(){
@@ -86,8 +86,8 @@ public class Company {
         catch (Exception e)
         {
             System.out.println("Error inesperado procesando el pedido.");
-            printExceptionReasonAndThrowBack(e);
             e.printStackTrace();
+            printExceptionReasonAndThrowBack(e);
         }
     }
 

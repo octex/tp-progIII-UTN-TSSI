@@ -13,9 +13,6 @@ public class CustomerOrderTest {
     public Company company;
     public Order order = new Order();
 
-
-
-
     @BeforeEach
     void setUp() {
         client = new Client(1, new Economic(), null);
