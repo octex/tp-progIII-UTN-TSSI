@@ -3,6 +3,7 @@ package CompanyUtils;
 import Client.Location;
 import CompanyUtils.Employees.*;
 import CompanyUtils.OrderVerifyerExceptions.CouldNotVerifyOrderException;
+import CompanyUtils.PriceUtils.PriceCalculator;
 import Order.FactoryCleanType.CleanData;
 import Order.FactoryCleanType.ComplexClean;
 import Order.FactoryCleanType.SimpleClean;
@@ -272,5 +273,36 @@ class CompanyTest
         testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
         assertDoesNotThrow(() -> testClient.sendOrder(company, testOrder));
         assertInstanceOf(ComplexClean.class, testOrder.getCleanData().getCleanType());
+    }
+
+    @Test
+    void getCompanySetOrderPriceOk() throws Exception {
+        SpecialistAssigner specialistAssigner = new SpecialistAssigner();
+        PriceCalculator priceCalculator =new PriceCalculator();
+        priceCalculator.setStrategy(new SimpleClean());
+        float subTotal;
+        testService = new Classic();
+        testClient.setService(testService);
+        testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
+        repairs.add(new ElectricalRepair(1));
+        testOrder.setRepairsNeeded(repairs);
+        testOrder.addRobot(new K311Y_fl());
+
+        Specialist MaximoMagaldi =new Electritian(5,"MaximoMagaldi");
+        Specialist OctavioGurnik =new Gasist(5,"MaximoMagaldi");
+        Specialist BrunoMirocznyk =new Electritian(5,"MaximoMagaldi");
+
+        SpecialistRegister.getInstance().addSpecialist(MaximoMagaldi);
+        SpecialistRegister.getInstance().addSpecialist(OctavioGurnik);
+        SpecialistRegister.getInstance().addSpecialist(BrunoMirocznyk);
+
+        try {
+            company.recieveOrder(testOrder);
+            System.out.println();
+
+        } catch (NoHayEspecialistaExepcion e) {
+            System.out.println("a");
+        }
+        assertEquals((int)company.getCompanyRegistry().getClientsAgenda().get(0).clientOrders.get(0).getOrderPrice(),6700);
     }
 }

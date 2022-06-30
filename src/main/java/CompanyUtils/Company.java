@@ -69,6 +69,8 @@ public class Company {
             specialistAssigner.iterateOrder(order);
             priceCalculator.setStrategy(order.getCleanData().getCleanType());
             order.setOrderPrice(priceCalculator.getFinalPrice(order));
+            createOrUpdateClient(order);
+
         }
         catch (OverpassesDebtExeption e)
         {
