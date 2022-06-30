@@ -69,7 +69,7 @@ public class Order {
     }
 
     public boolean doesWantOrder() {
-        return wantsOrder;
+        return this.wantsOrder;
     }
 
     public void setWantsOrder(boolean wantsOrder) {

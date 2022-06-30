@@ -16,7 +16,6 @@ public class OrderVerifyer implements PaymentModule{
         }
         catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption | CouldNotVerifyOrderException.HasNoCreditsExeption e)
         {
-            System.out.println(e.toString());
             throw e;
         }
     }

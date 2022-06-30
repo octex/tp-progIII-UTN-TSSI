@@ -20,7 +20,7 @@ public class Client {
         this.locations = locations;
     };
 
-    public void sendOrder(Company company, Order order)
+    public void sendOrder(Company company, Order order) throws Exception
     {
         company.recieveOrder(order);
     }

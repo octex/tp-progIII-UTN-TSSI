@@ -1,15 +1,12 @@
 package CompanyUtils;
 
 import Client.Client;
-import CompanyUtils.Employees.Specialist;
-import CompanyUtils.Employees.SpecialistRegister;
 import CompanyUtils.OrderVerifyerExceptions.*;
 import CompanyUtils.PriceUtils.PriceCalculator;
 import CompanyUtils.RobotAssignerExceptions.*;
 import Order.Order;
 import Robots.Robot;
 import Robots.RobotRegister;
-import org.mockito.internal.matchers.Or;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -59,7 +56,8 @@ public class Company {
         return this.priceCalculator;
     }
 
-    public void recieveOrder(Order order){
+    public void recieveOrder(Order order) throws Exception
+    {
         try
         {
             orderVerifyer.verifyOrder(order);
@@ -68,22 +66,23 @@ public class Company {
         catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption e)
         {
             System.out.println("Error verificando el servicio del cliente.");
-            printExceptionReason(e);
+            printExceptionReasonAndThrowBack(e);
         }
         catch (CouldNotVerifyOrderException.HasNoCreditsExeption e)
         {
             System.out.println("Error de pago.");
-            printExceptionReason(e);
+            printExceptionReasonAndThrowBack(e);
         }
         catch (CouldNotAssignRobotException e)
         {
             System.out.println("No se pudo asignar el robot a la orden.");
-            printExceptionReason(e);
+            printExceptionReasonAndThrowBack(e);
         }
         catch (Exception e)
         {
             System.out.println("Error inesperado procesando el pedido.");
-            printExceptionReason(e);
+            printExceptionReasonAndThrowBack(e);
+            e.printStackTrace();
         }
     }
 
@@ -134,9 +133,10 @@ public class Company {
         this.robotAdjustmentFactor = robotAdjustmentFactor;
     }
 
-    private void printExceptionReason(Exception e)
+    private void printExceptionReasonAndThrowBack(Exception e) throws Exception
     {
         System.out.println("Detalle: ");
-        e.printStackTrace();
+        System.out.println(e.toString());
+        throw e;
     }
 }

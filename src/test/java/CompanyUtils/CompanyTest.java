@@ -55,20 +55,20 @@ class CompanyTest
         Order order = new Order(client, cleanType, location, true, Surface.PISOS);
 
         assertThrows(CouldNotVerifyOrderException.class , () -> {
-            company.recieveOrder(order);
+            client.sendOrder(company, order);
         });
     }
 
     @Test
     void tryToAssignRobotToEconomicThrowCouldNotVerifyOrderException() {
-        CleanType cleanType =   new SimpleClean();
+        CleanType cleanType = new SimpleClean();
         Location location = new Location("Buenos Aires", "Olivos", "Maipu 233");
         Service service = new Economic();
         Client client = new Client(111111111, service, Collections.singleton(location));
         Order order = new Order(client, cleanType, location, true, Surface.PISOS);
 
-        assertThrows(CouldNotVerifyOrderException.class , () -> {
-            company.recieveOrder(order);
+        assertThrows(CouldNotVerifyOrderException.ServiceNotIncludedExeption.class , () -> {
+            client.sendOrder(company, order);
         });
     }
 
@@ -81,7 +81,7 @@ class CompanyTest
         Order order = new Order(client, cleanType, location, true, Surface.PISOS);
 
         assertThrows(CouldNotVerifyOrderException.class , () -> {
-            company.recieveOrder(order);
+            client.sendOrder(company, order);
         });
     }
 }
