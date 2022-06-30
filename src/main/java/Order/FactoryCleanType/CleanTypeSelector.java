@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class CleanTypeSelector {
 
     private static CleanTypeSelector instance;
-    private Company company;
+    private final Company company;
 
     private CleanTypeSelector(Company company)
     {
@@ -41,7 +41,7 @@ public class CleanTypeSelector {
         return (int) daysDifference;
     }
     protected boolean recentlyCleaned(String currentDate,String lastCleanDate){
-        return daysFromLastClean(currentDate, lastCleanDate) < 15;
+        return daysFromLastClean(currentDate, lastCleanDate) <= 15;
     }
 
     protected boolean doesNotContainMud(HashSet<String> residuos){
@@ -51,17 +51,20 @@ public class CleanTypeSelector {
 
     public CleanType setCleanStrategy(CleanData cleanData) {
         String currentDate = LocalDate.now().toString();
-        if((hasJustPolvoOrEmpty(cleanData.residuos)||
-                (doesNotContainMud(cleanData.residuos)) && numberOfPetsSimple(cleanData.cantMascotas))||
-                (recentlyCleaned(currentDate,cleanData.lastCleanDate)))
+        CleanType newCleanType;
+        if((hasJustPolvoOrEmpty(cleanData.residuos))||
+                ((doesNotContainMud(cleanData.residuos)) && numberOfPetsSimple(cleanData.cantMascotas)) ||
+                (recentlyCleaned(currentDate, cleanData.lastCleanDate)))
         {
-            this.company.getPriceCalculator().setStrategy(new SimpleClean());
             this.company.getCompanyRegistry().increasNumberOfSimplex();
-            return new SimpleClean();
+            newCleanType = new SimpleClean();
+            cleanData.setCleanType(newCleanType);
+            return newCleanType;
         }
-        this.company.getPriceCalculator().setStrategy(new SimpleClean());
         this.company.getCompanyRegistry().increaseNumberOfComplex();
-        return new ComplexClean(company.getRobotAdjustmentFactor());
+        newCleanType = new ComplexClean(company.getRobotAdjustmentFactor());
+        cleanData.setCleanType(newCleanType);
+        return newCleanType;
     }
 
     public Company getCompany() {

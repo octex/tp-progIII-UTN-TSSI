@@ -2,10 +2,12 @@ package Order.FactoryCleanType;
 
 import java.util.HashSet;
 
-public class CleanData {
+public class CleanData
+{
     String lastCleanDate;
     HashSet<String> residuos;
     int cantMascotas;
+    private CleanType cleanType;
 
     public CleanData(String lastCleanDate, HashSet<String> residuos, int cantMascotas) {
         this.lastCleanDate = lastCleanDate;
@@ -35,5 +37,15 @@ public class CleanData {
 
     public void setCantMascotas(int cantMascotas) {
         this.cantMascotas = cantMascotas;
+    }
+
+    public void setCleanType(CleanType cleanType)
+    {
+        this.cleanType = cleanType;
+    }
+
+    public CleanType getCleanType()
+    {
+        return cleanType;
     }
 }
