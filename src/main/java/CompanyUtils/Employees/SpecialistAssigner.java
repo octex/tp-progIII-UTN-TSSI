@@ -19,7 +19,9 @@ public class SpecialistAssigner
         order.getRepairsNeeded().forEach(repair ->
                 {
                     try {
+                        Specialist specialist = getRequiredSpecialist(repair);
                         order.assignSpecialist(getRequiredSpecialist(repair));
+                        specialist.setRepair(repair);
 
                     } catch (NoHayEspecialistaExepcion e) {
                         System.out.println(e.getMessage());

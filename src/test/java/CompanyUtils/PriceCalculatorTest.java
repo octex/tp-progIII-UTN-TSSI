@@ -12,6 +12,7 @@ import Robots.Surface;
 import CompanyUtils.Employees.Electritian;
 import CompanyUtils.Employees.Gasist;
 import CompanyUtils.Employees.Specialist;
+import CompanyUtils.Employees.SpecialistAssigner;
 import CompanyUtils.PriceUtils.*;
 import Services.Classic;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,6 +48,7 @@ public class PriceCalculatorTest {
     ArrayList<Specialist> specialists;
     LocalDate today;
     LocalDate fifteenDaysAgo;
+    SpecialistAssigner specialistAssigner;
 
 
     @BeforeEach
@@ -111,6 +113,12 @@ public class PriceCalculatorTest {
         testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
         repairs.add(new ElectricalRepair(1));
         testOrder.setRepairsNeeded(repairs);
+
+        try {
+            specialistAssigner.iterateOrder(testOrder);
+        } catch (Exception e) {
+        }
+        
 
         subTotal = priceCalculator.getFinalPrice(testOrder);
 
