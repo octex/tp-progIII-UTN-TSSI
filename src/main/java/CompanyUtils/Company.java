@@ -1,6 +1,7 @@
 package CompanyUtils;
 
 import Client.Client;
+import CompanyUtils.Employees.NoHayEspecialistaExepcion;
 import CompanyUtils.Employees.SpecialistAssigner;
 import CompanyUtils.OrderVerifyerExceptions.*;
 import CompanyUtils.PriceUtils.PriceCalculator;
@@ -85,6 +86,11 @@ public class Company {
         catch (CouldNotAssignRobotException e)
         {
             System.out.println("No se pudo asignar el robot a la orden.");
+            printExceptionReasonAndThrowBack(e);
+        }
+        catch (NoHayEspecialistaExepcion e)
+        {
+            System.out.println("No se pudo procesar el pedido de reparacion.");
             printExceptionReasonAndThrowBack(e);
         }
         catch (Exception e)
