@@ -8,6 +8,7 @@ import Order.FactoryCleanType.CleanType;
 import Order.Repairs.Repair;
 import Robots.Robot;
 import Robots.Surface;
+import org.mockito.internal.matchers.Or;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,13 @@ public class Order
     private ArrayList<Repair> repairNeeded;
     private CleanData cleanData;
     private float orderPrice;
+
+    public Order()
+    {
+        this.robots = new ArrayList<>();
+        this.specialistsAssigned =new ArrayList<>();
+        this.repairNeeded = new ArrayList<>();
+    }
 
     public Order(Client client, CleanData cleanData, Location location,
                  boolean wantsOrder, boolean wantsPolish, Surface surface)

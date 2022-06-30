@@ -41,7 +41,7 @@ public class CleanTypeSelector {
         return (int) daysDifference;
     }
     protected boolean recentlyCleaned(String currentDate,String lastCleanDate){
-        return daysFromLastClean(currentDate, lastCleanDate) < 15;
+        return daysFromLastClean(currentDate, lastCleanDate) <= 15;
     }
 
     protected boolean doesNotContainMud(HashSet<String> residuos){
@@ -52,9 +52,9 @@ public class CleanTypeSelector {
     public CleanType setCleanStrategy(CleanData cleanData) {
         String currentDate = LocalDate.now().toString();
         CleanType newCleanType;
-        if((hasJustPolvoOrEmpty(cleanData.residuos)||
-                (doesNotContainMud(cleanData.residuos)) && numberOfPetsSimple(cleanData.cantMascotas))||
-                (recentlyCleaned(currentDate,cleanData.lastCleanDate)))
+        if((hasJustPolvoOrEmpty(cleanData.residuos))||
+                ((doesNotContainMud(cleanData.residuos)) && numberOfPetsSimple(cleanData.cantMascotas)) ||
+                (recentlyCleaned(currentDate, cleanData.lastCleanDate)))
         {
             this.company.getCompanyRegistry().increasNumberOfSimplex();
             newCleanType = new SimpleClean();
