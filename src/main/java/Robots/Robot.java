@@ -33,4 +33,21 @@ public abstract class Robot {
         return surfaces.contains(surface);
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (!(o instanceof Robot oRobot))
+        {
+            return false;
+        }
+        return oRobot.toString().equals(this.toString());
+    }
+
+    @Override
+    public int hashCode()
+    {
+        float v = costPH * costPH;
+        return (int)v;
+    }
+
 }

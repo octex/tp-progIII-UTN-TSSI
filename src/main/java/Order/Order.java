@@ -21,7 +21,7 @@ public class Order {
     private Surface surface;
     private Client client;
     private ArrayList<Robot> robots;
-    private ArrayList<Specialist> specialistsAssigned =new ArrayList<Specialist>();
+    private ArrayList<Specialist> specialistsAssigned;
     private Specialist specialist;
     private ArrayList<Repair> repairNeeded;
     private CleanData cleanData;
@@ -41,6 +41,8 @@ public class Order {
         this.location = location;
         this.wantsOrder = wantsOrder;
         this.surface=surface;
+        this.robots = new ArrayList<>();
+        this.specialistsAssigned =new ArrayList<>();
     }
     public void setCleanData(CleanData cleanData) {
         this.cleanData = cleanData;
