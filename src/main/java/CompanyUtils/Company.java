@@ -24,13 +24,13 @@ public class Company {
     private final PaymentModule paymentModule;
     private final RegistryPrinter registryPrinter;
     private final SpecialistAssigner specialistAssigner;
+    private PriceCalculator priceCalculator;
+    private CompanyRegistry companyRegistry;
     private ArrayList<Client> clients;
     private ArrayList<Order> orders;
     private ArrayList<RobotRegister> orderPerRobot;
     private CommunicationModuleReciver communicationModuleReciver;
-    private PriceCalculator priceCalculator;
     private float robotAdjustmentFactor;
-    private CompanyRegistry companyRegistry;
 
 
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders)
@@ -38,6 +38,7 @@ public class Company {
         this.robotAssigner = new RobotAssigner();
         this.specialistAssigner = new SpecialistAssigner();
         this.orderVerifyer = new OrderVerifyer();
+        this.priceCalculator = new PriceCalculator();
         this.robots = new ArrayList<>();
         this.orderPerRobot = new ArrayList<>();
         this.clients = new ArrayList<>();
