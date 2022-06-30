@@ -125,6 +125,11 @@ public class Company {
         return this.robotAdjustmentFactor;
     }
 
+    public SpecialistAssigner getSpecialistAssigner()
+    {
+        return specialistAssigner;
+    }
+
     public CompanyRegistry getCompanyRegistry() {
         return this.companyRegistry;
     }

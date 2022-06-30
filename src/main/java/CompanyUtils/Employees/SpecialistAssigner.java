@@ -3,6 +3,8 @@ package CompanyUtils.Employees;
 import Order.Order;
 import Order.Repairs.Repair;
 
+import java.util.ArrayList;
+
 public class SpecialistAssigner
 {
     private final SpecialistRegister specialistRegister;
@@ -29,6 +31,22 @@ public class SpecialistAssigner
             throw new NoHayEspecialistaExepcion("Falta un especialista");
         }
     }
+
+    public void setSpecialistRegister(ArrayList<Specialist> specialists)
+    {
+        specialistRegister.setSpecialists(specialists);
+    }
+
+    public ArrayList<Specialist> getSpecialists()
+    {
+        return specialistRegister.getSpecialists();
+    }
+
+    public void clearSpecialistRegister()
+    {
+        specialistRegister.clearSpecialist();
+    }
+
     public Specialist getRequiredSpecialist(Repair repair) throws NoHayEspecialistaExepcion
     {
         Specialist specialistToAssign = specialistRegister.getSpecialists().stream().filter(specialist -> specialist.canHandle(repair)).findFirst().orElse(null);

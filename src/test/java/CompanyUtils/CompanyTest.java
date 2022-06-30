@@ -1,8 +1,12 @@
 package CompanyUtils;
 
 import Client.Location;
+import CompanyUtils.Employees.*;
 import CompanyUtils.OrderVerifyerExceptions.CouldNotVerifyOrderException;
 import Order.FactoryCleanType.CleanData;
+import Order.Repairs.ElectricalRepair;
+import Order.Repairs.GasRepair;
+import Order.Repairs.Repair;
 import Robots.*;
 import Services.Classic;
 import Services.Exeptions.ClassicOverpassesDebtExeption;
@@ -31,6 +35,8 @@ class CompanyTest
     Service testService;
     CleanData testCleanData;
     Order testOrder;
+    ArrayList<Repair> repairs;
+    ArrayList<Specialist> specialists;
 
     @BeforeEach
     void setUp()
@@ -55,13 +61,23 @@ class CompanyTest
         robots.add(k311yfl);
 
         company = new Company(robots, new ArrayList<>(), new ArrayList<>());
+        specialists = new ArrayList<>();
         paymentModule = company.getPaymentModule();
         Mockito.reset(paymentModule);
+
+        Specialist electricalSpecialist = new Electritian(1f, "Nikola Tesla");
+        Specialist gasSpecialist = new Gasist(1f, "Juan Carlos Perez Garay");
+
+        specialists.add(electricalSpecialist);
+        specialists.add(gasSpecialist);
+
+        company.getSpecialistAssigner().setSpecialistRegister(specialists);
 
         location = new Location("Buenos Aires", "Olivos", "Maipu 2300");
         testClient = new Client(111111111, testService, Collections.singleton(location));
         testService = new Economic();
         testCleanData = new CleanData(LocalDate.now().toString(), new HashSet<>(), 1);
+        repairs = new ArrayList<>();
     }
 
     @Test
@@ -158,25 +174,49 @@ class CompanyTest
     @Test
     void tryToSendOrderWithElectricalRepairOk()
     {
-
+        testService = new Classic();
+        testClient.setService(testService);
+        testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
+        repairs.add(new ElectricalRepair(1));
+        testOrder.setRepairsNeeded(repairs);
+        assertDoesNotThrow(() -> testClient.sendOrder(company, testOrder));
     }
 
     @Test
     void tryToSendOrderWithGasRepairOk()
     {
-
+        testService = new Classic();
+        testClient.setService(testService);
+        testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
+        repairs.add(new GasRepair(1));
+        testOrder.setRepairsNeeded(repairs);
+        assertDoesNotThrow(() -> testClient.sendOrder(company, testOrder));
     }
 
     @Test
     void tryToSendOrderWithElectricalRepairWithNoEmployeesAvailable()
     {
+        testService = new Classic();
+        testClient.setService(testService);
+        testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
+        repairs.add(new ElectricalRepair(1));
+        testOrder.setRepairsNeeded(repairs);
+        company.getSpecialistAssigner().clearSpecialistRegister();
 
+        assertThrows(NoHayEspecialistaExepcion.class, () -> testClient.sendOrder(company, testOrder));
     }
 
     @Test
     void tryToSendOrderWithGasRepairWithNoEmployeesAvailable()
     {
+        testService = new Classic();
+        testClient.setService(testService);
+        testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
+        repairs.add(new GasRepair(1));
+        testOrder.setRepairsNeeded(repairs);
+        company.getSpecialistAssigner().clearSpecialistRegister();
 
+        assertThrows(NoHayEspecialistaExepcion.class, () -> testClient.sendOrder(company, testOrder));
     }
 
     @Test
