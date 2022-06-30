@@ -49,7 +49,7 @@ public class CleanTypeSelector {
 
 
     public  CleanType setCleanStrategy(CleanData cleanData) {
-        String currentDate="2022-06-12";
+        String currentDate = LocalDate.now().toString();
         if((hasJustPolvoOrEmpty(cleanData.residuos)||
                 (doesNotContainMud(cleanData.residuos)) && numberOfPetsSimple(cleanData.cantMascotas))||
                 (recentlyCleaned(currentDate,cleanData.lastCleanDate))){
