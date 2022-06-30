@@ -40,6 +40,7 @@ class CompanyTest
     ArrayList<Repair> repairs;
     ArrayList<Specialist> specialists;
     LocalDate today;
+    LocalDate fifteenDaysAgo;
 
     @BeforeEach
     void setUp()
@@ -224,8 +225,36 @@ class CompanyTest
         testClient.setService(testService);
         HashSet<String> dirt = new HashSet<>();
         dirt.add("Barro");
-        testCleanData = new CleanData(LocalDate.now().toString(), dirt, 2);
+        fifteenDaysAgo = LocalDate.of(today.getYear(), today.getMonth(), today.getDayOfMonth() - 15);
+        testCleanData = new CleanData(fifteenDaysAgo.toString(), dirt, 2);
+        testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
+        assertDoesNotThrow(() -> testClient.sendOrder(company, testOrder));
+        assertInstanceOf(SimpleClean.class, testOrder.getCleanData().getCleanType());
+    }
 
+    @Test
+    void tryToSendOrderExpectsASimpleCleanBySurface()
+    {
+        testService = new Classic();
+        testClient.setService(testService);
+        HashSet<String> dirt = new HashSet<>();
+        dirt.add("Polvo");
+        testCleanData = new CleanData(LocalDate.now().toString(), dirt, 2);
+        fifteenDaysAgo = LocalDate.of(today.getYear(), today.getMonth(), today.getDayOfMonth() - 16);
+        testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
+        assertDoesNotThrow(() -> testClient.sendOrder(company, testOrder));
+        assertInstanceOf(SimpleClean.class, testOrder.getCleanData().getCleanType());
+    }
+
+    @Test
+    void tryToSendOrderExpectsASimpleCleanByPets()
+    {
+        testService = new Classic();
+        testClient.setService(testService);
+        HashSet<String> dirt = new HashSet<>();
+        dirt.add("Barro");
+        testCleanData = new CleanData(LocalDate.now().toString(), dirt, 1);
+        fifteenDaysAgo = LocalDate.of(today.getYear(), today.getMonth(), today.getDayOfMonth() - 16);
         testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
         assertDoesNotThrow(() -> testClient.sendOrder(company, testOrder));
         assertInstanceOf(SimpleClean.class, testOrder.getCleanData().getCleanType());
@@ -238,7 +267,6 @@ class CompanyTest
         testClient.setService(testService);
         HashSet<String> dirt = new HashSet<>();
         dirt.add("Barro");
-        LocalDate fifteenDaysAgo;
         fifteenDaysAgo = LocalDate.of(today.getYear(), today.getMonth(), today.getDayOfMonth() - 16);
         testCleanData = new CleanData(fifteenDaysAgo.toString(), dirt, 2);
         testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
