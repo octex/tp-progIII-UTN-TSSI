@@ -53,8 +53,9 @@ public class CleanTypeSelector {
         String currentDate = LocalDate.now().toString();
         if((hasJustPolvoOrEmpty(cleanData.residuos)||
                 (doesNotContainMud(cleanData.residuos)) && numberOfPetsSimple(cleanData.cantMascotas))||
-                (recentlyCleaned(currentDate,cleanData.lastCleanDate))){
-            getInstance(company).company.getPriceCalculator().setStrategy(new SimpleClean());
+                (recentlyCleaned(currentDate,cleanData.lastCleanDate)))
+        {
+            this.company.getPriceCalculator().setStrategy(new SimpleClean());
             this.company.getCompanyRegistry().increasNumberOfSimplex();
             return new SimpleClean();
         }
@@ -62,7 +63,6 @@ public class CleanTypeSelector {
         this.company.getCompanyRegistry().increaseNumberOfComplex();
         return new ComplexClean(company.getRobotAdjustmentFactor());
     }
-
 
     public Company getCompany() {
         return company;

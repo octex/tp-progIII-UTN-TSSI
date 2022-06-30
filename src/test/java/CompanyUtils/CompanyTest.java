@@ -177,4 +177,16 @@ class CompanyTest
     {
 
     }
+
+    @Test
+    void tryToSendOrderExpectsASimpleClean()
+    {
+
+    }
+
+    @Test
+    void tryToSendOrderExpectsAComplexClean()
+    {
+
+    }
 }

@@ -6,6 +6,7 @@ import CompanyUtils.Employees.SpecialistAssigner;
 import CompanyUtils.OrderVerifyerExceptions.*;
 import CompanyUtils.PriceUtils.PriceCalculator;
 import CompanyUtils.RobotAssignerExceptions.*;
+import Order.FactoryCleanType.CleanTypeSelector;
 import Order.Order;
 import Robots.Robot;
 import Robots.RobotRegister;
@@ -24,6 +25,7 @@ public class Company {
     private final PaymentModule paymentModule;
     private final RegistryPrinter registryPrinter;
     private final SpecialistAssigner specialistAssigner;
+    private final CleanTypeSelector cleanTypeSelector;
     private PriceCalculator priceCalculator;
     private CompanyRegistry companyRegistry;
     private ArrayList<Client> clients;
@@ -38,6 +40,7 @@ public class Company {
         this.robotAssigner = new RobotAssigner();
         this.specialistAssigner = new SpecialistAssigner();
         this.orderVerifyer = new OrderVerifyer();
+        this.cleanTypeSelector = CleanTypeSelector.getInstance(this);
         this.priceCalculator = new PriceCalculator();
         this.robots = new ArrayList<>();
         this.orderPerRobot = new ArrayList<>();
@@ -58,6 +61,7 @@ public class Company {
         {
             paymentModule.checkClientsDebt(order.getClient());
             orderVerifyer.verifyOrder(order);
+            cleanTypeSelector.setCleanStrategy(order.getCleanData());
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
             specialistAssigner.iterateOrder(order);
         }
