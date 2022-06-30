@@ -6,6 +6,8 @@ import Services.Economic;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerOrderTest {
@@ -16,6 +18,7 @@ public class CustomerOrderTest {
     @BeforeEach
     void setUp() {
         client = new Client(1, new Economic(), null);
+        company = new Company(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         Order order = new Order();
         order.setClient(client);
     }
