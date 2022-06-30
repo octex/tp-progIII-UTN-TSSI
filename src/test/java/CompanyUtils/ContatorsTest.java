@@ -12,6 +12,7 @@ import Client.*;
 import Services.*;
 //import org.mockito.internal.matchers.Or;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,8 +22,9 @@ public class ContatorsTest {
     Company company;
 
     @BeforeEach
-    void setUp() {
-       // company = new Company();
+    void setUp()
+    {
+       company = new Company(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
     @Test

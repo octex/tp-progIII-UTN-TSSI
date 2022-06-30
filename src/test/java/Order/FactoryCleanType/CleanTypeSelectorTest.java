@@ -10,26 +10,28 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashSet;
 
-class CleanTypeSelectorTest {
-    public CleanData cleanData;
-    public Company company;
+class CleanTypeSelectorTest
+{
+    CleanData cleanData;
+    Company company;
     PriceCalculator priceCalculator;
 
-
-
     @BeforeEach
-    void setUp() throws ParseException {
-        CleanTypeSelector cleanTypeSelector =CleanTypeSelector.getInstance(company);
+    void setUp()
+    {
+        company = new Company(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         priceCalculator = new PriceCalculator();
+        CleanTypeSelector cleanTypeSelector = CleanTypeSelector.getInstance(company);
         company.setPriceCalculator(priceCalculator);
         CleanTypeSelector.getInstance(company);
         String date ="2022-06-10";
 
         HashSet <String>residuos=new HashSet();
         residuos.add("Polvo");
-        cleanData=new CleanData(date,residuos,1);
+        cleanData = new CleanData(date,residuos,1);
     }
 
     @Test

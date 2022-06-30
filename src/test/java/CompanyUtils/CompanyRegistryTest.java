@@ -25,6 +25,7 @@ public class CompanyRegistryTest {
     Order order4 =new Order();
     @BeforeEach
     void setUp() {
+        company = new Company(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         client = new Client(1, new Economic(), null);
         Order order = new Order();
         client2 = new Client(2, new Economic(), null);

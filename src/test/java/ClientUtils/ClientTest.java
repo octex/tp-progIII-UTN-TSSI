@@ -13,6 +13,8 @@ import CompanyUtils.Company;
 import Order.Order;
 import Services.Economic;
 
+import java.util.ArrayList;
+
 
 public class ClientTest {
 
@@ -21,7 +23,7 @@ public class ClientTest {
     @BeforeEach
     void setUp()
     {
-
+        company = new Company(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
     @Test
