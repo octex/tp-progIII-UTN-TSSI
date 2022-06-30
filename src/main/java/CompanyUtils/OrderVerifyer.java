@@ -11,8 +11,8 @@ public class OrderVerifyer
     public void verifyOrder(Order order) throws Exception{
         try
         {
-            order.getClient().getService().validateClientCredits(order);
             order.getClient().getService().validateService(order);
+            order.getClient().getService().validateClientCredits(order);
         }
         catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption | CouldNotVerifyOrderException.HasNoCreditsExeption e)
         {

@@ -63,9 +63,9 @@ public class Company {
     {
         try
         {
+            paymentModule.checkClientsDebt(order.getClient());
             orderVerifyer.verifyOrder(order);
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
-            paymentModule.checkClientsDebt(order.getClient());
             specialistAssigner.iterateOrder(order);
         }
         catch (OverpassesDebtExeption e)
