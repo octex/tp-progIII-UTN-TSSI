@@ -11,6 +11,7 @@ import Order.Order;
 import Robots.Robot;
 import Robots.RobotRegister;
 import Services.Exeptions.OverpassesDebtExeption;
+import Services.Service;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -57,6 +58,8 @@ public class Company {
 
     public void recieveOrder(Order order) throws Exception
     {
+        Service backupService = order.getClient().getService();
+        ArrayList<RobotRegister> backupRobots = orderPerRobot;
         try
         {
             paymentModule.checkClientsDebt(order.getClient());
@@ -83,11 +86,14 @@ public class Company {
         catch (CouldNotAssignRobotException e)
         {
             System.out.println("No se pudo asignar el robot a la orden.");
+            order.getClient().setService(backupService);
             printExceptionReasonAndThrowBack(e);
         }
         catch (NoHayEspecialistaExepcion e)
         {
             System.out.println("No se pudo procesar el pedido de reparacion.");
+            order.getClient().setService(backupService);
+            orderPerRobot = backupRobots;
             printExceptionReasonAndThrowBack(e);
         }
         catch (Exception e)
