@@ -26,7 +26,7 @@ public class ServiceManagmentTest {
     protected OrderVerifyer orderVerifyer=new OrderVerifyer();
 
     public Client client = new Client(111, new Economic(), null);
-    public Order order =new Order(client, new SimpleClean(),null,false, Surface.PISOS);
+    public Order order;
 
 
     ServiceManagement serviceManagment = ServiceManagement.getInstance();

@@ -3,6 +3,7 @@ package ClientUtils;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import CompanyUtils.OrderVerifyerExceptions.CouldNotVerifyOrderException;
+import Order.FactoryCleanType.CleanData;
 import Order.FactoryCleanType.SimpleClean;
 import Robots.Surface;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +15,7 @@ import Order.Order;
 import Services.Economic;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 
 public class ClientTest {
@@ -30,8 +32,11 @@ public class ClientTest {
     void EconomicClientRequestsCleaningAndOrder(){
         var client = new Client(111, new Economic(), null);
 
+        Order order = new Order(client, new CleanData("2022-06-01", new HashSet<>(), 1),
+                null, true, false, Surface.PISOS);
+
         assertThrows(CouldNotVerifyOrderException.ServiceNotIncludedExeption.class, ()->{
-                     client.sendOrder(company, new Order(client, new SimpleClean(), null, true, Surface.PISOS));
+                     client.sendOrder(company, order);
         });
     }
 

@@ -4,6 +4,7 @@ package CompanyUtils;
 import CompanyUtils.OrderVerifyerExceptions.CouldNotVerifyOrderException;
 import Order.*;
 import Client.*;
+import Order.FactoryCleanType.CleanData;
 import Order.FactoryCleanType.SimpleClean;
 import Robots.Surface;
 import Services.Classic;
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashSet;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class OrderVerifyerTest {
@@ -21,7 +24,8 @@ class OrderVerifyerTest {
     protected OrderVerifyer orderVerifyer=new OrderVerifyer();
     public Location location = new Location("Buenos aires","Olivos","Maipu 3500");;
     public Client client = new Client(111, new Economic(), null);
-    public Order order =new Order(client, new SimpleClean(),location,false, Surface.PISOS);
+    public CleanData cleanData = new CleanData("2022-06-01", new HashSet<>(), 1);
+    public Order order = new Order(client, cleanData,location, false, false, Surface.PISOS);
 
     @BeforeEach
     void setUp() {
