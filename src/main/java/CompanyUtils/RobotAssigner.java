@@ -48,7 +48,7 @@ public class RobotAssigner
             }
             else
             {
-                assignedRobotRegistry.AddOrder(order);
+                robotsOrders.get(robotsOrders.indexOf(assignedRobotRegistry)).AddOrder(order);
             }
         }
     }
