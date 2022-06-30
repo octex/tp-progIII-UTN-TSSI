@@ -1,10 +1,8 @@
 package CompanyUtils;
 
 import Client.Client;
-import Client.CouldNotCreateOrderException;
 import Order.Order;
 import Services.Economic;
-import Services.Exeptions.OverpassesDebtExeption;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

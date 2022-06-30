@@ -20,17 +20,9 @@ public class Client {
         this.locations = locations;
     };
 
-    public void requestOrder(Company company, Order order) throws Exception
+    public void sendOrder(Company company, Order order)
     {
-        try
-        {
-            company.recieveOrder(order);
-        }
-        catch (Exception CouldNotCreateOrderException)
-        {
-            throw new CouldNotCreateOrderException("No se pudo crear la orden");
-        }
-
+        company.recieveOrder(order);
     }
 
     public int getDni() {
