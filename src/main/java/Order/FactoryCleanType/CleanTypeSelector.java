@@ -59,7 +59,7 @@ public class CleanTypeSelector {
         }
         this.company.getPriceCalculator().setStrategy(new SimpleClean());
         this.company.increaseComplexRegistry();
-        return new ComplexClean();
+        return new ComplexClean(company.getRobotAdjustmentFactor());
     }
 
 

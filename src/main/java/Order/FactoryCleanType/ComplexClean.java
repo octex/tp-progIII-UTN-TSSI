@@ -5,7 +5,7 @@ import Robots.Robot;
 
 public class ComplexClean implements CleanType{
 
-    public void ComplexClean(float robotPlusValue){
+    public ComplexClean(float robotPlusValue){
         this.robotPlusValue = robotPlusValue;
     }
 
