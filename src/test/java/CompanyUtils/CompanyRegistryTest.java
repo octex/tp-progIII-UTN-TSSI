@@ -17,7 +17,7 @@ public class CompanyRegistryTest {
     public Client client3;
     public Client client4;
     public Client client5;
-    public Company company = new Company();
+    public Company company;
     public Order order = new Order();
     public Order order2= new Order();
 

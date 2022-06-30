@@ -18,7 +18,7 @@ class EconomicTest {
     Client client;
     Service economic =new Economic();
     Order order =new Order();
-    Company company= new Company();
+    Company company;
     OrderVerifyer orderVerifyer =new OrderVerifyer();
     @BeforeEach
     void setUp() {

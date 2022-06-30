@@ -22,7 +22,7 @@ public class ContatorsTest {
 
     @BeforeEach
     void setUp() {
-        company = new Company();
+       // company = new Company();
     }
 
     @Test

@@ -14,7 +14,7 @@ import java.util.HashSet;
 
 class CleanTypeSelectorTest {
     public CleanData cleanData;
-    public Company company =new Company();
+    public Company company;
     PriceCalculator priceCalculator;
 
 

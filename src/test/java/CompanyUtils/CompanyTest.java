@@ -153,4 +153,28 @@ class CompanyTest
             client.sendOrder(company, order);
         });
     }
+
+    @Test
+    void tryToSendOrderWithElectricalRepairOk()
+    {
+
+    }
+
+    @Test
+    void tryToSendOrderWithGasRepairOk()
+    {
+
+    }
+
+    @Test
+    void tryToSendOrderWithElectricalRepairWithNoEmployeesAvailable()
+    {
+
+    }
+
+    @Test
+    void tryToSendOrderWithGasRepairWithNoEmployeesAvailable()
+    {
+
+    }
 }

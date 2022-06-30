@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerOrderTest {
     public Client client;
-    public Company company = new Company();
+    public Company company;
     public Order order = new Order();
 
 
