@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import CompanyUtils.Company;
 import Order.*;
-import Services.Platinum;
 import Services.Service;
 
 
@@ -25,7 +24,7 @@ public class Client {
     {
         try
         {
-            company.tryToAssign(order);
+            company.recieveOrder(order);
         }
         catch (Exception CouldNotCreateOrderException)
         {

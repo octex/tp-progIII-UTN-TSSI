@@ -16,6 +16,7 @@ public class Company {
     private ArrayList<Client> clients;
     private ArrayList<Order> orders;
     private RobotAssigner robotAssigner;
+    private OrderVerifyer orderVerifyer;
     private ArrayList<RobotRegister> orderPerRobot;
     private CommunicationModuleReciver communicationModuleReciver;
     private PriceCalculator priceCalculator;
@@ -23,18 +24,18 @@ public class Company {
     private int complexOrdersContator;
     private float robotAdjustmentFactor;
 
-
-
     public Company() {
 
     }
 
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
+        this.robots = new ArrayList<>();
+        this.orderPerRobot = new ArrayList();
         this.robots.addAll(robots);
         this.clients.addAll(clients);
         this.orders.addAll(orders);
         this.robotAssigner = new RobotAssigner();
-        this.orderPerRobot = new ArrayList();
+        orderVerifyer = new OrderVerifyer();
         this.simpleOrdersContator = 0;
         this.complexOrdersContator = 0;
         this.robotAdjustmentFactor = 1;
@@ -48,11 +49,9 @@ public class Company {
         return this.priceCalculator;
     }
 
-    public void tryToAssign(Order order){
-        try{
-            OrderVerifyer orderVerifyer = new OrderVerifyer();
-            RobotAssigner robotAssigner = new RobotAssigner();
-
+    public void recieveOrder(Order order){
+        try
+        {
             orderVerifyer.verifyOrder(order);
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
         }
