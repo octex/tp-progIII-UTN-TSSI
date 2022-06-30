@@ -1,7 +1,5 @@
 package Order.FactoryCleanType;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 
 public class CleanData {

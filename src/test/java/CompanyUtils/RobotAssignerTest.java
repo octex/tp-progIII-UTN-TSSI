@@ -77,7 +77,6 @@ class RobotAssignerTest {
     void AssignTwoRobotsForAClassicClient()
     {
         testClient.setService(new Classic());
-
         assertDoesNotThrow(() ->robotAssigner.AssignRobot(testOrder, robots, robotOrders));
         assertTrue(hasRobot(testOrder, k311yfl));
         assertTrue(hasRobot(testOrder, so31rty));

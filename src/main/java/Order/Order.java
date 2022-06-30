@@ -4,10 +4,8 @@ import Client.Client;
 import Client.Location;
 import CompanyUtils.Employees.Specialist;
 import Order.FactoryCleanType.CleanData;
-import Order.FactoryCleanType.CleanType;
 import Order.Repairs.Repair;
 import Robots.Robot;
-import Robots.RobotRegister;
 import Robots.Surface;
 
 import java.util.ArrayList;

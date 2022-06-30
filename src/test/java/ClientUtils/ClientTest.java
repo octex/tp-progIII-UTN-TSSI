@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import CompanyUtils.OrderVerifyerExceptions.CouldNotVerifyOrderException;
 import Order.FactoryCleanType.CleanData;
-import Order.FactoryCleanType.SimpleClean;
 import Robots.Surface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
