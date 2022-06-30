@@ -3,11 +3,12 @@ package CompanyUtils;
 import java.util.ArrayList;
 
 public class CompanyRegistry {
-    ArrayList<ClientOrders> clientsAgenda;
+    ArrayList<ClientOrders> clientsAgenda= new ArrayList<ClientOrders>();
     Integer numberOfSimplex=0;
     Integer numberOfComplex=0;
 
-    public ArrayList<ClientOrders> getClientsAgneda() {
+
+    public ArrayList<ClientOrders> getClientsAgenda() {
         return clientsAgenda;
     }
 

@@ -1,14 +1,18 @@
 package CompanyUtils;
 
 import Client.Client;
+import CompanyUtils.Employees.Specialist;
+import CompanyUtils.Employees.SpecialistRegister;
 import CompanyUtils.OrderVerifyerExceptions.*;
 import CompanyUtils.PriceUtils.PriceCalculator;
 import CompanyUtils.RobotAssignerExceptions.*;
 import Order.Order;
 import Robots.Robot;
 import Robots.RobotRegister;
+import org.mockito.internal.matchers.Or;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 
 public class Company {
@@ -32,17 +36,6 @@ public class Company {
         this.orders = new ArrayList<>();
         this.companyRegistry= new CompanyRegistry();
     }
-
-
-    public void increaseComplexRegistry(){
-        companyRegistry.increaseNumberOfComplex();
-    }
-
-
-    public void increaseSimpleRegistry(){
-        companyRegistry.increasNumberOfSimplex();
-    }
-
 
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
         this.robotAssigner = new RobotAssigner();
@@ -85,6 +78,25 @@ public class Company {
         }
     }
 
+    public void createOrUpdateClient(Order order){
+        ClientOrders clientRegister =findClient(order);
+
+        if((clientRegister!=null)){
+            clientRegister.getClientOrders().add(order);
+        }
+        else{
+            ArrayList<Order> firstClientOrder = new ArrayList<Order>();
+            firstClientOrder.add(order);
+            getCompanyRegistry().getClientsAgenda().add(new ClientOrders(order.getClient(),firstClientOrder));
+        }
+    };
+
+    public ClientOrders findClient(Order order){
+        Stream<ClientOrders> a= companyRegistry.getClientsAgenda().stream().filter(
+                (clientOrders -> order.getClient().getDni() == clientOrders.client.getDni()));
+        return a.findFirst().orElse(null);
+    }
+
     public void setPriceCalculator(PriceCalculator priceCalculator) {
         this.priceCalculator = priceCalculator;
     }
@@ -96,6 +108,19 @@ public class Company {
     public CompanyRegistry getCompanyRegistry() {
         return this.companyRegistry;
     }
+
+    public void setCompanyRegistry(CompanyRegistry companyRegistry) {
+        this.companyRegistry = companyRegistry;
+    }
+
+    public void increaseComplexRegistry(){
+        companyRegistry.increaseNumberOfComplex();
+    }
+
+    public void increaseSimpleRegistry(){
+        companyRegistry.increasNumberOfSimplex();
+    }
+
     public void setRobotAdjustmentFactor(float robotAdjustmentFactor) {
         this.robotAdjustmentFactor = robotAdjustmentFactor;
     }
