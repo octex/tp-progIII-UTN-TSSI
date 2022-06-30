@@ -72,7 +72,7 @@ public class Company {
         }
         catch (OverpassesDebtExeption e)
         {
-            System.out.println("Error de deuda.");
+            System.out.println("Error de pago.");
             printExceptionReasonAndThrowBack(e);
         }
         catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption e)
@@ -82,7 +82,7 @@ public class Company {
         }
         catch (CouldNotVerifyOrderException.HasNoCreditsExeption e)
         {
-            System.out.println("Error de pago.");
+            System.out.println("Error de credito.");
             printExceptionReasonAndThrowBack(e);
         }
         catch (CouldNotAssignRobotException e)

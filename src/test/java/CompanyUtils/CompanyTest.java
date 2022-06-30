@@ -6,12 +6,14 @@ import Order.FactoryCleanType.CleanType;
 import Order.FactoryCleanType.SimpleClean;
 import Robots.*;
 import Services.Classic;
+import Services.Exeptions.ClassicOverpassesDebtExeption;
 import Services.Exeptions.OverpassesDebtExeption;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import Order.*;
 import Client.*;
 import Services.*;
+import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -51,14 +53,17 @@ class CompanyTest
     }
 
     @Test
-    void tryToAssignRobotToClassicThrowCouldNotVerifyOrderException() {
+    void tryToAssignRobotToClassicWithDebt() throws OverpassesDebtExeption {
         CleanType cleanType = new SimpleClean();
         Location location = new Location("Buenos Aires", "Olivos", "Maipu");
         Service service = new Classic();
         Client client = new Client(111111111, service, Collections.singleton(location));
         Order order = new Order(client, cleanType, location, true, Surface.PISOS);
 
-        assertThrows(CouldNotVerifyOrderException.class , () -> {
+        Mockito.doThrow(new ClassicOverpassesDebtExeption("El cliente con servicio Classic supero la mora de $2000"))
+                .when(paymentModule).checkClientsDebt(client);
+
+        assertThrows(ClassicOverpassesDebtExeption.class , () -> {
             client.sendOrder(company, order);
         });
     }
