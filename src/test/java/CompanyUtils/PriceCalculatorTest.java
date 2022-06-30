@@ -110,7 +110,7 @@ public class PriceCalculatorTest {
 
         subTotal = priceCalculator.getFinalPrice(testOrder);
 
-        assertEquals(3000, subTotal);
+        assertEquals((int)3000, (int)subTotal);
 
     }
 
