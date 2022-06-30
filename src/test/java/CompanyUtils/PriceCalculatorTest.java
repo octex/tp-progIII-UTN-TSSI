@@ -11,6 +11,7 @@ import Robots.Robot;
 import Robots.Surface;
 import CompanyUtils.Employees.Electritian;
 import CompanyUtils.Employees.Gasist;
+import CompanyUtils.Employees.NoHayEspecialistaExepcion;
 import CompanyUtils.Employees.Specialist;
 import CompanyUtils.Employees.SpecialistAssigner;
 import CompanyUtils.PriceUtils.*;
@@ -61,6 +62,7 @@ public class PriceCalculatorTest {
         Robot po11h = new P011H();
         Robot so31rty = new S031RTY();
         Robot k311yfl = new K311Y_fl();
+        specialistAssigner = new SpecialistAssigner();
 
         robots.add(k311Yfu);
         robots.add(k311Ya);
@@ -87,24 +89,8 @@ public class PriceCalculatorTest {
         repairs = new ArrayList<>();
     }
 
-
     @Test
     void testPrice0Order() {
-        
-        priceCalculator.setStrategy(new SimpleClean());
-
-        testService = new Economic();
-        testClient.setService(testService);
-        testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
-
-        subTotal = priceCalculator.getFinalPrice(testOrder);
-
-        assertEquals(0, subTotal);
-
-    }
-
-    @Test
-    void contatorInitializeComplex() {
         
         priceCalculator.setStrategy(new SimpleClean());
 
@@ -113,18 +99,43 @@ public class PriceCalculatorTest {
         testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
         repairs.add(new ElectricalRepair(1));
         testOrder.setRepairsNeeded(repairs);
+        testOrder.addRobot(new K311Y_fl());
 
         try {
             specialistAssigner.iterateOrder(testOrder);
-        } catch (Exception e) {
+        } catch (NoHayEspecialistaExepcion e) {
+            System.out.println("a");
         }
         
 
         subTotal = priceCalculator.getFinalPrice(testOrder);
 
-        assertEquals(0, subTotal);
+        assertEquals(3000, subTotal);
 
     }
+
+
+    @Test
+    void test1RobotOrder() {
+        
+        priceCalculator.setStrategy(new SimpleClean());
+
+        testService = new Classic();
+        testClient.setService(testService);
+        testOrder = new Order(testClient, testCleanData, location, true, false, Surface.PISOS);
+        repairs.add(new ElectricalRepair(1));
+        testOrder.setRepairsNeeded(repairs);
+        testOrder.addRobot(new K311Y_fl());
+
+        
+
+        subTotal = priceCalculator.getFinalPrice(testOrder);
+
+        assertEquals(1000, subTotal);
+
+    }
+
+    
 
 
     

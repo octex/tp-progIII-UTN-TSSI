@@ -4,6 +4,10 @@ import Order.Order;
 
 public class CostCalculator{
 
+    public CostCalculator(){
+        
+    }
+
     public float calculatePrice(Order order){
 
         float sumatory = 0f;

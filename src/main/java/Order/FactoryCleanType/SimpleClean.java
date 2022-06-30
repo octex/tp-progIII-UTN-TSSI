@@ -3,6 +3,11 @@ package Order.FactoryCleanType;
 import Order.Order;
 
 public class SimpleClean implements CleanType{
+
+    public SimpleClean(){
+
+    }
+
     @Override
 
     public float calculatePrice(Order order){
