@@ -27,7 +27,7 @@ public class Company {
     private float robotAdjustmentFactor;
     private CompanyRegistry companyRegistry;
     private PaymentModule paymentModule;
-
+    private RegistryPrinter registryPrinter;
     public Company() {
         this.robotAssigner = new RobotAssigner();
         this.orderVerifyer = new OrderVerifyer();
@@ -37,6 +37,7 @@ public class Company {
         this.orders = new ArrayList<>();
         this.companyRegistry= new CompanyRegistry();
         this.paymentModule = mock(PaymentModule.class);
+        this.registryPrinter=new RegistryPrinter(companyRegistry);
     }
 
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
@@ -154,5 +155,9 @@ public class Company {
 
     public PaymentModule getPaymentModule() {
         return paymentModule;
+    }
+
+    public RegistryPrinter getRegistryPrinter() {
+        return this.registryPrinter;
     }
 }
