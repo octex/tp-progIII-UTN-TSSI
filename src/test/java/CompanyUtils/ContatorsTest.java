@@ -27,8 +27,27 @@ public class ContatorsTest {
 
     @Test
     void contatorInitializeComplex() {
-
         assertEquals(0, company.getCompanyRegistry().getNumberOfComplex());
     }
+
+    @Test
+    void contatorInitializeSimple() {
+        assertEquals(0, company.getCompanyRegistry().getNumberOfSimplex());
+    }
+
+    @Test
+    void increaseSimpleCleans() {
+        company.getCompanyRegistry().increasNumberOfSimplex();
+
+        assertEquals(1, company.getCompanyRegistry().getNumberOfSimplex());
+    }
+
+    @Test
+    void increaseComplexCleans() {
+        company.getCompanyRegistry().increaseNumberOfComplex();
+
+        assertEquals(1, company.getCompanyRegistry().getNumberOfComplex());
+    }
+
     
 }
