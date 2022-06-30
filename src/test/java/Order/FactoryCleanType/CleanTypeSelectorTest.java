@@ -17,6 +17,7 @@ class CleanTypeSelectorTest
 {
     CleanData cleanData;
     Company company;
+    CleanTypeSelector cleanTypeSelector;
     PriceCalculator priceCalculator;
 
     @BeforeEach
@@ -24,9 +25,8 @@ class CleanTypeSelectorTest
     {
         company = new Company(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         priceCalculator = new PriceCalculator();
-        CleanTypeSelector cleanTypeSelector = CleanTypeSelector.getInstance(company);
+        cleanTypeSelector = CleanTypeSelector.getInstance(company);
         company.setPriceCalculator(priceCalculator);
-        CleanTypeSelector.getInstance(company);
         String date ="2022-06-10";
 
         HashSet <String>residuos=new HashSet();
@@ -37,65 +37,65 @@ class CleanTypeSelectorTest
     @Test
     void numberOfPetsSimpleOk()
     {
-        assertTrue(CleanTypeSelector.numberOfPetsSimple(cleanData.cantMascotas));
+        assertTrue(cleanTypeSelector.numberOfPetsSimple(cleanData.cantMascotas));
     }
     @Test
     void numberOfPetsSimpleFail()
     {
         cleanData.setCantMascotas(5);
-        assertFalse(CleanTypeSelector.numberOfPetsSimple(cleanData.cantMascotas));
+        assertFalse(cleanTypeSelector.numberOfPetsSimple(cleanData.cantMascotas));
     }
 
     @Test
     void hasJustDustOk(){
 
-        assertTrue(CleanTypeSelector.hasJustPolvoOrEmpty(cleanData.residuos));
+        assertTrue(cleanTypeSelector.hasJustPolvoOrEmpty(cleanData.residuos));
     }
 
     @Test
     void doesNotContainMudFalse(){
         cleanData.getResiduos().add("Barro");
-        assertFalse(CleanTypeSelector.doesNotContainMud(cleanData.residuos));
+        assertFalse(cleanTypeSelector.doesNotContainMud(cleanData.residuos));
     }
     @Test
     void doesNotContainMudOk(){
         cleanData.getResiduos().remove("Barro");
-        assertTrue(CleanTypeSelector.doesNotContainMud(cleanData.residuos));
+        assertTrue(cleanTypeSelector.doesNotContainMud(cleanData.residuos));
     }
     @Test
     void recentlyCleanedOk(){
         cleanData.setLastCleanDate("2022-06-10");
         String currentDate = "2022-06-12";
-        assertTrue(CleanTypeSelector.recentlyCleaned(currentDate,cleanData.lastCleanDate));
+        assertTrue(cleanTypeSelector.recentlyCleaned(currentDate,cleanData.lastCleanDate));
     }
 
     @Test
     void recentlyCleanedFalse(){
         cleanData.setLastCleanDate("2022-04-10");
         String currentDate = "2022-06-12";
-        assertFalse(CleanTypeSelector.recentlyCleaned(currentDate,cleanData.lastCleanDate));
+        assertFalse(cleanTypeSelector.recentlyCleaned(currentDate,cleanData.lastCleanDate));
     }
 
     @Test
     void isEmptyOk(){
         cleanData.getResiduos().remove("Polvo");
-        assertTrue(CleanTypeSelector.hasJustPolvoOrEmpty(cleanData.residuos));
+        assertTrue(cleanTypeSelector.hasJustPolvoOrEmpty(cleanData.residuos));
 
     }
     @Test
     void returnsSimpleOk(){
-        assertEquals(new SimpleClean().getClass(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData).getClass());
+        assertEquals(new SimpleClean().getClass(), cleanTypeSelector.setCleanStrategy(cleanData).getClass());
     }
     @Test
     void returnsSimpleWithMultipleDogsBecauseOfJustDustOk(){
         cleanData.setCantMascotas(5);
-        assertEquals(new SimpleClean(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
+        assertEquals(new SimpleClean(), cleanTypeSelector.setCleanStrategy(cleanData));
     }
     @Test
     void returnsSimpleWith2MaterialsBecauseOfDate(){
         cleanData.getResiduos().add("Barro");
         cleanData.setCantMascotas(5);
-        assertEquals(new SimpleClean(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));    }
+        assertEquals(new SimpleClean(), cleanTypeSelector.setCleanStrategy(cleanData));    }
 
 
     @Test
@@ -103,21 +103,13 @@ class CleanTypeSelectorTest
         cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Barro");
         cleanData.setCantMascotas(5);
-        assertEquals(new ComplexClean(1), CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
+        assertEquals(new ComplexClean(1), cleanTypeSelector.setCleanStrategy(cleanData));
     }
     @Test
     void returnsComplexBecauseNotSimpleWith2Residuos(){
         cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Pelos");
         cleanData.setCantMascotas(5);
-        assertEquals(new ComplexClean(1),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
+        assertEquals(new ComplexClean(1), cleanTypeSelector.setCleanStrategy(cleanData));
     }
-/*
-    @Test
-    void AssignRobotForClassicService()
-    {
-        System.out.println(CleanTypeSelector.daysFromLastClean(cleanData.lastCleanDate));
-        assertEquals(0,CleanTypeSelector.daysFromLastClean(cleanData.lastCleanDate));
-    }
-    */
 }
