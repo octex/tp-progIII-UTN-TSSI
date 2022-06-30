@@ -19,7 +19,6 @@ public abstract class Repair
         this.complexity = complexity;
         priceChart = new HashMap<>();
         verifyComplexityRange();
-        calculateRepairPrice();
     }
 
     public int getComplexity() { return complexity; }

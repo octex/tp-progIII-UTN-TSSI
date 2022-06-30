@@ -27,8 +27,10 @@ public class Order {
     private CleanData cleanData;
     private float orderPrice;
 
-    public Order() {
-
+    public Order()
+    {
+        this.robots = new ArrayList<>();
+        this.specialistsAssigned =new ArrayList<>();
     }
     public void setSpecialist(Specialist specialist) {
         this.specialist = specialist;
