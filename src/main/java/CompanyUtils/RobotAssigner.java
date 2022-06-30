@@ -41,6 +41,7 @@ public class RobotAssigner
 
         for(Robot robot : suitableRobots)
         {
+            order.addRobot(robot);
             try
             {
                 robotsOrders.get(GetRobotRegistry(robot, robotsOrders)).AddOrder(order);

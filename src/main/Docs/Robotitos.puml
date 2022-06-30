@@ -129,10 +129,16 @@ class CleantypeSelector {
 }
 
 
-enum CleanType{
-    SIMPLE,
-    COMPLEJA;
+interface CleanType{
+
 }
+class ComplexClean implements CleanType{
+}
+
+class SimpleClean implements CleanType{
+
+}
+
 
 class OrderVerifyer{
     - boolean validateCreditClient(Order order);
@@ -174,13 +180,21 @@ class ElectricalRepair extends Repair{
 
 class SpecialistsAssigner {
 +iterateOrder(order);
--getRequiredSpecialist(repair);
+-Specialist getRequiredSpecialist(repair);
 -assignSpecialistToOrder(Specialist);
 
 }
 
+class CleanData{
+    String lastCleanDate;
+    HashSet<String> residuos;
+    int cantMascotas;
+}
+
 SpecialistsAssigner->Order
 
+Order*-->CleanData
+CleantypeSelector -right>CleanData
 SpecialistsAssigner->Repair
 
 SpecialistsAssigner-left>Specialist
@@ -224,6 +238,6 @@ Company *--Specialist
 Company *-CleantypeSelector
 Order*-->Specialists
 Order*-->Repair
-Order- CleanType
+Order*- CleanType
 Client*--Order
 @enduml

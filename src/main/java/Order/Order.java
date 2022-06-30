@@ -7,6 +7,7 @@ import Order.FactoryCleanType.CleanData;
 import Order.FactoryCleanType.CleanType;
 import Order.Repairs.Repair;
 import Robots.Robot;
+import Robots.RobotRegister;
 import Robots.Surface;
 
 import java.util.ArrayList;
@@ -111,6 +112,7 @@ public class Order {
 
     public ArrayList<Robot> getRobots() { return robots; }
 
+    public void addRobot(Robot robot) { robots.add(robot); }
 
     public ArrayList<Specialist> getSpecialistsAssigned() {
         return specialistsAssigned;

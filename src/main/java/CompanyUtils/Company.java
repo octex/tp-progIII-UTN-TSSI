@@ -23,22 +23,43 @@ public class Company {
     private int simpleOrdersContator;
     private int complexOrdersContator;
     private float robotAdjustmentFactor;
+    private CompanyRegistry companyRegistry;
 
     public Company() {
-
+        this.robotAssigner = new RobotAssigner();
+        this.orderVerifyer = new OrderVerifyer();
+        this.robots = new ArrayList<>();
+        this.orderPerRobot = new ArrayList<>();
+        this.clients = new ArrayList<>();
+        this.orders = new ArrayList<>();
+        this.companyRegistry= new CompanyRegistry();
     }
 
+
+    public void increaseComplexRegistry(){
+        companyRegistry.increaseNumberOfComplex();
+    }
+
+
+    public void increaseSimpleRegistry(){
+        companyRegistry.increasNumberOfSimplex();
+    }
+
+
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
+        this.robotAssigner = new RobotAssigner();
+        this.orderVerifyer = new OrderVerifyer();
         this.robots = new ArrayList<>();
-        this.orderPerRobot = new ArrayList();
+        this.orderPerRobot = new ArrayList<>();
+        this.clients = new ArrayList<>();
+        this.orders = new ArrayList<>();
         this.robots.addAll(robots);
         this.clients.addAll(clients);
         this.orders.addAll(orders);
-        this.robotAssigner = new RobotAssigner();
-        this.orderVerifyer = new OrderVerifyer();
         this.simpleOrdersContator = 0;
         this.complexOrdersContator = 0;
         this.robotAdjustmentFactor = 1;
+        companyRegistry= new CompanyRegistry();
     }
 
     public CommunicationModuleReciver getCommunicationModuleReciver(){
@@ -71,16 +92,12 @@ public class Company {
     public int getSimpleOrdersContator() {
         return simpleOrdersContator;
     }
-    public void increaseSimpleOrdersContator() {
-        simpleOrdersContator += 1;
-    }
+
     
     public int getComplexOrdersContator() {
         return complexOrdersContator;
     }
-    public void increaseComplexOrdersContator() {
-        complexOrdersContator += 1;
-    }
+
 
     public void setPriceCalculator(PriceCalculator priceCalculator) {
         this.priceCalculator = priceCalculator;

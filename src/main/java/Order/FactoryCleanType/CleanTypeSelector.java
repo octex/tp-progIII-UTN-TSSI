@@ -9,19 +9,19 @@ import java.time.LocalDate;
 
 public class CleanTypeSelector {
 
-    private static CleanTypeSelector single_instance = null;
+    private static CleanTypeSelector instance = null;
     private  Company company;
     private CleanTypeSelector(Company company)
     {
-        this.company =company;
+        this.company = company;
     }
 
     public static CleanTypeSelector getInstance(Company company)
     {
-        if (single_instance == null)
-            single_instance = new CleanTypeSelector(company);
+        if (instance == null)
+            instance = new CleanTypeSelector(company);
 
-        return single_instance;
+        return instance;
     }
 
     protected static boolean hasJustPolvoOrEmpty(HashSet<String> residuos){
@@ -49,16 +49,16 @@ public class CleanTypeSelector {
 
 
     public  CleanType setCleanStrategy(CleanData cleanData) {
-        String currentDate="2022-06-12";
+        String currentDate = LocalDate.now().toString();
         if((hasJustPolvoOrEmpty(cleanData.residuos)||
                 (doesNotContainMud(cleanData.residuos)) && numberOfPetsSimple(cleanData.cantMascotas))||
                 (recentlyCleaned(currentDate,cleanData.lastCleanDate))){
             getInstance(company).company.getPriceCalculator().setStrategy(new SimpleClean());
-            this.company.increaseSimpleOrdersContator();
+            this.company.increaseSimpleRegistry();
             return new SimpleClean();
         }
         this.company.getPriceCalculator().setStrategy(new SimpleClean());
-        this.company.increaseComplexOrdersContator();
+        this.company.increaseComplexRegistry();
         return new ComplexClean();
     }
 
