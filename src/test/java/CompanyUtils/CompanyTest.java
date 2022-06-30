@@ -42,17 +42,11 @@ class CompanyTest
     void setUp()
     {
         ArrayList<Robot> robots = new ArrayList<>();
-        Robot k311Yfu;
-        Robot k311Ya;
-        Robot po11h;
-        Robot so31rty;
-        Robot k311yfl;
-
-        k311Yfu = new K311Y_fu();
-        k311Ya = new K311Ya();
-        po11h = new P011H();
-        so31rty = new S031RTY();
-        k311yfl = new K311Y_fl();
+        Robot k311Yfu = new K311Y_fu();
+        Robot k311Ya = new K311Ya();
+        Robot po11h = new P011H();
+        Robot so31rty = new S031RTY();
+        Robot k311yfl = new K311Y_fl();
 
         robots.add(k311Yfu);
         robots.add(k311Ya);
