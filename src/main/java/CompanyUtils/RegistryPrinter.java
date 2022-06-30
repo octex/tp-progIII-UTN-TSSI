@@ -1,8 +1,5 @@
 package CompanyUtils;
 
-import CompanyUtils.CompanyRegistry;
-
-import java.util.Iterator;
 import java.util.Map;
 
 public class RegistryPrinter {
