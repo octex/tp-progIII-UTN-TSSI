@@ -101,14 +101,14 @@ class CleanTypeSelectorTest {
         cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Barro");
         cleanData.setCantMascotas(5);
-        assertEquals(new ComplexClean(), CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
+        assertEquals(new ComplexClean(1), CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
     }
     @Test
     void returnsComplexBecauseNotSimpleWith2Residuos(){
         cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Pelos");
         cleanData.setCantMascotas(5);
-        assertEquals(new ComplexClean(),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
+        assertEquals(new ComplexClean(1),CleanTypeSelector.getInstance(company).setCleanStrategy(cleanData));
     }
 /*
     @Test
