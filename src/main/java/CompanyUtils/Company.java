@@ -36,12 +36,12 @@ public class Company {
     }
 
 
-    void increaseComplexRegistry(){
+    public void increaseComplexRegistry(){
         companyRegistry.increaseNumberOfComplex();
     }
 
 
-    void addSimpleRegistry(){
+    public void increaseSimpleRegistry(){
         companyRegistry.increasNumberOfSimplex();
     }
 
@@ -92,16 +92,12 @@ public class Company {
     public int getSimpleOrdersContator() {
         return simpleOrdersContator;
     }
-    public void increaseSimpleOrdersContator() {
-        simpleOrdersContator += 1;
-    }
+
     
     public int getComplexOrdersContator() {
         return complexOrdersContator;
     }
-    public void increaseComplexOrdersContator() {
-        complexOrdersContator += 1;
-    }
+
 
     public void setPriceCalculator(PriceCalculator priceCalculator) {
         this.priceCalculator = priceCalculator;
