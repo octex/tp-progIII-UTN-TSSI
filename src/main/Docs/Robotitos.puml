@@ -318,6 +318,8 @@ CleantypeSelector<--CleantypeSelector
 
 Company *-- SpecialistsAssigner
 
+PriceCalculator*--CleantypeSelector
+
 Company*-- Robot
 Company *-- Client
 Company *-- Order
