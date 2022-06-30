@@ -110,12 +110,10 @@ Company *-> CompanyRegistry
 CompanyRegistry ->ClientOrders
 
 class RobotAssigner{
+   - GetSuitableRobotsStrategy strategy;
    + RobotAssigner();
    + void AssignRobot(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
-   - ArrayList<Robot> GetSuitableRobots(Order order, ArrayList<Robot> robots);
-   - Robot GetCheapestRobot(ArrayList<Robot> robots);
-   - Robot GetRequiredRobotToPlatinumRobot(ArrayList<Robot> suitableRobots, ArrayList<RobotRegister> robotsOrders)
-}
+   }
 
 class Order{
 
@@ -134,6 +132,23 @@ class Order{
 }
 
 
+
+interface GetSuitableRobotsStrategy{
+ + ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
+}
+
+class getCheapestRobotStrategy implements GetSuitableRobotsStrategy{
+
++ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
+-getCheapestRobot(ArrayList<Robot> robots)
+
+}
+
+class getPlatinumRobot implements GetSuitableRobotsStrategy{
++ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
+-int GetRobotRegistry(Robot robot, ArrayList<RobotRegister> robotOrders)
+
+}
 
 class CleantypeSelector {
 
@@ -257,4 +272,5 @@ Order*-->Specialists
 Order*-->Repair
 Order*- CleanType
 Client*--Order
+RobotAssigner*->GetSuitableRobotsStrategy
 @enduml

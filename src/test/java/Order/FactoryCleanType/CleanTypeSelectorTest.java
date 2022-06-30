@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -82,34 +83,39 @@ class CleanTypeSelectorTest
         assertTrue(cleanTypeSelector.hasJustPolvoOrEmpty(cleanData.residuos));
 
     }
+
     @Test
-    void returnsSimpleOk(){
+    void returnsSimpleOk()
+    {
         assertEquals(new SimpleClean().getClass(), cleanTypeSelector.setCleanStrategy(cleanData).getClass());
     }
+
     @Test
     void returnsSimpleWithMultipleDogsBecauseOfJustDustOk(){
         cleanData.setCantMascotas(5);
-        assertEquals(new SimpleClean(), cleanTypeSelector.setCleanStrategy(cleanData));
+        assertInstanceOf(SimpleClean.class, cleanTypeSelector.setCleanStrategy(cleanData));
     }
+
     @Test
     void returnsSimpleWith2MaterialsBecauseOfDate(){
+        cleanData.setLastCleanDate(LocalDate.now().toString());
         cleanData.getResiduos().add("Barro");
         cleanData.setCantMascotas(5);
-        assertEquals(new SimpleClean(), cleanTypeSelector.setCleanStrategy(cleanData));    }
-
+        assertInstanceOf(SimpleClean.class, cleanTypeSelector.setCleanStrategy(cleanData));
+    }
 
     @Test
     void returnsComplexBecauseNotSimpleWithBarro() {
         cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Barro");
         cleanData.setCantMascotas(5);
-        assertEquals(new ComplexClean(1), cleanTypeSelector.setCleanStrategy(cleanData));
+        assertInstanceOf(ComplexClean.class, cleanTypeSelector.setCleanStrategy(cleanData));
     }
     @Test
     void returnsComplexBecauseNotSimpleWith2Residuos(){
         cleanData.setLastCleanDate("2021-05-19");
         cleanData.getResiduos().add("Pelos");
         cleanData.setCantMascotas(5);
-        assertEquals(new ComplexClean(1), cleanTypeSelector.setCleanStrategy(cleanData));
+        assertInstanceOf(ComplexClean.class, cleanTypeSelector.setCleanStrategy(cleanData));
     }
 }
