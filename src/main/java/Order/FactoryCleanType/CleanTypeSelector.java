@@ -9,19 +9,19 @@ import java.time.LocalDate;
 
 public class CleanTypeSelector {
 
-    private static CleanTypeSelector single_instance = null;
+    private static CleanTypeSelector instance = null;
     private  Company company;
     private CleanTypeSelector(Company company)
     {
-        this.company =company;
+        this.company = company;
     }
 
     public static CleanTypeSelector getInstance(Company company)
     {
-        if (single_instance == null)
-            single_instance = new CleanTypeSelector(company);
+        if (instance == null)
+            instance = new CleanTypeSelector(company);
 
-        return single_instance;
+        return instance;
     }
 
     protected static boolean hasJustPolvoOrEmpty(HashSet<String> residuos){
