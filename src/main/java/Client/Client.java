@@ -40,4 +40,9 @@ public class Client {
     public void setService(Service service) {
         this.service = service;
     }
+
+    public String getServiceName()
+    {
+        return service.getServiceName();
+    }
 }

@@ -24,7 +24,7 @@ public class Economic extends Service  {
     }
 
     public boolean validateService(Order order) throws CouldNotVerifyOrderException.ServiceNotIncludedExeption {
-        if(order.doesWantOrder() && order.getClient().getService().getServiceName().equals("Economic")){
+        if(order.doesWantOrder() && order.getClient().getServiceName().equals("Economic")){
             throw new CouldNotVerifyOrderException.ServiceNotIncludedExeption("El cliente economico no puede pedir ordenamiento.");}
         else
             return true;

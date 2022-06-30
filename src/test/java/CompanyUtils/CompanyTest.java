@@ -78,10 +78,8 @@ class CompanyTest
         Location location = new Location("Buenos Aires", "Olivos", "Maipu");
         Service service = new Economic();
         Client client = new Client(111111111, service, Collections.singleton(location));
-        Order order = new Order(client, cleanType, location, true, Surface.PISOS);
+        Order order = new Order(client, cleanType, location, false, Surface.PISOS);
 
-        assertThrows(CouldNotVerifyOrderException.class , () -> {
-            client.sendOrder(company, order);
-        });
+        assertDoesNotThrow(() -> client.sendOrder(company, order));
     }
 }
