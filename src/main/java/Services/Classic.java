@@ -30,6 +30,7 @@ public class Classic extends Service  {
         if (order.doesWantOrder() && order.getClient().getService().getOrderingQuantity() <= 0) {
             throw new CouldNotVerifyOrderException.HasNoCreditsExeption("El cliente clasico no tiene creditos");
         } else {
+            order.getClient().getService().substractOrderingQuantity();
             return true;
         }
     };

@@ -34,7 +34,7 @@ public class Economic extends Service  {
      if (order.getClient().getService().getCleaningQuantity() <= 0) {
         throw new CouldNotVerifyOrderException.HasNoCreditsExeption("El cliente Economico no tiene creditos para limpieza.");
     }else{
-         order.getClient().getService().setCleaningQuantity(order.getClient().getService().getCleaningQuantity()-1);
+         order.getClient().getService().substractCleaningQuantity();
         return true;
     }
     }

@@ -82,7 +82,7 @@ public class Company {
         }
         catch (CouldNotVerifyOrderException.HasNoCreditsExeption e)
         {
-            System.out.println("Error de credito.");
+            System.out.println("Error de creditos.");
             printExceptionReasonAndThrowBack(e);
         }
         catch (CouldNotAssignRobotException e)

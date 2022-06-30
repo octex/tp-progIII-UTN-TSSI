@@ -7,6 +7,7 @@ import Order.FactoryCleanType.SimpleClean;
 import Robots.*;
 import Services.Classic;
 import Services.Exeptions.ClassicOverpassesDebtExeption;
+import Services.Exeptions.EconomicOverpassesDebtExeption;
 import Services.Exeptions.OverpassesDebtExeption;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,7 +54,7 @@ class CompanyTest
     }
 
     @Test
-    void tryToAssignRobotToClassicWithDebt() throws OverpassesDebtExeption {
+    void tryToSendOrderFromClassicWithDebt() throws OverpassesDebtExeption {
         CleanType cleanType = new SimpleClean();
         Location location = new Location("Buenos Aires", "Olivos", "Maipu");
         Service service = new Classic();
@@ -69,7 +70,7 @@ class CompanyTest
     }
 
     @Test
-    void tryToAssignRobotToEconomicThrowCouldNotVerifyOrderException() {
+    void tryToSendOrderFromEconomicThrowCouldNotVerifyOrderException() {
         CleanType cleanType = new SimpleClean();
         Location location = new Location("Buenos Aires", "Olivos", "Maipu 233");
         Service service = new Economic();
@@ -82,7 +83,7 @@ class CompanyTest
     }
 
     @Test
-    void tryToAssignRobotToEconomicDontThrowCouldNotVerifyOrderException() {
+    void tryToSendOrderFromToEconomicSuccess() {
         CleanType cleanType =  new SimpleClean();
         Location location = new Location("Buenos Aires", "Olivos", "Maipu");
         Service service = new Economic();
@@ -90,5 +91,66 @@ class CompanyTest
         Order order = new Order(client, cleanType, location, false, Surface.PISOS);
 
         assertDoesNotThrow(() -> client.sendOrder(company, order));
+    }
+
+    @Test
+    void tryToSendOrderFromPlatinumClientSuccess()
+    {
+        CleanType cleanType =  new SimpleClean();
+        Location location = new Location("Buenos Aires", "Olivos", "Maipu");
+        Service service = new Platinum();
+        Client client = new Client(111111111, service, Collections.singleton(location));
+        Order order = new Order(client, cleanType, location, false, Surface.PISOS);
+
+        assertDoesNotThrow(() -> client.sendOrder(company, order));
+    }
+
+    @Test
+    void tryToSendOrderFromEconomicClientWithDebt() throws OverpassesDebtExeption
+    {
+        CleanType cleanType = new SimpleClean();
+        Location location = new Location("Buenos Aires", "Olivos", "Maipu");
+        Service service = new Economic();
+        Client client = new Client(111111111, service, Collections.singleton(location));
+        Order order = new Order(client, cleanType, location, false, Surface.PISOS);
+
+        Mockito.doThrow(new EconomicOverpassesDebtExeption("El cliente con servicio Economic se encuentra moroso."))
+                .when(paymentModule).checkClientsDebt(client);
+
+        assertThrows(EconomicOverpassesDebtExeption.class , () -> {
+            client.sendOrder(company, order);
+        });
+    }
+
+    @Test
+    void tryToSendOrderFromEconomicClientWithNoCleaningCredits()
+    {
+        CleanType cleanType = new SimpleClean();
+        Location location = new Location("Buenos Aires", "Olivos", "Maipu");
+        Service service = new Economic();
+        Client client = new Client(111111111, service, Collections.singleton(location));
+        Order order = new Order(client, cleanType, location, false, Surface.PISOS);
+        assertDoesNotThrow(() -> client.sendOrder(company, order));
+        assertDoesNotThrow(() -> client.sendOrder(company, order));
+        assertDoesNotThrow(() -> client.sendOrder(company, order));
+        assertThrows(CouldNotVerifyOrderException.HasNoCreditsExeption.class , () -> {
+            client.sendOrder(company, order);
+        });
+    }
+
+    @Test
+    void tryToSendOrderFromClassicClientWithNoOrderingCredits()
+    {
+        CleanType cleanType = new SimpleClean();
+        Location location = new Location("Buenos Aires", "Olivos", "Maipu");
+        Service service = new Classic();
+        Client client = new Client(111111111, service, Collections.singleton(location));
+        Order order = new Order(client, cleanType, location, true, Surface.PISOS);
+        assertDoesNotThrow(() -> client.sendOrder(company, order));
+        assertDoesNotThrow(() -> client.sendOrder(company, order));
+        assertDoesNotThrow(() -> client.sendOrder(company, order));
+        assertThrows(CouldNotVerifyOrderException.HasNoCreditsExeption.class , () -> {
+            client.sendOrder(company, order);
+        });
     }
 }
