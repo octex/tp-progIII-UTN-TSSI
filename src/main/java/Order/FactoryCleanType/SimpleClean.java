@@ -3,19 +3,20 @@ package Order.FactoryCleanType;
 import Order.Order;
 
 public class SimpleClean implements CleanType{
+
+    public SimpleClean(){
+
+    }
+
     @Override
 
     public float calculatePrice(Order order){
 
 
         float sumatory=0;
-        /*
-        order.getRobots().stream().forEach(y -> sumatory += y.getCostPH());
 
-        sumatory += (order.getSpecialist().getSalary() / 160) * order.getReparacion().getComplexity();
+        sumatory += order.getRobots().stream().map(y -> y.getCostPH()).reduce(0f, (ans, i) -> ans + i);
 
-        sumatory += order.getReparacion().getCost();
-*/
         return sumatory;
     }
 

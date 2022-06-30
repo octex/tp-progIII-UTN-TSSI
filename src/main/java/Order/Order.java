@@ -7,36 +7,44 @@ import Order.FactoryCleanType.CleanData;
 import Order.FactoryCleanType.CleanType;
 import Order.Repairs.Repair;
 import Robots.Robot;
+import Robots.Surface;
+import org.mockito.internal.matchers.Or;
 
 import java.util.ArrayList;
 
-public class Order {
-
-    private CleanType cleanType;
+public class Order
+{
     private Location location;
     private boolean wantsPolish;
     private boolean wantsOrder;
-    private String surface;
+    private Surface surface;
     private Client client;
     private ArrayList<Robot> robots;
-    private ArrayList<Specialist> specialistsAssigned =new ArrayList<Specialist>();
-    public Order() {
-
-    }
-    public void setSpecialist(Specialist specialist) {
-        this.specialist = specialist;
-    }
-
+    private ArrayList<Specialist> specialistsAssigned;
     private Specialist specialist;
     private ArrayList<Repair> repairNeeded;
     private CleanData cleanData;
+    private float orderPrice;
 
-    public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, String surface){
+    public Order()
+    {
+        this.robots = new ArrayList<>();
+        this.specialistsAssigned =new ArrayList<>();
+        this.repairNeeded = new ArrayList<>();
+    }
+
+    public Order(Client client, CleanData cleanData, Location location,
+                 boolean wantsOrder, boolean wantsPolish, Surface surface)
+    {
         this.client = client;
-        this.cleanType = cleanType;
+        this.cleanData = cleanData;
         this.location = location;
         this.wantsOrder = wantsOrder;
-        this.surface=surface;
+        this.wantsPolish = wantsPolish;
+        this.surface = surface;
+        this.robots = new ArrayList<>();
+        this.specialistsAssigned =new ArrayList<>();
+        this.repairNeeded = new ArrayList<>();
     }
     public void setCleanData(CleanData cleanData) {
         this.cleanData = cleanData;
@@ -54,32 +62,40 @@ public class Order {
         this.wantsPolish = wantsPolish;
     }
 
-    public CleanType getCleanType() {
-        return cleanType;
-    }
-
     public Location getLocation() {
         return location;
     }
 
     public boolean doesWantOrder() {
-        return wantsOrder;
+        return this.wantsOrder;
     }
 
     public void setWantsOrder(boolean wantsOrder) {
         this.wantsOrder = wantsOrder;
     }
 
-    public String getSurface() {
+    public Surface getSurface() {
         return surface;
     }
 
-    public void setSurface(String surface) {
+    public void setSurface(Surface surface) {
         this.surface = surface;
     }
 
     public Client getClient() {
         return client;
+    }
+
+    public float getOrderPrice() {
+        return orderPrice;
+    }
+
+    public void setOrderPrice(float price) {
+        this.orderPrice = price;
+    }
+
+    public void addOrderPrice(float price) {
+        this.orderPrice += price;
     }
 
     public void setLocation(Location location) {
@@ -94,9 +110,9 @@ public class Order {
         this.client = client;
     }
 
-
     public ArrayList<Robot> getRobots() { return robots; }
 
+    public void addRobot(Robot robot) { robots.add(robot); }
 
     public ArrayList<Specialist> getSpecialistsAssigned() {
         return specialistsAssigned;
@@ -106,6 +122,10 @@ public class Order {
         this.specialistsAssigned = specialistsAssigned;
     }
 
+    public void setSpecialist(Specialist specialist) {
+        this.specialist = specialist;
+    }
+
     public ArrayList<Repair> getRepairsNeeded() {
         return repairNeeded;
     }
@@ -113,6 +133,7 @@ public class Order {
     public void assignSpecialist(Specialist specialist){
         this.specialistsAssigned.add(specialist);
     }
+
     public void setRepairsNeeded(ArrayList<Repair> repairNeeded) {
         this.repairNeeded = repairNeeded;
     }

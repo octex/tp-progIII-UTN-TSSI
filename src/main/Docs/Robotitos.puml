@@ -5,25 +5,30 @@ skinparam linetype ortho
 
 class Client {
     - Service service;
-    - LinkedList<Location> locations;
+    - Collection locations;
     - int dni;
+    + getters
+    + setters
 
     + Client();
-    + Order requestOrder(Company company, Order order);
+    + void sendOrder(Company company, Order order);
 }
 
 class Location{
-    - int height;
-    - String street;
-    - String area;
-    - int floor;
-    - int department;
+    - String provincia;
+    - String barrio;
+    - String calle;
+    + getters
     + Location();
 }
+
 
 class RobotRegister{
     - Robot robot;
     - LinkedList<Order> orders;
+    + int GetAmountOfOrders()
+    + Robot GetRobot()
+    + void AddOrder(Order order)
 }
 
 abstract Robot{
@@ -71,44 +76,124 @@ class Economic{
 }
 
 class Company{
-    - ArrayList<Client> clients;
-    - ArrayList<Robot> robots;
-    - ArrayList<Order> orders;
-    - CleantypeSelector cleanTypeSelector;
-    - RobotAssigner robotAssigner;
-    - ArrayList<RobotRegister> orderPerRobot;
-    - CommunicationModuleReciver communicationModule;
+    - final SpecialistsAssigner specialistAssigner
+    - ArrayList<Client> clients
+    - final ArrayList<Robot> robots
+    - ArrayList<Order> orders
+    - final CleantypeSelector cleanTypeSelector
+    - final RobotAssigner robotAssigner
+    - ArrayList<RobotRegister> orderPerRobot
+    - CommunicationModuleReciver communicationModule
+    - CompanyRegistry companyRegistry
+    - RegistryPrinter registryPrinter
+    - final OrderVerifyer orderVerifyer
+    - final PaymentModule paymentModule
+    - final RegistryPrinter registryPrinter
+    - PriceCalculator priceCalculator
+    + getters
+    + setters
 
-    + Company();
+    + Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders);
     + CommunicationModuleReciver getCommunicationModuleReciver();
-    + void tryToAssing(Order);
+    + void recieveOrder(Order);
+    + void createOrUpdateClient(Order order)
+    + ClientOrders findClient(Order order)
+    + void printExceptionReasonAndThrowBack(Exception e)
+}
+
+Company*--CommunicationModuleReciver
+
+Robot*--CommunicationModuleEmisor
+
+class CommunicationModuleEmisor
+{
+    - Company company
+    + void readyMessage(Robot robot)
+}
+
+class CommunicationModuleReciver
+{
+    + Robot reciveMessage(Robot robot)
+}
+
+class PriceCalculator
+{
+    - CleanType cleanTypeStrategy
+    - CostCalculator costCalculator
+    + getters
+    + setters
+    + void setStrategy(CleanType cleanTypeStrategy)
+    + float getFinalPrice(Order order)
+}
+
+
+
+class CompanyRegistry{
+-Arraylist<ClientOrders>
+-int numberSimplex;
+-int numberComplex;
+-getClientTotalPrice(ClientOrders clientOrders);
++getMapUserSpent();
+}
+
+class ClientOrders{
+    -Client client;
+    -List <Orders>
+    + getters
+    + setters
 }
 
 class OrderVerifyer{
-    + void verifyOrder(Order order);
-    - Robot GetRequiredRobot(Order order);
-    - Robot GetRequiredToPlatinumRobot(Order order);
+    + void verifyOrder(Order order)
 }
+
+Company *-> CompanyRegistry
+CompanyRegistry ->ClientOrders
 
 class RobotAssigner{
+   - GetSuitableRobotsStrategy strategy;
    + RobotAssigner();
    + void AssignRobot(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
-   - ArrayList<Robot> GetSuitableRobots(Order order, ArrayList<Robot> robots);
-   - Robot GetCheapestRobot(ArrayList<Robot> robots);
-   - Robot GetRequiredRobotToPlatinumRobot(ArrayList<Robot> suitableRobots, ArrayList<RobotRegister> robotsOrders)
+   }
+
+enum Surface
+{
+    PISOS,MUEBLES,ANY
 }
 
-class Order{
+Order*--Surface
+Robot*--Surface
 
+class Order
+{
     - CleanType cleanType;
     - Location location;
     - boolean wantsOrder;
     - boolean wantsPolish;
-    - String surface;
+    - Surface surface;
     - Client client;
+    - Arraylist<Repair> repairsRequested;
     - CleanData cleanData;
     + CleanType createOrderCleanType();
     + Order();
+    - ArrayList<Robot> robotsAsigned;
+    - ArrayList<Specialists> specialistsAssigned;
+}
+
+
+
+interface GetSuitableRobotsStrategy{
+    + ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
+}
+
+class GetCheapestRobotStrategy implements GetSuitableRobotsStrategy{
+    +ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
+}
+
+class GetPlatinumRobot implements GetSuitableRobotsStrategy{
+    +ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
+    -int GetRobotRegistry(Robot robot, ArrayList<RobotRegister> robotOrders)
+
 }
 
 class CleantypeSelector {
@@ -122,29 +207,124 @@ class CleantypeSelector {
 }
 
 
-enum CleanType{
-    SIMPLE,
-    COMPLEJA;
+interface CleanType
+{
+    float calculatePrice(Order order)
 }
+class ComplexClean implements CleanType
+{
+    - float robotPlusValue
+}
+
+class SimpleClean implements CleanType{
+
+}
+
 
 class OrderVerifyer{
     - boolean validateCreditClient(Order order);
     - boolean validateService(Order order);
 }
 
-Interface PaymentModule{
+Interface PaymentModule
+{
+    + void checkClientsDebt(Client client)
 }
 
-OrderVerifyer <.left. PaymentModule
+
+abstract class Specialist{
+    # Repair repair
+    # String name
+    # float salary
+    + getters
+    + setters
+    + void abstract repair();
+    + boolean abstract canHandle(Repair repair);
+}
+
+class Gasist extends Specialist{
+
+}
+
+class Electritian extends Specialist{
+
+}
+
+abstract class Repair{
+   -Complexity complexity;
+   +verifyComplexityRange();
+   +calculateRepairPrice();
+}
+class GasRepair extends Repair{
+
+}
+class ElectricalRepair extends Repair{
+
+}
+
+class SpecialistRegister
+{
+    - ArrayList<Specialist> specialists
+    - static SpecialistRegister instance
+    - SpecialistRegister()
+    + getters
+    + setters
+    + void clearSpecialist()
+    + static SpecialistRegister getInstance()
+}
+
+SpecialistsAssigner*-up-SpecialistRegister
+
+class SpecialistsAssigner {
+    - SpecialistRegister specialistRegister;
+    + getters
+    + iterateOrder(order);
+    + void clearSpecialistRegister();
+    - Specialist getRequiredSpecialist(repair);
+    - assignSpecialistToOrder(Specialist);
+}
+
+class CleanData{
+    String lastCleanDate;
+    HashSet<String> residuos;
+    int cantMascotas;
+}
+
+class RegistryPrinter
+{
+    - CompanyRegistry companyRegistry
+    + RegistryPrinter(CompanyRegistry companyRegistry)
+    + void printUserAndSpent()
+}
+
+SpecialistsAssigner->Order
+
+Order*-->CleanData
+CleantypeSelector -right>CleanData
+SpecialistsAssigner->Repair
+
+SpecialistsAssigner-left>Specialist
+
+Specialists-left->Repair
+Company *-left- PaymentModule
 OrderVerifyer <-- Order
 
 Service <|-- Platinum
 Service <|-- Classic
 Service <|-- Economic
 
+
+CleantypeSelector<--CleantypeSelector
+
+Company *-- SpecialistsAssigner
+
+PriceCalculator*--CleantypeSelector
+
 Company*-- Robot
 Company *-- Client
 Company *-- Order
+Company *-- PriceCalculator
+Company *-- RegistryPrinter
 Company *-- RobotRegister
 Company <-left- OrderVerifyer
 Company <-up- RobotAssigner
@@ -164,8 +344,11 @@ OrderingRobot <.. S031RTY
 
 Client *-- Service
 Client *-- Location
-
+Company *--Specialist
 Company *-CleantypeSelector
-Order- CleanType
+Order*-->Specialists
+Order*-->Repair
+Order*- CleanType
 Client*--Order
+RobotAssigner*->GetSuitableRobotsStrategy
 @enduml

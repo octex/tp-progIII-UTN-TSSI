@@ -1,12 +1,5 @@
 package SpecialistAssigner;
-
-import CompanyUtils.Company;
 import CompanyUtils.Employees.*;
-import CompanyUtils.PriceUtils.PriceCalculator;
-import Order.FactoryCleanType.CleanData;
-import Order.FactoryCleanType.CleanTypeSelector;
-import Order.FactoryCleanType.ComplexClean;
-import Order.FactoryCleanType.SimpleClean;
 import Order.Order;
 import Order.Repairs.ElectricalRepair;
 import Order.Repairs.GasRepair;
@@ -16,39 +9,37 @@ import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashSet;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import CompanyUtils.Company;
-import CompanyUtils.PriceUtils.PriceCalculator;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
-
-import java.text.ParseException;
-import java.util.HashSet;
 
 public class SpecialistTest {
 
-    private SpecialistRegister specialistRegister = SpecialistRegister.getInstance();
-    private SpecialistAssigner specialistAssigner = new SpecialistAssigner();
-    private ArrayList<Repair> repairList = new ArrayList<Repair>();
-    private Order order= new Order();
-    private Specialist electritian= new Electritian(5,"Bruno");
-    private Specialist gasist= new Gasist(5,"Bruno");
+    private SpecialistRegister specialistRegister;
+    private SpecialistAssigner specialistAssigner;
+    private ArrayList<Repair> repairList;
+    private Order order;
+    private Specialist electritian;
+    private Specialist gasist;
+
     @BeforeEach
-    void setUp() throws ParseException {
-
-
+    void setUp()
+    {
+        specialistRegister = SpecialistRegister.getInstance();
+        specialistRegister.clearSpecialist();
+        specialistAssigner = new SpecialistAssigner();
+        repairList = new ArrayList<>();
+        order= new Order();
+        electritian = new Electritian(5,"Bruno");
+        gasist = new Gasist(5,"Bruno");
     }
 
-
     @Test
-    void getElectricianOk(){
+    void getElectricianOk() throws Exception {
 
-        SpecialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(electritian);
         repairList.add(new ElectricalRepair(5));
         order.setRepairsNeeded(repairList);
         specialistAssigner.iterateOrder(order);
@@ -57,9 +48,9 @@ public class SpecialistTest {
     }
 
     @Test
-    void getGasistOk(){
+    void getGasistOk() throws NoHayEspecialistaExepcion {
 
-        SpecialistRegister.addSpecialist(gasist);
+        specialistRegister.addSpecialist(gasist);
         repairList.add(new GasRepair(5));
         order.setRepairsNeeded(repairList);
         specialistAssigner.iterateOrder(order);
@@ -68,9 +59,9 @@ public class SpecialistTest {
     }
 
  @Test
-    void getGasistAndElectricianOk(){
-        SpecialistRegister.addSpecialist(electritian);
-        SpecialistRegister.addSpecialist(gasist);
+    void getGasistAndElectricianOk() throws NoHayEspecialistaExepcion {
+        specialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(gasist);
         repairList.add(new GasRepair(5));
         repairList.add(new ElectricalRepair(5));
         order.setRepairsNeeded(repairList);
@@ -81,9 +72,9 @@ public class SpecialistTest {
 
     }
     @Test
-    void getElectricianAndGasistOk(){
-        SpecialistRegister.addSpecialist(gasist);
-        SpecialistRegister.addSpecialist(electritian);
+    void getElectricianAndGasistOk() throws NoHayEspecialistaExepcion {
+        specialistRegister.addSpecialist(gasist);
+        specialistRegister.addSpecialist(electritian);
         repairList.add(new GasRepair(5));
         repairList.add(new ElectricalRepair(5));
         order.setRepairsNeeded(repairList);
@@ -93,12 +84,11 @@ public class SpecialistTest {
         assertTrue(validation1 && validation2);
     }
 
-    /*@Test
-
+    @Test
     void getElectricianAndGasistFailNoGasist(){
 
-        SpecialistRegister.addSpecialist(electritian);
-        SpecialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(electritian);
         repairList.add(new GasRepair(5));
         repairList.add(new ElectricalRepair(5));
         order.setRepairsNeeded(repairList);
@@ -109,18 +99,18 @@ public class SpecialistTest {
         });
 
 }
-*/
+
 
     @Test
     void noAvailableGasist(){
 
-        SpecialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(electritian);
         repairList.add(new GasRepair(5));
         order.setRepairsNeeded(repairList);
 
 
         assertThrows(NoHayEspecialistaExepcion.class, () -> {
-            specialistAssigner.getRequiredSpecialist(order.getRepairsNeeded().get(0));
+            specialistAssigner.iterateOrder(order);
         });
 
     }
@@ -129,13 +119,12 @@ public class SpecialistTest {
     @Test
     void noAvailableElectritian(){
 
-        SpecialistRegister.addSpecialist(gasist);
+        specialistRegister.addSpecialist(gasist);
         repairList.add(new ElectricalRepair(5));
         order.setRepairsNeeded(repairList);
 
         assertThrows(NoHayEspecialistaExepcion.class, () -> {
-            specialistAssigner.getRequiredSpecialist(order.getRepairsNeeded().get(0));
+            specialistAssigner.iterateOrder(order);
         });
-
     }
 }

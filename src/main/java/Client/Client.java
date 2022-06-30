@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import CompanyUtils.Company;
 import Order.*;
-import Services.Platinum;
 import Services.Service;
 
 
@@ -21,17 +20,9 @@ public class Client {
         this.locations = locations;
     };
 
-    public void requestOrder(Company company, Order order) throws CouldNotCreateOrderException
+    public void sendOrder(Company company, Order order) throws Exception
     {
-        try
-        {
-            company.tryToAssign(order);
-        }
-        catch (Exception CouldNotCreateOrderException)
-        {
-            throw new CouldNotCreateOrderException("No se pudo crear la orden");
-        }
-
+        company.recieveOrder(order);
     }
 
     public int getDni() {
@@ -48,5 +39,10 @@ public class Client {
 
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public String getServiceName()
+    {
+        return service.getServiceName();
     }
 }

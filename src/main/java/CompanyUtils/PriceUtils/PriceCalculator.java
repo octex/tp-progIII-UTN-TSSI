@@ -2,12 +2,15 @@ package CompanyUtils.PriceUtils;
 
 import Order.Order;
 import Order.FactoryCleanType.CleanType;
+import Order.FactoryCleanType.CostCalculator;
 
 public class PriceCalculator {
 
-    CleanType cleanTypeStrategy;
+    private CleanType cleanTypeStrategy;
+    private CostCalculator costCalculator;
 
     public PriceCalculator() {
+        this.costCalculator = new CostCalculator();
     }
 
     public void setStrategy(CleanType cleanTypeStrategy){
@@ -15,7 +18,7 @@ public class PriceCalculator {
     }
 
     public float getFinalPrice(Order order){
-        return cleanTypeStrategy.calculatePrice(order);
+        return cleanTypeStrategy.calculatePrice(order) + costCalculator.calculatePrice(order);
     }
 
 
