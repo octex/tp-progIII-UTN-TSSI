@@ -29,13 +29,15 @@ public class Company {
     }
 
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
+        this.robotAssigner = new RobotAssigner();
+        this.orderVerifyer = new OrderVerifyer();
         this.robots = new ArrayList<>();
-        this.orderPerRobot = new ArrayList();
+        this.orderPerRobot = new ArrayList<>();
+        this.clients = new ArrayList<>();
+        this.orders = new ArrayList<>();
         this.robots.addAll(robots);
         this.clients.addAll(clients);
         this.orders.addAll(orders);
-        this.robotAssigner = new RobotAssigner();
-        this.orderVerifyer = new OrderVerifyer();
         this.simpleOrdersContator = 0;
         this.complexOrdersContator = 0;
         this.robotAdjustmentFactor = 1;
