@@ -52,6 +52,10 @@ public abstract class Service{
         this.orderingQuantity = orderingQuantity;
     }
 
+    public void substractOrderingQuantity() { this.orderingQuantity--; }
+
+    public void substractCleaningQuantity() { this.cleaningQuantity--; }
+
     public void setOrderValue(float orderValue) {
         this.orderValue = orderValue;
     }
