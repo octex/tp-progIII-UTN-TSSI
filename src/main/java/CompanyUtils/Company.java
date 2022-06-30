@@ -20,8 +20,6 @@ public class Company {
     private ArrayList<RobotRegister> orderPerRobot;
     private CommunicationModuleReciver communicationModuleReciver;
     private PriceCalculator priceCalculator;
-    private int simpleOrdersContator;
-    private int complexOrdersContator;
     private float robotAdjustmentFactor;
     private CompanyRegistry companyRegistry;
 
@@ -56,8 +54,6 @@ public class Company {
         this.robots.addAll(robots);
         this.clients.addAll(clients);
         this.orders.addAll(orders);
-        this.simpleOrdersContator = 0;
-        this.complexOrdersContator = 0;
         this.robotAdjustmentFactor = 1;
         companyRegistry= new CompanyRegistry();
     }
@@ -89,22 +85,16 @@ public class Company {
         }
     }
 
-    public int getSimpleOrdersContator() {
-        return simpleOrdersContator;
-    }
-
-    
-    public int getComplexOrdersContator() {
-        return complexOrdersContator;
-    }
-
-
     public void setPriceCalculator(PriceCalculator priceCalculator) {
         this.priceCalculator = priceCalculator;
     }
     
     public float getRobotAdjustmentFactor() {
         return this.robotAdjustmentFactor;
+    }
+
+    public CompanyRegistry getCompanyRegistry() {
+        return this.companyRegistry;
     }
     public void setRobotAdjustmentFactor(float robotAdjustmentFactor) {
         this.robotAdjustmentFactor = robotAdjustmentFactor;
