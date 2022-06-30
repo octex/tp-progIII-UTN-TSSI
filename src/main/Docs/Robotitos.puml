@@ -80,10 +80,24 @@ class Company{
     - RobotAssigner robotAssigner;
     - ArrayList<RobotRegister> orderPerRobot;
     - CommunicationModuleReciver communicationModule;
-
+    - CompanyRegistry companyRegistry;
+    - RegistryPrinter registryPrinter;
     + Company();
     + CommunicationModuleReciver getCommunicationModuleReciver();
     + void assign(Order);
+}
+
+class CompanyRegistry{
+-Arraylist<ClientOrders>
+-int numberSimplex;
+-int numberComplex;
+-getClientTotalPrice(ClientOrders clientOrders);
++getMapUserSpent();
+}
+
+class ClientOrders{
+-Client client;
+-List <Orders>
 }
 
 class OrderVerifyer{
@@ -91,6 +105,9 @@ class OrderVerifyer{
     - Robot GetRequiredRobot(Order order);
     - Robot GetRequiredToPlatinumRobot(Order order);
 }
+
+Company *-> CompanyRegistry
+CompanyRegistry ->ClientOrders
 
 class RobotAssigner{
    + RobotAssigner();

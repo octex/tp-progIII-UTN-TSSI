@@ -27,6 +27,16 @@ public class Company {
     private float robotAdjustmentFactor;
     private CompanyRegistry companyRegistry;
 
+    public RegistryPrinter getRegistryPrinter() {
+        return registryPrinter;
+    }
+
+    public void setRegistryPrinter(RegistryPrinter registryPrinter) {
+        this.registryPrinter = registryPrinter;
+    }
+
+    private RegistryPrinter registryPrinter;
+
     public Company() {
         this.robotAssigner = new RobotAssigner();
         this.orderVerifyer = new OrderVerifyer();
@@ -35,6 +45,7 @@ public class Company {
         this.clients = new ArrayList<>();
         this.orders = new ArrayList<>();
         this.companyRegistry= new CompanyRegistry();
+        this.registryPrinter= new RegistryPrinter(companyRegistry);
     }
 
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
@@ -64,6 +75,7 @@ public class Company {
         {
             orderVerifyer.verifyOrder(order);
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
+            createOrUpdateClient(order);
         }
 
         catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption e){
@@ -83,7 +95,9 @@ public class Company {
 
         if((clientRegister!=null)){
             clientRegister.getClientOrders().add(order);
+
         }
+
         else{
             ArrayList<Order> firstClientOrder = new ArrayList<Order>();
             firstClientOrder.add(order);
@@ -92,9 +106,8 @@ public class Company {
     };
 
     public ClientOrders findClient(Order order){
-        Stream<ClientOrders> a= companyRegistry.getClientsAgenda().stream().filter(
-                (clientOrders -> order.getClient().getDni() == clientOrders.client.getDni()));
-        return a.findFirst().orElse(null);
+
+        return companyRegistry.getClientsAgenda().stream().filter((clientOrders -> order.getClient().getDni() == clientOrders.client.getDni())).findFirst().orElse(null);
     }
 
     public void setPriceCalculator(PriceCalculator priceCalculator) {

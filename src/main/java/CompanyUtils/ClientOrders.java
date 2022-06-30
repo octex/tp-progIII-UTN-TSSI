@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ClientOrders {
     Client client;
-    ArrayList<Order> clientOrders;
+    ArrayList<Order> clientOrders= new ArrayList<Order>();
 
     public ClientOrders(){
 
@@ -18,18 +18,6 @@ public class ClientOrders {
         this.client = client;
         this.clientOrders = clientOrders;
     }
-
-    float calculateClientTotal(){
-
-        float sum = 0;
-        for(int i = 0; i < clientOrders.size(); i++){
-            sum += clientOrders.get(i).getOrderPrice();
-
-    }
-        return sum;
-
-    }
-
 
     public Client getClient() {
         return client;
