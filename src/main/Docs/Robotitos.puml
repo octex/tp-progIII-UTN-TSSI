@@ -100,6 +100,14 @@ class Company{
 
 Company*--CommunicationModuleReciver
 
+Robot*--CommunicationModuleEmisor
+
+class CommunicationModuleEmisor
+{
+    - Company company
+    + void readyMessage(Robot robot)
+}
+
 class CommunicationModuleReciver
 {
     + Robot reciveMessage(Robot robot)
@@ -145,13 +153,22 @@ class RobotAssigner{
    + void AssignRobot(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
    }
 
-class Order{
+enum Surface
+{
+    PISOS,MUEBLES,ANY
+}
+
+Order*--Surface
+Robot*--Surface
+
+class Order
+{
 
     - CleanType cleanType;
     - Location location;
     - boolean wantsOrder;
     - boolean wantsPolish;
-    - String surface;
+    - Surface surface;
     - Client client;
     - Arraylist<Repair> repairsRequested;
     - CleanData cleanData;
@@ -191,10 +208,13 @@ class CleantypeSelector {
 }
 
 
-interface CleanType{
-
+interface CleanType
+{
+    float calculatePrice(Order order)
 }
-class ComplexClean implements CleanType{
+class ComplexClean implements CleanType
+{
+    - float robotPlusValue
 }
 
 class SimpleClean implements CleanType{
