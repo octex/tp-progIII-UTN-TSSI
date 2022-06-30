@@ -25,7 +25,7 @@ public class SpecialistTest {
     private Specialist gasist;
 
     @BeforeEach
-    void setUp() throws ParseException
+    void setUp()
     {
         specialistRegister = SpecialistRegister.getInstance();
         SpecialistRegister.clearSpecialist();
