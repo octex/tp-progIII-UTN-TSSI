@@ -32,10 +32,6 @@ public class Order {
         this.robots = new ArrayList<>();
         this.specialistsAssigned =new ArrayList<>();
     }
-    public void setSpecialist(Specialist specialist) {
-        this.specialist = specialist;
-    }
-
 
     public Order(Client client, CleanType cleanType, Location location, boolean wantsOrder, Surface surface){
         this.client = client;
@@ -45,6 +41,7 @@ public class Order {
         this.surface=surface;
         this.robots = new ArrayList<>();
         this.specialistsAssigned =new ArrayList<>();
+        this.repairNeeded = new ArrayList<>();
     }
     public void setCleanData(CleanData cleanData) {
         this.cleanData = cleanData;
@@ -93,13 +90,14 @@ public class Order {
     public float getOrderPrice() {
         return orderPrice;
     }
+
     public void setOrderPrice(float price) {
         this.orderPrice = price;
     }
+
     public void addOrderPrice(float price) {
         this.orderPrice += price;
     }
-    
 
     public void setLocation(Location location) {
         this.location = location;
@@ -113,7 +111,6 @@ public class Order {
         this.client = client;
     }
 
-
     public ArrayList<Robot> getRobots() { return robots; }
 
     public void addRobot(Robot robot) { robots.add(robot); }
@@ -124,6 +121,10 @@ public class Order {
 
     public void setSpecialistsAssigned(ArrayList<Specialist> specialistsAssigned) {
         this.specialistsAssigned = specialistsAssigned;
+    }
+
+    public void setSpecialist(Specialist specialist) {
+        this.specialist = specialist;
     }
 
     public ArrayList<Repair> getRepairsNeeded() {

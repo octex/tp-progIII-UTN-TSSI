@@ -17,19 +17,19 @@ import static org.mockito.Mockito.mock;
 
 
 public class Company {
-    private ArrayList<Robot> robots;
+    private final ArrayList<Robot> robots;
+    private final RobotAssigner robotAssigner;
+    private final OrderVerifyer orderVerifyer;
+    private final PaymentModule paymentModule;
+    private final RegistryPrinter registryPrinter;
+    private final SpecialistAssigner specialistAssigner;
     private ArrayList<Client> clients;
     private ArrayList<Order> orders;
-    private RobotAssigner robotAssigner;
-    private OrderVerifyer orderVerifyer;
-    private SpecialistAssigner specialistAssigner;
     private ArrayList<RobotRegister> orderPerRobot;
     private CommunicationModuleReciver communicationModuleReciver;
     private PriceCalculator priceCalculator;
     private float robotAdjustmentFactor;
     private CompanyRegistry companyRegistry;
-    private PaymentModule paymentModule;
-    private RegistryPrinter registryPrinter;
 
 
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders)
@@ -65,6 +65,7 @@ public class Company {
             orderVerifyer.verifyOrder(order);
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
             paymentModule.checkClientsDebt(order.getClient());
+            specialistAssigner.iterateOrder(order);
         }
         catch (OverpassesDebtExeption e)
         {
