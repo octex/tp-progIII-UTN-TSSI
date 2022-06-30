@@ -28,7 +28,7 @@ public class SpecialistTest {
     void setUp()
     {
         specialistRegister = SpecialistRegister.getInstance();
-        SpecialistRegister.clearSpecialist();
+        specialistRegister.clearSpecialist();
         specialistAssigner = new SpecialistAssigner();
         repairList = new ArrayList<>();
         order= new Order();
@@ -39,7 +39,7 @@ public class SpecialistTest {
     @Test
     void getElectricianOk() throws Exception {
 
-        SpecialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(electritian);
         repairList.add(new ElectricalRepair(5));
         order.setRepairsNeeded(repairList);
         specialistAssigner.iterateOrder(order);
@@ -50,7 +50,7 @@ public class SpecialistTest {
     @Test
     void getGasistOk() throws NoHayEspecialistaExepcion {
 
-        SpecialistRegister.addSpecialist(gasist);
+        specialistRegister.addSpecialist(gasist);
         repairList.add(new GasRepair(5));
         order.setRepairsNeeded(repairList);
         specialistAssigner.iterateOrder(order);
@@ -60,8 +60,8 @@ public class SpecialistTest {
 
  @Test
     void getGasistAndElectricianOk() throws NoHayEspecialistaExepcion {
-        SpecialistRegister.addSpecialist(electritian);
-        SpecialistRegister.addSpecialist(gasist);
+        specialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(gasist);
         repairList.add(new GasRepair(5));
         repairList.add(new ElectricalRepair(5));
         order.setRepairsNeeded(repairList);
@@ -73,8 +73,8 @@ public class SpecialistTest {
     }
     @Test
     void getElectricianAndGasistOk() throws NoHayEspecialistaExepcion {
-        SpecialistRegister.addSpecialist(gasist);
-        SpecialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(gasist);
+        specialistRegister.addSpecialist(electritian);
         repairList.add(new GasRepair(5));
         repairList.add(new ElectricalRepair(5));
         order.setRepairsNeeded(repairList);
@@ -87,8 +87,8 @@ public class SpecialistTest {
     @Test
     void getElectricianAndGasistFailNoGasist(){
 
-        SpecialistRegister.addSpecialist(electritian);
-        SpecialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(electritian);
         repairList.add(new GasRepair(5));
         repairList.add(new ElectricalRepair(5));
         order.setRepairsNeeded(repairList);
@@ -104,7 +104,7 @@ public class SpecialistTest {
     @Test
     void noAvailableGasist(){
 
-        SpecialistRegister.addSpecialist(electritian);
+        specialistRegister.addSpecialist(electritian);
         repairList.add(new GasRepair(5));
         order.setRepairsNeeded(repairList);
 
@@ -119,7 +119,7 @@ public class SpecialistTest {
     @Test
     void noAvailableElectritian(){
 
-        SpecialistRegister.addSpecialist(gasist);
+        specialistRegister.addSpecialist(gasist);
         repairList.add(new ElectricalRepair(5));
         order.setRepairsNeeded(repairList);
 

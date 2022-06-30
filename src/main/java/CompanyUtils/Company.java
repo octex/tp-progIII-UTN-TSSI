@@ -1,6 +1,7 @@
 package CompanyUtils;
 
 import Client.Client;
+import CompanyUtils.Employees.SpecialistAssigner;
 import CompanyUtils.OrderVerifyerExceptions.*;
 import CompanyUtils.PriceUtils.PriceCalculator;
 import CompanyUtils.RobotAssignerExceptions.*;
@@ -21,6 +22,7 @@ public class Company {
     private ArrayList<Order> orders;
     private RobotAssigner robotAssigner;
     private OrderVerifyer orderVerifyer;
+    private SpecialistAssigner specialistAssigner;
     private ArrayList<RobotRegister> orderPerRobot;
     private CommunicationModuleReciver communicationModuleReciver;
     private PriceCalculator priceCalculator;
@@ -33,6 +35,7 @@ public class Company {
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders)
     {
         this.robotAssigner = new RobotAssigner();
+        this.specialistAssigner = new SpecialistAssigner();
         this.orderVerifyer = new OrderVerifyer();
         this.robots = new ArrayList<>();
         this.orderPerRobot = new ArrayList<>();

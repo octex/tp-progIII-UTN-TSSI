@@ -3,7 +3,14 @@ package CompanyUtils.Employees;
 import Order.Order;
 import Order.Repairs.Repair;
 
-public class SpecialistAssigner {
+public class SpecialistAssigner
+{
+    private SpecialistRegister specialistRegister;
+
+    public SpecialistAssigner()
+    {
+        specialistRegister = SpecialistRegister.getInstance();
+    }
 
     public void iterateOrder(Order order) throws NoHayEspecialistaExepcion {
 
@@ -23,7 +30,7 @@ public class SpecialistAssigner {
         }
     }
     public Specialist getRequiredSpecialist(Repair repair) throws NoHayEspecialistaExepcion {
-        Specialist specialistToAssign= SpecialistRegister.getSpecialists().stream().filter(specialist -> specialist.canHandle(repair)).findFirst().orElse(null);
+        Specialist specialistToAssign= specialistRegister.getSpecialists().stream().filter(specialist -> specialist.canHandle(repair)).findFirst().orElse(null);
         if(specialistToAssign ==null) {
             throw new NoHayEspecialistaExepcion("No hay especialistas del tipo" + repair.getType());
         }else{
