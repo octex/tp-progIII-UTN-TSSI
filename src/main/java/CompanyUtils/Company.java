@@ -67,6 +67,7 @@ public class Company {
             cleanTypeSelector.setCleanStrategy(order.getCleanData());
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
             specialistAssigner.iterateOrder(order);
+            priceCalculator.setStrategy(order.getCleanData().getCleanType());
             order.setOrderPrice(priceCalculator.getFinalPrice(order));
         }
         catch (OverpassesDebtExeption e)
