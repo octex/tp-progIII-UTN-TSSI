@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 class CompanyTest
 {
@@ -50,6 +49,7 @@ class CompanyTest
 
         company = new Company(robots, new ArrayList<>(), new ArrayList<>());
         paymentModule = company.getPaymentModule();
+        Mockito.reset(paymentModule);
     }
 
     @Test
