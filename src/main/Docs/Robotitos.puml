@@ -26,6 +26,9 @@ class Location{
 class RobotRegister{
     - Robot robot;
     - LinkedList<Order> orders;
+    + int GetAmountOfOrders()
+    + Robot GetRobot()
+    + void AddOrder(Order order)
 }
 
 abstract Robot{
@@ -163,7 +166,6 @@ Robot*--Surface
 
 class Order
 {
-
     - CleanType cleanType;
     - Location location;
     - boolean wantsOrder;
@@ -181,19 +183,16 @@ class Order
 
 
 interface GetSuitableRobotsStrategy{
- + ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
+    + ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
 }
 
-class getCheapestRobotStrategy implements GetSuitableRobotsStrategy{
-
-+ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
--getCheapestRobot(ArrayList<Robot> robots)
-
+class GetCheapestRobotStrategy implements GetSuitableRobotsStrategy{
+    +ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
 }
 
-class getPlatinumRobot implements GetSuitableRobotsStrategy{
-+ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
--int GetRobotRegistry(Robot robot, ArrayList<RobotRegister> robotOrders)
+class GetPlatinumRobot implements GetSuitableRobotsStrategy{
+    +ArrayList<Robot> getSuitableRobots(Order order, ArrayList<Robot> robots, ArrayList<RobotRegister> robotsOrders);
+    -int GetRobotRegistry(Robot robot, ArrayList<RobotRegister> robotOrders)
 
 }
 
