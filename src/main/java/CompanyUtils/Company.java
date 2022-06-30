@@ -1,18 +1,18 @@
 package CompanyUtils;
 
 import Client.Client;
-import CompanyUtils.Employees.Specialist;
-import CompanyUtils.Employees.SpecialistRegister;
 import CompanyUtils.OrderVerifyerExceptions.*;
 import CompanyUtils.PriceUtils.PriceCalculator;
 import CompanyUtils.RobotAssignerExceptions.*;
 import Order.Order;
 import Robots.Robot;
 import Robots.RobotRegister;
-import org.mockito.internal.matchers.Or;
+import Services.Exeptions.OverpassesDebtExeption;
 
 import java.util.*;
 import java.util.stream.Stream;
+
+import static org.mockito.Mockito.mock;
 
 
 public class Company {
@@ -26,16 +26,7 @@ public class Company {
     private PriceCalculator priceCalculator;
     private float robotAdjustmentFactor;
     private CompanyRegistry companyRegistry;
-
-    public RegistryPrinter getRegistryPrinter() {
-        return registryPrinter;
-    }
-
-    public void setRegistryPrinter(RegistryPrinter registryPrinter) {
-        this.registryPrinter = registryPrinter;
-    }
-
-    private RegistryPrinter registryPrinter;
+    private PaymentModule paymentModule;
 
     public Company() {
         this.robotAssigner = new RobotAssigner();
@@ -45,7 +36,7 @@ public class Company {
         this.clients = new ArrayList<>();
         this.orders = new ArrayList<>();
         this.companyRegistry= new CompanyRegistry();
-        this.registryPrinter= new RegistryPrinter(companyRegistry);
+        this.paymentModule = mock(PaymentModule.class);
     }
 
     public Company(ArrayList<Robot> robots, ArrayList<Client> clients, ArrayList<Order> orders){
@@ -59,7 +50,8 @@ public class Company {
         this.clients.addAll(clients);
         this.orders.addAll(orders);
         this.robotAdjustmentFactor = 1;
-        companyRegistry= new CompanyRegistry();
+        this.companyRegistry = new CompanyRegistry();
+        this.paymentModule = mock(PaymentModule.class);
     }
 
     public CommunicationModuleReciver getCommunicationModuleReciver(){
@@ -70,22 +62,38 @@ public class Company {
         return this.priceCalculator;
     }
 
-    public void recieveOrder(Order order){
+    public void recieveOrder(Order order) throws Exception
+    {
         try
         {
             orderVerifyer.verifyOrder(order);
             robotAssigner.AssignRobot(order, robots, orderPerRobot);
-            createOrUpdateClient(order);
+            paymentModule.checkClientsDebt(order.getClient());
         }
-
-        catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption e){
-            System.out.println("No se pudo verificar la orden.");
+        catch (OverpassesDebtExeption e)
+        {
+            System.out.println("Error de pago.");
+            printExceptionReasonAndThrowBack(e);
         }
-        catch (CouldNotVerifyOrderException.HasNoCreditsExeption e){
+        catch (CouldNotVerifyOrderException.ServiceNotIncludedExeption e)
+        {
+            System.out.println("Error verificando el servicio del cliente.");
+            printExceptionReasonAndThrowBack(e);
+        }
+        catch (CouldNotVerifyOrderException.HasNoCreditsExeption e)
+        {
+            System.out.println("Error de creditos.");
+            printExceptionReasonAndThrowBack(e);
+        }
+        catch (CouldNotAssignRobotException e)
+        {
             System.out.println("No se pudo asignar el robot a la orden.");
-        } catch (CouldNotAssignRobotException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
+            printExceptionReasonAndThrowBack(e);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Error inesperado procesando el pedido.");
+            printExceptionReasonAndThrowBack(e);
             e.printStackTrace();
         }
     }
@@ -95,9 +103,7 @@ public class Company {
 
         if((clientRegister!=null)){
             clientRegister.getClientOrders().add(order);
-
         }
-
         else{
             ArrayList<Order> firstClientOrder = new ArrayList<Order>();
             firstClientOrder.add(order);
@@ -106,8 +112,9 @@ public class Company {
     };
 
     public ClientOrders findClient(Order order){
-
-        return companyRegistry.getClientsAgenda().stream().filter((clientOrders -> order.getClient().getDni() == clientOrders.client.getDni())).findFirst().orElse(null);
+        Stream<ClientOrders> a= companyRegistry.getClientsAgenda().stream().filter(
+                (clientOrders -> order.getClient().getDni() == clientOrders.client.getDni()));
+        return a.findFirst().orElse(null);
     }
 
     public void setPriceCalculator(PriceCalculator priceCalculator) {
@@ -136,5 +143,16 @@ public class Company {
 
     public void setRobotAdjustmentFactor(float robotAdjustmentFactor) {
         this.robotAdjustmentFactor = robotAdjustmentFactor;
+    }
+
+    private void printExceptionReasonAndThrowBack(Exception e) throws Exception
+    {
+        System.out.println("Detalle: ");
+        System.out.println(e.toString());
+        throw e;
+    }
+
+    public PaymentModule getPaymentModule() {
+        return paymentModule;
     }
 }

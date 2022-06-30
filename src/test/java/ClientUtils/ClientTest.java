@@ -22,7 +22,7 @@ public class ClientTest {
             var client = new Client(111, new Economic(), null);
 
             assertThrows(CouldNotVerifyOrderException.ServiceNotIncludedExeption.class, ()->{
-                         client.requestOrder(new Company(), new Order(client, new SimpleClean(), null, true, Surface.PISOS));
+                         client.sendOrder(new Company(), new Order(client, new SimpleClean(), null, true, Surface.PISOS));
             });
         }
 

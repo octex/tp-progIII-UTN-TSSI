@@ -17,15 +17,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SpecialistTest {
 
-    private SpecialistRegister specialistRegister = SpecialistRegister.getInstance();
-    private SpecialistAssigner specialistAssigner = new SpecialistAssigner();
-    private ArrayList<Repair> repairList = new ArrayList<Repair>();
-    private Order order= new Order();
-    private Specialist electritian= new Electritian(5,"Bruno");
-    private Specialist gasist= new Gasist(5,"Bruno");
+    private SpecialistRegister specialistRegister;
+    private SpecialistAssigner specialistAssigner;
+    private ArrayList<Repair> repairList;
+    private Order order;
+    private Specialist electritian;
+    private Specialist gasist;
+
     @BeforeEach
-    void setUp() throws ParseException {
+    void setUp()
+    {
+        specialistRegister = SpecialistRegister.getInstance();
+        SpecialistRegister.clearSpecialist();
+        specialistAssigner = new SpecialistAssigner();
+        repairList = new ArrayList<>();
+        order= new Order();
+        electritian = new Electritian(5,"Bruno");
+        gasist = new Gasist(5,"Bruno");
     }
+
     @Test
     void getElectricianOk() throws Exception {
 
@@ -75,7 +85,6 @@ public class SpecialistTest {
     }
 
     @Test
-
     void getElectricianAndGasistFailNoGasist(){
 
         SpecialistRegister.addSpecialist(electritian);

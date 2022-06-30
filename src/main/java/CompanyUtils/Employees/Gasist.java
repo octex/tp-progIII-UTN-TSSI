@@ -1,44 +1,19 @@
 package CompanyUtils.Employees;
 
-import Order.Order;
 import Order.Repairs.Repair;
 
 import java.util.Objects;
 
-public class Gasist implements Specialist {
+public class Gasist extends Specialist {
 
-    float salary;
-    String name;
-
-    public Gasist(float salary, String name) {
-        this.salary = salary;
-        this.name = name;
+    public Gasist(float salary, String name)
+    {
+        super(name, salary);
     }
-
-
 
     public boolean canHandle(Repair repair) {
         return Objects.equals(repair.getType(), "Gas");
     }
 
-    public float getSalary() {
-        return salary;
-    }
-
-    @Override
-    public void repair() {
-
-    }
-
-    public void setSalary(float salary) {
-        this.salary = salary;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+    public void repair() {}
 }

@@ -17,24 +17,24 @@ public class Economic extends Service  {
     @Override
     public boolean overpassesDebtLimit(float clientDebt) throws EconomicOverpassesDebtExeption {
         if(clientDebt>0){
-            throw new EconomicOverpassesDebtExeption("Cliente economico se paso");
+            throw new EconomicOverpassesDebtExeption("Cliente economico se paso.");
         }else{
             return true;
         }
     }
 
     public boolean validateService(Order order) throws CouldNotVerifyOrderException.ServiceNotIncludedExeption {
-        if(order.doesWantOrder() && order.getClient().getService().getServiceName().equals("Economic")){
-            throw new CouldNotVerifyOrderException.ServiceNotIncludedExeption("El cliente economico no puede pedir orden Exeption");}
+        if(order.doesWantOrder() && order.getClient().getServiceName().equals("Economic")){
+            throw new CouldNotVerifyOrderException.ServiceNotIncludedExeption("El cliente economico no puede pedir ordenamiento.");}
         else
             return true;
     }
 
     public boolean validateClientCredits(Order order) throws CouldNotVerifyOrderException.HasNoCreditsExeption {
      if (order.getClient().getService().getCleaningQuantity() <= 0) {
-        throw new CouldNotVerifyOrderException.HasNoCreditsExeption("El cliente Economico no tiene creditos para limpieza");
+        throw new CouldNotVerifyOrderException.HasNoCreditsExeption("El cliente Economico no tiene creditos para limpieza.");
     }else{
-         order.getClient().getService().setCleaningQuantity(order.getClient().getService().getCleaningQuantity()-1);
+         order.getClient().getService().substractCleaningQuantity();
         return true;
     }
     }

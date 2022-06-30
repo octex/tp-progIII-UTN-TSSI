@@ -27,6 +27,10 @@ public class SpecialistRegister {
         specialists.add(specialist);
     }
 
+    public static void clearSpecialist()
+    {
+        specialists.clear();
+    }
 
     public static void setSpecialists(ArrayList<Specialist> specialists) {
         SpecialistRegister.specialists = specialists;

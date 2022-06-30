@@ -1,8 +1,8 @@
 package CompanyUtils;
-import static org.mockito.Mockito.mock;
 import Client.Client;
+import Services.Exeptions.OverpassesDebtExeption;
 
 public interface PaymentModule {
 
-    public float getDebt(Client client);
+    public void checkClientsDebt(Client client) throws OverpassesDebtExeption;
 }

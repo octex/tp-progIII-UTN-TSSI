@@ -1,7 +1,6 @@
 package CompanyUtils;
 
 import Client.Client;
-import Client.CouldNotCreateOrderException;
 import Order.Order;
 import Services.Economic;
 import org.junit.jupiter.api.BeforeEach;
