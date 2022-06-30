@@ -7,6 +7,7 @@ import Order.FactoryCleanType.SimpleClean;
 import Robots.*;
 import Services.Classic;
 import Services.Exeptions.ClassicOverpassesDebtExeption;
+import Services.Exeptions.EconomicOverpassesDebtExeption;
 import Services.Exeptions.OverpassesDebtExeption;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -82,7 +83,7 @@ class CompanyTest
     }
 
     @Test
-    void tryToAssignRobotToEconomicDontThrowCouldNotVerifyOrderException() {
+    void tryToAssignRobotToEconomicSuccess() {
         CleanType cleanType =  new SimpleClean();
         Location location = new Location("Buenos Aires", "Olivos", "Maipu");
         Service service = new Economic();
@@ -90,5 +91,34 @@ class CompanyTest
         Order order = new Order(client, cleanType, location, false, Surface.PISOS);
 
         assertDoesNotThrow(() -> client.sendOrder(company, order));
+    }
+
+    @Test
+    void tryToAssignRobotToPlatinumClientSuccess()
+    {
+        CleanType cleanType =  new SimpleClean();
+        Location location = new Location("Buenos Aires", "Olivos", "Maipu");
+        Service service = new Platinum();
+        Client client = new Client(111111111, service, Collections.singleton(location));
+        Order order = new Order(client, cleanType, location, false, Surface.PISOS);
+
+        assertDoesNotThrow(() -> client.sendOrder(company, order));
+    }
+
+    @Test
+    void tryToAssignRobotToEconomicClientWithDebt() throws OverpassesDebtExeption
+    {
+        CleanType cleanType = new SimpleClean();
+        Location location = new Location("Buenos Aires", "Olivos", "Maipu");
+        Service service = new Economic();
+        Client client = new Client(111111111, service, Collections.singleton(location));
+        Order order = new Order(client, cleanType, location, false, Surface.PISOS);
+
+        Mockito.doThrow(new EconomicOverpassesDebtExeption("El cliente con servicio Economic se encuentra moroso."))
+                .when(paymentModule).checkClientsDebt(client);
+
+        assertThrows(EconomicOverpassesDebtExeption.class , () -> {
+            client.sendOrder(company, order);
+        });
     }
 }
