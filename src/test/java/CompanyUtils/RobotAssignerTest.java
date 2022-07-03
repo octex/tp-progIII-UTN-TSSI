@@ -61,25 +61,14 @@ class RobotAssignerTest {
         robotOrders.add(k311yflOrders);
     }
 
-    private boolean hasRobot(Order order, Robot expectedRobot)
-    {
-        for(Robot robot : order.getRobots())
-        {
-            if (robot.equals(expectedRobot))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 
     @Test
     void AssignTwoRobotsForAClassicClient()
     {
         testClient.setService(new Classic());
         assertDoesNotThrow(() ->robotAssigner.AssignRobot(testOrder, robots, robotOrders));
-        assertTrue(hasRobot(testOrder, k311yfl));
-        assertTrue(hasRobot(testOrder, so31rty));
+        assertTrue(testOrder.getRobots().contains(k311yfl));
+        assertTrue(testOrder.getRobots().contains(so31rty));
     }
 
     @Test
@@ -88,8 +77,8 @@ class RobotAssignerTest {
         testClient.setService(new Classic());
         testOrder.setWantsPolish(true);
         assertDoesNotThrow(() ->robotAssigner.AssignRobot(testOrder, robots, robotOrders));
-        assertTrue(hasRobot(testOrder, k311yfl));
-        assertTrue(hasRobot(testOrder, k311Yfu));
+        assertTrue(testOrder.getRobots().contains(k311yfl));
+        assertTrue(testOrder.getRobots().contains(k311Yfu));
     }
 
     @Test
@@ -98,6 +87,6 @@ class RobotAssignerTest {
         testClient.setService(new Platinum());
         testOrder.setWantsPolish(false);
         assertDoesNotThrow(() ->robotAssigner.AssignRobot(testOrder, robots, robotOrders));
-        assertTrue(hasRobot(testOrder, k311Ya));
+        assertTrue(testOrder.getRobots().contains(k311Ya));
     }
 }
